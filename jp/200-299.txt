@@ -129,4 +129,99 @@ page 212
 Measurement Pilotからの各BSSの説明は、以下の要素で構成されています。ここで、ピアSTAという用語は、BSS記述が決定された測定パイロットフレームを送 信するSTAを指し、ローカルSTAという用語は、スキャンを実行するSTAを指しています。Time Advertisement Time Advertisement要素8.4.2.63で定義されているように、そのような要素がプローブ応答フレームまたはビーコンフレームに存在する場合、時間通知要素からの値。そうでない場合はnull。タイムゾーンタイムゾーン要素を使用しない8.4.2.89で定義されているように、タイムゾーン要素からの値がプローブ応答フレームまたはビーコンフレームに存在する場合は、それ以外の場合はnull。 MeshID MeshID要素を使用しない8.4.2.101で定義されているように、MeshID要素の値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnull。メッシュ設定メッシュ設定要素を使用しない8.4.2.100で定義されているように、メッシュ設定要素からの値がプローブ応答またはビーコンフレームに存在する場合はその値。そうでない場合はnull。メッシュアウェイクウィンドウメッシュアウェイクウィンドウエレメントを採用しない8.4.2.106で定義されているように、メッシュアウェイクウィンドウエレメントからの値がプローブ応答フレームまたはビーコンフレームに存在する場合はそれ以外の場合はnull。ビーコンタイミングビーコンタイミング要素を使用しない8.4.2.107で定義されているように、ビーコンタイミング要素からの値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnull。 MCCAOP を採用しない広告概要MCCAOP Advertisement Overviewエレメントフレームフォーマットで定義されているようにBeacon Timingエレメントからの値がProbeレスポンスまたはBeaconフレームに存在する場合はそれ以外の場合はnull。 MCCAOPを採用しないでください。広告MCCAOP Advertisementフレームフォーマットで定義されています。ビーコンタイミング要素からの値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnullです。採用しないでください名前タイプ有効範囲説明BSSID MACアドレス該当なし機密情報のBSSID d BSS.BSSタイプ列挙体INFRASTRUCTURE検出されたBSSのタイプ。 Local Time Integer N / A検出されたBSSからの受信フレームのタイムスタンプフィールドの最初のオクテットの受信開始時のローカルSTAのTSFタイマーの値。凝縮能力情報凝縮能力情報フィールド8.5.8.3で定義されているように、BSSの凝縮能力の広告。名前タイプ有効範囲説明IBSSの採用
 
 page 213
+6.3.3.3.3生成時このプリミティブは、STAの動作環境を確認するためにMLME-SCAN.requestプリミティブの結果としてMLMEによって生成される。 6.3.3.3.4受領の影響
+SMEは、スキャン手順の結果を通知される。
+6.3.4同期
+6.3.4.1はじめに
+このメカニズムは、認証プロセスでピアを選択するプロセスをサポートします。
+6.3.4.2 MLME-JOIN.request
+6.3.4.2.1機能
+このプリミティブは、BSSとの同期を要求し、そのタイプはインフラストラクチャまたは独立型である。
+縮約国文字列縮約国文字列フィールド
+8.5.8.3で定義されているように、運営クラス、ピアSTAが位置する規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報.Operating Class Operating Classフィールド
+フィールドは8.5.8.3で定義され、フィールドの有効な値はAnnexEで定義されている。
+Condensed Country Stringとともに、ピアSTAが配置されている規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報。チャネルチャネルフィールド
+フィールドは8.5.8.3で定義され、フィールドの有効な値はAnnexEで定義されている。
+受信フレームに示されたBSSの動作チャネル測定パイロット間隔測定パイロット間隔フィールド
+8.5.8.3で定義されている。受信フレーム内に示されたBSSの測定パイロット間隔複数のBSSID要素複数のBSSID要素は、8.4.2.48で定義され、BSSが複数のBSSIDセット（10.11.14参照）内にあることを示す。
+BSSIDの範囲は、BSSIDとMultiple BSSID要素によって決定されます.PHY TypeIntegerAs AnnexCで定義されています。受信フレームのdot11PHYType.RCPIMeasurementInteger
+16.4.8.6、または18.3.10.7、または17.4.8.6
+受信したフレームのRCPI。
+RSNIMeasurementInteger
+16.4.8.6、または18.3.10.7、または17.4.8.6
+受信したフレームのRSNI。
+
+page 214
+6.3.4.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。MLME-JOIN.request（
+ 選択されたBSS、
+ JoinFailureTimeout、
+ ProbeDelay、
+ OperationalRateSet、
+ HTOperationalMCSSet、
+ VendorSpecificInfo
+）
+6.3.4.2.3生成時
+このプリミティブは、STAのためにSMEによって生成され、BSSとの同期を確立する。
+6.3.4.2.4受領の影響
+このプリミティブは、現在のフレーム交換シーケンスが完了したら同期手順を開始する。
+MLMEは、Selected BSSパラメータで提供される要素に基づいて、指定されたBSSとタイミングを同期させます。
+その後、MLMEは、その結果を反映するMLME-JOIN.confirmプリミティブを発行します。
+MLME が、サポートされていないレートを含むBSS基本レートセット要素を含む選択BSSパラメータを含むMLME-JOIN.requestプリミティブを受 信した場合、結果のMLME-JOIN.confirmプリミティブのMLME応答は、設定されていない結果コードパラメータを含むSUCCESSの値に変更します。名前タイプ有効な範囲説明選択したBSSB SS DescriptionN / AThe BSS結合するBSSの説明。
+選 択されたBSSは、MLME-SCAN.requestプリミティブの結果として返された一連の記述のメンバであ る.JoinFailureTimeoutInteger1ビーコン間隔の単位である時間制限であり、その後に結合手順が終了する.ProbeDelay 整数N / A遅延NAVを設定できるフレームシーケンスが検出されなかった場合、DozeからAwakeに変更するときに送信する前に使用する時間（マイクロ秒単位）を指定します。
+Operational Rate Set整数の集合1 127（集合内の各整数に対して）STAがBSS内の通信に使用したいデータ速度の集合。
+STAは、セットに記載されている各データレートで受信できるものとする。
+このセットは、BSS基本レートセットパラメータに含まれるレートのスーパーセットです.HTOperational MCSSet MCSインデックス値を表す整数セット0 76（セットの各メンバー用）STAが通信に使用するMCS値のセットBSS内で
+STAは、セットに記載されている各データレートで受信できるものとする。
+このセットは、BSSBasicMCSSetパラメータに含まれるMCS値のスーパーセットです。
+ベンダー固有の情報要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 215
+HT STAのMLMEが、サポートされていないMCSを含むBSS基本MCS設定値を含む選択BSSパラメータを含むMLME-JOIN.requestプリミティブを受信した場合、結果のMLME-JOIN.confirmプリミティブのMLME応答は、値SUCCESSに設定されていないパラメータ。
+6.3.4.3 MLME-JOIN.confirm
+6.3.4.3.1 機能このプリミティブは、BSSとの同期を確認する.6.3.4.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りであ る：MLME-JOIN.confirm（ResultCode、VendorSpecificInfo）6.3.4.3.3生成されるプリミティブMLME-JOIN.requestプリミティブの結果としてMLMEによって生成され、BSSとの同期を確立する。 6.3.4.3.4受領の影響SMEは、同期手続きの結果を通知される。
+6.3.5認証する
+6.3.5.1導入
+このメカニズムは、ピアMACエンティティとの認証関係を確立するプロセスをサポートします。
+6.3.5.2 MLME-AUTHENTICATE.request
+6.3.5.2.1 機能このプリミティブは、指定されたピアMACエンティティを用いて認証を要求する。6.3.5.2.2サービスプリミティブのセマンティクスプリミティ ブパラメータは以下の通りである：MLME-AUTHENTICATE.request（PeerSTAAddress、 AuthenticationType、AuthenticateFailureTimeout、NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、INVALID_PARAMETERSIndicates MLME-JOIN.requestプリミティブの結果.VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+0個以上の要素
+
+page 216
+ FT認証要素の内容、
+ SAE認証フレームの内容、ベンダ固有情報
+）
+
+6.3.5.2.3生成時
+こ のプリミティブは、STAに対して、クラス2フレームを許可するために指定されたピアMACエンティティ、またはSAE認証を利用するAMPEのメッシュ ピアリング管理フレーム（dot11AuthenticationAlgorithmが同時Auth Equals（4）の場合）との認証を確立するためにSMEによって生成されます。 2つのSTAの間で交換される。
+認証手続の間、SMEは追加のMLME-AUTHENTICATE.requestプリミティブを生成するかもしれない。
+6.3.5.2.4受領の影響
+このプリミティブは認証手順を開始する。
+その後、MLMEは結果を反映するMLME-AUTHENTICATE.confirmプリミティブを発行する。
+6.3.5.3 MLME-AUTHENTICATE.confirm
+6.3.5.3.1関数
+このプリミティブは、認証試行の結果を、指定されたピアMACエンティティで報告する.
+6.3.5.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは以下の通りである：
+MLME-AUTHENTICATE.confirm（
+ PeerSTAAddress、
+ 認証タイプ、
+ ResultCode、
+ FT認証要素の内容、
+ SAE認証フレームの内容、
+ ベンダ固有の情報
+)
+
+有効な個別のMACアドレス認証プロセスを実行するピアMAC エンティティのアドレスを指定します。この値は、ピアSTAアドアレスパラメタと一致します。このパラメタは、MLME-AUTHENTICATE.request要素によって指定される。
+
+認証処理中に使用する認証アルゴリズムのタイプを指定しま す。この値は、認証タイプパラメタの、MLME-AUTHENTICATE.request要素によって、指定される。
+
+AuthenticationFailureTimeoutInteger1（TU単位）認証手続きは終了する。FT認証要素の内容要素の順序12.8.2で定義されている.FT認証シーケンスの最初のメッセージに含まれる要素の集合。
+dot11FastBSSTransitionActivated がtrueの場合のみ存在する。SAE認証フレームの内容要素とフィールドのシーケンス 8.4.1.37,8.4.1.38,8.4.1.39,8.4.1.40,8.4.1.41、および8.4.1.42で定義されているように、要素と フィールドのセットSAEコミットメッセージまたはSAE確認メッセージに含まれています。
+AuthenticationTypeがSAE認証を示す場合にのみ存在する.VendorSpecificInfoA要素の集合8.4.2.28で定義されている.Zero以上の要素
+
+page 217
 
