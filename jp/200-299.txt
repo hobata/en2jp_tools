@@ -224,4 +224,93 @@ dot11FastBSSTransitionActivated がtrueの場合のみ存在する。SAE認証�
 AuthenticationTypeがSAE認証を示す場合にのみ存在する.VendorSpecificInfoA要素の集合8.4.2.28で定義されている.Zero以上の要素
 
 page 217
+FT認証要素の内容、
+ SAE認証フレームの内容、
+ VendorSpecificInfo
+）
+6.3.5.3.3生成時
+このプリミティブは、MLME-AUTHENTICATE.requestプリミティブの結果としてMLMEによって生成され、指定されたピアMACエンティティで認証される。
+6.3.5.3.4受領の影響
+SMEは、認証手順の結果を通知されます。
+6.3.5.4 MLME-AUTHENTICATE.indication
+6.3.5.4.1関数
+このプリミティブは、このプリミティブを処理するSTAとの認証関係を確立するために、特定のピアMACエンティティからの要求の受信を示す。名前タイプ有効範囲説明ピアSTAアドレスMACアドレス任意の有効な個々のMACアドレス認証プロセスが試行されたピアMACエンティティのアドレスを指定します。
+この値は、対応するMLME-AUTHENTICATE.requestプリミティブに指定されたピアSTA Addressパラメータに一致します。認証タイプ列挙OPEN_SYSTEM、SHARED_KEYFAST_BSS_TRANSITIONは、認証処 理中に使用された認証アルゴリズムのタイプを指定します。
+この値は、対応するMLME-AUTHENTICATE.requestプリミティブで指定された認証Typeパラメータと一致する。 ResultCodeEnumerationSUCCESS、 REFUSED、AN-CLOGGING TOKEN REQUIRED、FINITE CYCLIC GROUPがサポートされていない、AUTHENTICATION REJECTED MLME-AUTHENTICATE.requestプリミティブの結果を示します。 FT認証要素の内容要素のシーケンス
+12.8.3で規定されているように、FT認証シーケンスの第2のメッセージに含まれる要素の集合。
+dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+SAE認証フレームの内容要素のシーケンス
+8.4.1.37,8.4.1.38,8.4.1.39,8.4.1.40,8.4.1.41および8.4.1.42に定義されているように、SAEコミットメッセージまたはSAE確認メッセージに含まれる要素の集合。
+認証タイプがSAE認証を示す場合にのみ表示されます。 VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 218
+6.3.5.4.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-AUTHENTICATE.indication（PeerSTAAddress、AuthenticationType、FT認証要素の内容、SAE認証フレームの内容、VendorSpecificInfo）
+6.3.5.4.3生成時
+このプリミティブは、特定のピアMACエンティティからの認証要求の受信の結果としてMLMEによって生成される。
+6.3.5.4.4受領の影響
+SMEは、認証要求の受信を通知されます。
+6.3.5.5 MLME-AUTHENTICATE.response
+6.3.5.5.1機能
+こ のプリミティブは、このプリミティブを発行したSTAとの認証を要求した特定のピアMACエンティティに応答を送信するために使用される。 6.3.5.5.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：MLME- AUTHENTICATE.response（PeerSTAAddress、ResultCode 、NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個別のMACアドレス認証関係が確立されたピアMACエンティティのアドレスを指定します。
+AuthenticationTypeEnumerationOPEN_SYSTEM、SHARED_KEY、FAST_BSS_TRANSITIONは、認証処理中に使用された認証アルゴリズムのタイプを指定します。
+FT認証要素の内容要素のシーケンス
+12.8.2で定義されているように、12.8.2で説明したFT認証シーケンスの最初のメッセージに含まれる要素のセット。
+dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+SAE認証フレームの内容要素のシーケンス
+8.4.1.37,8.4.1.38,8.4.1.39,8.4.1.40,8.4.1.41および8.4.1.42に定義されているように、SAEコミットメッセージまたはSAE確認メッセージに含まれる要素の集合。
+AuthenticationTypeがSAE認証を示す場合のみ存在します。
+VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 219
+FT認証要素の内容、SAE認証フレームの内容、VendorSpecificInfo）
+6.3.5.5.3生成時
+このプリミティブは、MLME-AUTHENTICATE.indicationプリミティブに対する応答として、STAのSMEによって生成される。
+6.3.5.5.4受領の影響
+このプリミティブは、認証を要求した特定のピアMACエンティティへの応答の送信を開始する。
+6.3.6認証解除
+6.3.6.1はじめに
+このメカニズムは、ピアMACエンティティとの認証関係を無効にするプロセスをサポートします。
+6.3.6.2 MLME-DEAUTHENTICATE.request
+6.3.6.2.1機能
+このプリミティブは、指定されたピアMACエンティティとの認証関係が無効になることを要求する。
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddress
+任意の有効な個別MACアドレス認証要求が受信されたピアMACエンティティのアドレスを指定します。
+ResultCodeEnumerationSUCCESS、REFUSED、ANTI-CLOGGING TOKEN REQUIRED、FINITE CYCLIC GROUP NOT SUPPORTED、AUTHENTICATION REJECTEDピアMACエンティティからの認証要求に対する結果応答を示します。
+FT認証要素の内容要素のシーケンス
+12.8.3で規定されているように、FT認証シーケンスの第2メッセージに含まれる要素の集合。
+dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+SAE認証フレームの内容要素のシーケンス8.4.1.37,8.4.1.38,8.4.1.39,8.4.1.40,8.4.1.41、および8.4.1.42で定義されるSAEコミットメッセージまたはSAE確認メッセージに含める要素のセット。
+この応答を生成したMLME-AUTHENTICATE.indicationプリミティブの認証タイプがSAE認証を示した場合にのみ提示する.VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 220
+6.3.6.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。MLME-DEAUTHENTICATE.request（PeerSTAAddress、ReasonCode、VendorSpecificInfo）
+6.3.6.2.3生成時
+こ のプリミティブは、STAのためにSMEによって生成され、クラス2フレームの交換を防止するために指定されたピアMACエンティティ、またはSAE認証 を使用するAMPEのメッシュピアリング管理フレーム（d1111AuthenticationAlgorithmがAuthEquals（4）同時の場 合） 、2つのSTAの間。
+認証解除プロシージャの間、SMEは追加のMLME-DEAUTHENTICATE.requestプリミティブを生成することがあります。
+6.3.6.2.4受領の影響
+このプリミティブは認証解除手順を開始する。
+その後、MLMEは結果を反映するMLME-DEAUTHENTICATE.confirmプリミティブを発行する。
+6.3.6.3 MLME-DEAUTHENTICATE.confirm
+6.3.6.3.1機能
+このプリミティブは、認証解除試行の結果を指定されたピアMACエンティティで報告する。
+6.3.6.3.2サービスプリミティブのセマンティクス
+MLME- DEAUTHENTICATE.confirm（PeerSTAAddress）6.3.6.3.3生成されるとき、このプリミティブは、MLME- DEAUTHENTICATE.requestプリミティブの結果としてMLMEによって生成され、指定されたピアMACエンティティとの認証関係を無効 にする.NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレス認証解除処理を実行するピアMACエンティティのアドレスを指定します。 ReasonCodeReasonコードフィールド
+8.4.1.7で定義されているように、認証解除手順を開始する理由を指定します.VendorSpecificInfo
+要素のセット
+8.4.2.28Zero以上の要素で定義されているように.NameTypeValid rangeDescriptionPeerSTAAddressMACAddress
+任意の有効な個別のMACアドレス認証解除プロセスが試行されたピアMACエンティティのアドレスを指定します
+
+page 221
 
