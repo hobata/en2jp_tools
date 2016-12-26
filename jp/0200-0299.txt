@@ -1,65 +1,105 @@
 ﻿page 200
 5.2.4.2サービスプリミティブのセマンティクス
-MA-UNITDATA-STATUS.indication（送信元アドレス、宛先アドレス、送信ステータス、提供された優先度、提供されるサービスクラス）SAパラメータは、関連するMA- UNITDATA.requestプリミティブ。 DAパラメータは、関連するMA-UNITDATA.requestプリミティブに指定されている個別またはグループのMACサブレイヤエンティティアドレスのいずれかです。送信状態パラメータは、状態情報をローカル要求LLC副層エンティティに返送するために使用される。
+プリミティブのパラメタは以下の通り。
+MA-UNITDATA-STATUS.indication（
+ 送信元アドレス、
+ 宛先アドレス、
+ 送信ステータス、
+ 提供された優先度、
+ 提供されるサービスクラス
+）
+SAパラメータは、個別のMACサブレイヤエンティティアドレスで、MA-UNITDATA.requestプリミティブによって指定されます。
+DAパラメータは、個別またはグループのMACサブレイヤエンティティアドレスで、MA-UNITDATA.requestプリミティブによって指定されます。
+送信状態パラメータは、状態情報をローカル要求LLC副層エンティティに返送するために使用される。
 IEEE Std 802.11は、伝送ステータスに以下の値を指定します。
 a）成功した​​。
 b）配信不能（過度のデータ長）。
 c）配信不能（非ヌルソースルーティング）。
-d）配信不能：サポートされていない優先度（非QoS STAにおける競合または競合のない優先順位、または競合、競合のない優先順位、またはQoS STAで0から15までの整数）。
-e）配信不能：サポートされていないサービスクラス（非QoS STAおよびQoS Ack以外のサービスクラスまたはQoS STAのQoSNoAck以外の場合は、並べ替え可能グループ以外のサービスクラス、
-f）利用不可能な優先順位（PCまたはHCが利用できない場合は競合無料、または非QoS BSSに関連付けられたSTAで1から15までの整数、またはSTAで8から15までの整数IBSSのメンバーであり、この場合、MSDUは競合の優先順位で送信されます）。
-g）配信不能：利用不可能なサービスクラス（STA電力管理モードが非QoS STAに対してアクティブでない場合は厳密に順序付けされたサービスであり、QoS STAはStrictly Orderedサービスを提供しないのでこの値を返さない）。
+d）配信不能：サポートされていない優先度（非QoS STAでは、競合、または競合のない、以外の優先順位、QoS STAでは、競合、競合のない、または0から15までの整数以外の、優先順位の値の場合）。
+e）配信不能：サポートされていないサービスクラス（非QoS STAのサービスクラスでは、ReorderableGroupAddressed、StrictlyOrderedまたは、StrictlyOrdered以外で、QoS STAのサービスクラスでは、QoSAckまたはQoSNoAck以外）
+f）利用不可能な優先順位（PC無しまたはHCが利用できない場合はContensionFree、または非QoS BSSに関連付けられたSTAで1から15までの整数、またはIBSSのメンバーのSTAで8から15までの整数、このいずれかの場合、MSDUは競合の優先順位で送信されます）。
+g）配信不能：利用不可能なサービスクラス（STA電力管理モードが非QoS STAに対してアクティブでない場合はStrictlyOrdered(厳密に順序付けされた)サービスであり、QoS STAに対しては、Strictly Orderedサービスを提供しないのでこの値を返さない）。
 h）配信不能（利用可能なBSSなし）。
 i）配信不能（ヌルキーで暗号化できない）。
 j）dot11RejectUnadmittedTrafficが真であるSTAにおいて、配信不能：許可されていないトラフィック（この優先度に対して許可されたTSが存在せず、ACに対して許可制御が必要であるため、STAにおいて0と7の間で優先度が要求される。
-k）dot11SSPNInterfaceActivatedが真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティ ブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationMaxAuthVoiceRateで指定された制限違反）。
-l）dot11SSPNInterfaceActivatedが真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティ ブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationMaxAuthVideoRateによって指定された制限違 反）。
-m）dot11SSPNInterfaceActivated が真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationMaxAuthBestEffortRateで指定された制 限違反）
+k）dot11SSPNInterfaceActivatedが真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティ ブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationMaxAuthVoiceRateで指定された値に対する制限違反）。
+l）dot11SSPNInterfaceActivatedが真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティ ブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationMaxAuthVideoRateによって指定され値に対する制限違反）。
+m）dot11SSPNInterfaceActivated が真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationMaxAuthBestEffortRateで指定された値に対する制限違反）
 
 page 201
-n）dot11SSPNInterfaceActivatedが真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティ ブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationBackgroundRateによって指定された制限違 反）。
-o）dot11SSPNInterfaceActivated が真であるAPの場合、配送不能（MA-UNITDATA.requestプリミティブの宛先アドレスによって識別される非AP STAのdot11InterworkingTableのdot11nonAPStationAuxMaxHCCAHEMMrateで指定された制限違 反）。伝送ステータスパラメータが成功した場合提供されたpriorityパラメータは、関連するデータユニット転送（競合、競合回避、または0から15までの間の整数）に使用される優先度を指定します。それ以外の場合、指定された優先度パラメータは存在しません。伝送状態パラメータが成功（Successful）である場合、提供されるサービスクラスパラメータは、関連するデータユニット転送のサービスクラスを指定する。そうでなければ、提供されたサービスクラスパラメータは存在しない。
+n）dot11SSPNInterfaceActivatedが真であるAPに対して、配送不能（MA-UNITDATA.requestプリミティ ブの宛先アドレスによって識別されるnon-AP STAのdot11InterworkingTableのdot11NonAPStationBackgroundRateによって指定された値に対する制限違反）。
+o）dot11SSPNInterfaceActivated が真であるAPの場合、配送不能（MA-UNITDATA.requestプリミティブの宛先アドレスによって識別される非AP STAのdot11InterworkingTableの
+dot11nonAPStationAuxMaxHCCAHEMMrateで指定された値に対する制限違反）。
+
+伝送ステータスパラメータが成功した場合、提供されたpriorityパラメータは、関連するデータユニット転送（競合、競合回避、または0から15までの間の整数）に使用される優先度を指定します。それ以外の場合、指定された優先度パラメータは存在しません。伝送状態パラメータが成功（Successful）である場合、提供されるサービスクラスパラメータは、関連するデータユニット転送のサービスクラスを指定する。そうでなければ、提供されたサービスクラスパラメータは存在しない。
+
 非QoS STAでは、このパラメータの値はReorderable Group AddressedまたはStrictly Orderedです。
 QoS STAでは、QoSAckまたはQoSNoAckです。
 5.2.4.3生成時
 MA-UNITDATA-STATUS.indicationプリミティブは、MACサブレイヤエンティティからLLCサブレイヤエンティティに渡され、対応するMA-UNITDATA.requestプリミティブに提供されるサービスのステータスを示す。
 5.2.4.4受領の影響
-LLCサブレイヤによるこのプリミティブの受信の影響は、LLCサブレイヤエンティティによって使用される動作のタイプ
+LLCサブレイヤによるこのプリミティブの受信の影響は、LLCサブレイヤエンティティによって使用される動作のタイプに依存します。
 
 page 202
 6.レイヤー管理
 6.1管理モデルの概要
 MACサブレイヤとPHYの両方には、それぞれ概念的に、MLMEとPLMEと呼ばれる管理エンティティが含まれています。
-これらのエンティティは、レイヤ管理機能が呼び出されるレイヤ管理サービスインタフェースを提供します。正しいMAC動作を提供するために、各STA内にSMEが存在する。
-SMEは、レイヤーに依存しないエンティティで、別の管理プレーンに存在するか、側面に存在します。 SMEの機能のいくつかはこの規格で規定されている。
+これらのエンティティは、レイヤ管理機能が呼び出されるレイヤ管理サービスインタフェースを提供します。
+
+正しいMAC動作を提供するために、各STA内にSMEが存在する。
+SMEは、レイヤーに依存しないエンティティで、別の管理プレーンに存在するか、側面(わき：off to the side)に存在します。 SMEの機能のいくつかはこの規格で規定されている。
 通常、このエンティティは、さまざまなレイヤ管理エンティティ（LME）からのレイヤ依存ステータスの収集、レイヤ固有パラメータの値の設定などの機能を担当します。
 SMEは通常、一般的なシステム管理エンティティのためにそのような機能を実行し、標準の管理プロトコルを実装します。
-図4-14（in4.9）は、管理エンティティ間の関係を示しています。このモデル内のさまざまなエンティティは、さまざまな方法で相互作用します。
+図4-14（4.9節）は、管理エンティティ間の関係を示しています。
+
+このモデル内のさまざまなエンティティは、さまざまな方法で相互作用します。
 これらの相互作用のあるものは、定義されたプリミティブが交換されるSAPを介して、この標準内ではっきりと定義されています。
 この定義には、MLME、PLMEおよびSMEの間のGETおよびSET操作、および図6-1内の二重矢印で表される他の個別に定義されたサービスプリミティブが含まれます。
-他の相互作用は、MACとMLMEとの間、およびPLMEとPLCPとPMDとの間のインタフェースなど、この規格内で明示的に定義されていない。これらのMACおよびPHY LMEがMACサブレイヤ全体およびPHYに統合されている特定の方法は、この規格では規定されていません。 SME-MLME SAP SME-PLME SAP MLME-PLME SAP後者の2つのSAPは同一のプリミティブをサポートしており、実際には単一のSAP（PLME SAPと呼ばれます）と見なすことができます。直接MLMEまたは中小企業によって提供されます。
-このようにして、モデルは、PLME機能がMLMEによって（SMEに代わって）制御される一般的な実装アプローチであると予想される図6-1のGETとSET操作を反映しています。
+他の相互作用は、MACとMLMEとの間、およびPLMEとPLCPとPMDとの間のインタフェースなど、この規格内で明示的に定義されていない。これらのMACおよびPHY LMEがMACサブレイヤ全体およびPHYに統合されている特定の方法は、この規格では規定されていません。 
 
+図6-1 GETとSET操作
+
+このモデルにおけるSAPのマネジメントは以下の通り。
+SME-MLME SAP
+SME-PLME SAP
+MLME-PLME SAP
+後者の2つのSAPは同一のプリミティブをサポートしており、実際には単一のSAP（PLME SAPと呼ばれます）と見なすことができます。これは、直接MLMEまたはSMEによって利用されます。
+このようにして、このモデルは、PLME機能がMLMEによって（SMEに代わって）制御される一般的な実装アプローチであると予想されます。
+ーーーここまでーーー
 page 203
 6.2汎用管理プリミティブ
 各レイヤに固有の管理情報は、そのレイヤのMIBとして表されます。
 MLMEとPLMEは、そのレイヤのMIBを含むものと見なされます。
 管理SAP全体で交換されるMIB関連の管理プリミティブの一般的なモデルは、SAPユーザーエンティティがMIB属性の値を取得するか、またはMIB属性の値を設定できるようにすることです。
-SET.requestプリミティブの呼び出しでは、レイヤーエンティティが特定のアクションを実行する必要があります。図6-1に、これらの汎用プリミティブを示します。 GETおよびSETプリミティブは、関連するCONFIRMプリミティブとともにREQUESTとして表されます。
+SET.requestプリミティブの呼び出しでは、レイヤーエンティティが特定のアクションを実行する必要があります。
+図6-1に、これらの汎用プリミティブを示します。
+GETおよびSETプリミティブは、関連するCONFIRMプリミティブとともにREQUESTとして表されます。
 これらのプリミティブには、MACサブレイヤまたはPHY管理SAPのいずれが関与しているかに応じて、MLMEまたはPLMEの接頭辞が付けられます。
-XXはMLMEまたはPLMEを表します。XX-GET.request（MIBattribute）指定されたMI Battributeの値を要求します。
-XX-GET.confirm（status、MIB attribute、MIB attribute value）status = successの場合は適切なMIB属性値を返し、それ以外の場合はStatusフィールドにエラー表示を返します。
-考えられるエラーステータス値には、無効なMIBアトリビュートと書き込み専用MIBアトリビュートの取得が含まれます。 XX-SET.request（MIB属性、MIB属性値）指定されたMIB属性が指定された値に設定されることを要求します。
-このMIB属性が特定のアクションを意味する場合、これはアクションが実行されることを要求します。 XX-SET.confirm（status、MIB attribute）status = successの場合、指定されたMIB属性が要求された値に設定されていることを確認し、そうでない場合はstatusフィールドにエラー条件を返します。
+以降において、XXはMLMEまたはPLMEを表します。
+XX-GET.request（MIBattribute）
+　指定されたMI Battributeの値を要求します。
+XX-GET.confirm（status、MIB attribute、MIB attribute value）
+　status = successの場合は適切なMIB属性値を返し、それ以外の場合はStatusフィールドにエラー表示を返します。考えられるエラーステータス値には、無効なMIBアトリビュートと書き込み専用MIBアトリビュートの取得が含まれます。
+XX-SET.request（MIB attribute、MIB attributevalue）
+　指定されたMIB属性が指定された値に設定されることを要求します。
+このMIB属性が特定のアクションを意味する場合、これはアクションが実行されることを要求します。
+XX-SET.confirm（status、MIB attribute）
+　status = successの場合、指定されたMIB属性が要求された値に設定されていることを確認し、そうでない場合はstatusフィールドにエラー条件を返します。
 このMIB属性が特定のアクションを意味する場合、これはアクションが実行されたことを確認します。
 考えられるエラーステータス値には、無効なMIB属性が含まれ、読み取り専用のMIB属性を設定しようとします。さらに、特定のMIB属性の設定または取得に関係しない特定のSAP全体で呼び出される特定の要求があります。
-これらのうちの1つは、各SAPで次のようにサポートされています。XX-RESET.request：XXはMLMEまたはPLMEが適切です。このサービスは、管理エンティティ、MIB、およびデータパスエンティティの初期化に使用されます。
-項目にデフォルト以外の値に初期化される属性のリストが含まれる場合があります。その他のSAP特有のプリミティブは6.3で特定されている。
+これらのうちの1つは、各SAPで次のようにサポートされています。
+XX-RESET.request：XXはMLMEまたはPLMEです。
+
+このサービスは、管理エンティティ、MIB、およびデータパスエンティティの初期化に使用されます。
+項目にデフォルト以外の値に初期化される属性のリストが含まれる場合があります。
+
+その他のSAP特有のプリミティブは6.3で特定されている。
+
 6.3 MLME SAPインタフェース
-6.3.1
-導入
+6.3.1導入
 MLMEがSMEに提供するサービスは、本項で規定されている。
 これらのサービスは、抽象的な方法（ITU-T勧告X.210 [B50]に記述されたモデルに従う）で再記述され、特定の実装や公開されたインタフェースを暗示するものではない。
+ーーーここまでーーー
 MLME SAPプリミティブは、一般的な形式のACTION.requestの後に、ACTION.indepのあとにACTION.response（MLME によって開始された交換のため）が続くACTION.confirm（SAPクライアントによって開始された交換の場合）が続きます。
 
 page 204
