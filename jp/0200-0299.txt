@@ -313,11 +313,45 @@ FMS Descriptor要素からの値がProbe ResponseフレームまたはBeaconフ�
 要素がプローブ応答またはビーコンフレームに存在する場合は、QoSトラフィック機能要素からの値。そうでない場合はnull。
 
 チャネル使用のパラメータを指定する。
-ーーーここまで確認済ーーー
+
 page 212
-Measurement Pilotからの各BSSの説明は、以下の要素で構成されています。ここで、ピアSTAという用語は、BSS記述が決定された測定パイロットフレームを送 信するSTAを指し、ローカルSTAという用語は、スキャンを実行するSTAを指しています。Time Advertisement Time Advertisement要素8.4.2.63で定義されているように、そのような要素がプローブ応答フレームまたはビーコンフレームに存在する場合、時間通知要素からの値。そうでない場合はnull。タイムゾーンタイムゾーン要素を使用しない8.4.2.89で定義されているように、タイムゾーン要素からの値がプローブ応答フレームまたはビーコンフレームに存在する場合は、それ以外の場合はnull。 MeshID MeshID要素を使用しない8.4.2.101で定義されているように、MeshID要素の値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnull。メッシュ設定メッシュ設定要素を使用しない8.4.2.100で定義されているように、メッシュ設定要素からの値がプローブ応答またはビーコンフレームに存在する場合はその値。そうでない場合はnull。メッシュアウェイクウィンドウメッシュアウェイクウィンドウエレメントを採用しない8.4.2.106で定義されているように、メッシュアウェイクウィンドウエレメントからの値がプローブ応答フレームまたはビーコンフレームに存在する場合はそれ以外の場合はnull。ビーコンタイミングビーコンタイミング要素を使用しない8.4.2.107で定義されているように、ビーコンタイミング要素からの値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnull。 MCCAOP を採用しない広告概要MCCAOP Advertisement Overviewエレメントフレームフォーマットで定義されているようにBeacon Timingエレメントからの値がProbeレスポンスまたはBeaconフレームに存在する場合はそれ以外の場合はnull。 MCCAOPを採用しないでください。広告MCCAOP Advertisementフレームフォーマットで定義されています。ビーコンタイミング要素からの値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnullです。採用しないでください名前タイプ有効範囲説明BSSID MACアドレス該当なし機密情報のBSSID d BSS.BSSタイプ列挙体INFRASTRUCTURE検出されたBSSのタイプ。 Local Time Integer N / A検出されたBSSからの受信フレームのタイムスタンプフィールドの最初のオクテットの受信開始時のローカルSTAのTSFタイマーの値。凝縮能力情報凝縮能力情報フィールド8.5.8.3で定義されているように、BSSの凝縮能力の広告。名前タイプ有効範囲説明IBSSの採用
+
+TimeAdvertisement　この要素がプローブ応答フレームまたはビーコンフレームに存在する場合、時間通知要素からの値。そうでない場合はnull。
+
+TimeZone　この要素からの値がプローブ応答フレームまたはビーコンフレームに存在する場合は、それ以外の場合はnull。
+
+MeshID　要素の値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnull。
+
+メッシュ設定 要素からの値がプローブ応答またはビーコンフレームに存在する場合はその値。そうでない場合はnull。
+
+メッシュアウェイクウィンドウ 要素からの値がプローブ応答フレームまたはビーコンフレームに存在する場合はそれ以外の場合はnull。
+
+ビーコンタイミング 要素からの値がプローブ応答またはビーコンフレームに存在する場合は、それ以外の場合はnull。
+
+Beacon Timing　要素からの値がProbeレスポンスまたはBeaconフレームに存在する場合はそれ以外の場合はnull。
+
+Measurement Pilotからの各BSSの説明は、以下の要素で構成されています。ここで、ピアSTAという用語は、BSS記述が決定された測定パイロットフレームを送 信するSTAを指し、ローカルSTAという用語は、スキャンを実行するSTAを指しています。
+
+発見したBSSからの受信フレームのタイムスタンプフィールドの最初のオクテットの受信開始時のローカルSTAのTSFタイマーの値。
+
+BSSの凝縮能力の広告。名前タイプ有効範囲説明IBSSの採用
 
 page 213
+短縮国別文字列　運営クラス、ピアSTAが位置する規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報報
+
+オペレーティングクラス　Condensed Country Stringとともに、ピアSTAが配置されている規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報。
+
+チャネル　受信フレームに示されたBSSの動作チャネル
+
+測定パイロット間隔　BSSの測定パイロット間隔は、受信フレームにより指定される。
+
+複数BSSID要素　BSSが複数のBSSIDセット（10.11.14参照）内にあることを示す。BSSIDの範囲は、BSSIDとMultiple BSSID要素によって決定されます.
+
+PHY Type　受信フレームのdot11PHYType.
+
+RCPIMeasurement　受信したフレームのRCPI。
+RSNIMeasurement　受信したフレームのRSNI。
+
 6.3.3.3.3生成時このプリミティブは、STAの動作環境を確認するためにMLME-SCAN.requestプリミティブの結果としてMLMEによって生成される。 6.3.3.3.4受領の影響
 SMEは、スキャン手順の結果を通知される。
 6.3.4同期
@@ -326,21 +360,9 @@ SMEは、スキャン手順の結果を通知される。
 6.3.4.2 MLME-JOIN.request
 6.3.4.2.1機能
 このプリミティブは、BSSとの同期を要求し、そのタイプはインフラストラクチャまたは独立型である。
-縮約国文字列縮約国文字列フィールド
-8.5.8.3で定義されているように、運営クラス、ピアSTAが位置する規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報.Operating Class Operating Classフィールド
-フィールドは8.5.8.3で定義され、フィールドの有効な値はAnnexEで定義されている。
-Condensed Country Stringとともに、ピアSTAが配置されている規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報。チャネルチャネルフィールド
-フィールドは8.5.8.3で定義され、フィールドの有効な値はAnnexEで定義されている。
-受信フレームに示されたBSSの動作チャネル測定パイロット間隔測定パイロット間隔フィールド
-8.5.8.3で定義されている。受信フレーム内に示されたBSSの測定パイロット間隔複数のBSSID要素複数のBSSID要素は、8.4.2.48で定義され、BSSが複数のBSSIDセット（10.11.14参照）内にあることを示す。
-BSSIDの範囲は、BSSIDとMultiple BSSID要素によって決定されます.PHY TypeIntegerAs AnnexCで定義されています。受信フレームのdot11PHYType.RCPIMeasurementInteger
-16.4.8.6、または18.3.10.7、または17.4.8.6
-受信したフレームのRCPI。
-RSNIMeasurementInteger
-16.4.8.6、または18.3.10.7、または17.4.8.6
-受信したフレームのRSNI。
 
 page 214
+
 6.3.4.2.2サービスプリミティブのセマンティクス
 プリミティブパラメータは次のとおりです。MLME-JOIN.request（
  選択されたBSS、
@@ -350,13 +372,8 @@ page 214
  HTOperationalMCSSet、
  VendorSpecificInfo
 ）
-6.3.4.2.3生成時
-このプリミティブは、STAのためにSMEによって生成され、BSSとの同期を確立する。
-6.3.4.2.4受領の影響
-このプリミティブは、現在のフレーム交換シーケンスが完了したら同期手順を開始する。
-MLMEは、Selected BSSパラメータで提供される要素に基づいて、指定されたBSSとタイミングを同期させます。
-その後、MLMEは、その結果を反映するMLME-JOIN.confirmプリミティブを発行します。
-MLME が、サポートされていないレートを含むBSS基本レートセット要素を含む選択BSSパラメータを含むMLME-JOIN.requestプリミティブを受 信した場合、結果のMLME-JOIN.confirmプリミティブのMLME応答は、設定されていない結果コードパラメータを含むSUCCESSの値に変更します。名前タイプ有効な範囲説明選択したBSSB SS DescriptionN / AThe BSS結合するBSSの説明。
+ーーーここまで確認済ーーー
+名前タイプ有効な範囲説明選択したBSSB SS DescriptionN / AThe BSS結合するBSSの説明。
 選 択されたBSSは、MLME-SCAN.requestプリミティブの結果として返された一連の記述のメンバであ る.JoinFailureTimeoutInteger1ビーコン間隔の単位である時間制限であり、その後に結合手順が終了する.ProbeDelay 整数N / A遅延NAVを設定できるフレームシーケンスが検出されなかった場合、DozeからAwakeに変更するときに送信する前に使用する時間（マイクロ秒単位）を指定します。
 Operational Rate Set整数の集合1 127（集合内の各整数に対して）STAがBSS内の通信に使用したいデータ速度の集合。
 STAは、セットに記載されている各データレートで受信できるものとする。
@@ -366,6 +383,16 @@ STAは、セットに記載されている各データレートで受信でき�
 ベンダー固有の情報要素のセット
 8.4.2.28に定義されている
 0個以上の要素
+
+6.3.4.2.3生成時
+このプリミティブは、STAのためにSMEによって生成され、BSSとの同期を確立する。
+6.3.4.2.4受領の影響
+このプリミティブは、現在のフレーム交換シーケンスが完了したら同期手順を開始する。
+MLMEは、Selected BSSパラメータで提供される要素に基づいて、指定されたBSSとタイミングを同期させます。
+その後、MLMEは、その結果を反映するMLME-JOIN.confirmプリミティブを発行します。
+MLME が、サポートされていないレートを含むBSS基本レートセット要素を含む選択BSSパラメータを含むMLME-JOIN.requestプリミティブを受 信した場合、結果のMLME-JOIN.confirmプリミティブのMLME応答は、設定されていない結果コードパラメータを含むSUCCESSの値に変更します。
+
+
 
 page 215
 HT STAのMLMEが、サポートされていないMCSを含むBSS基本MCS設定値を含む選択BSSパラメータを含むMLME-JOIN.requestプリミティブを受信した場合、結果のMLME-JOIN.confirmプリミティブのMLME応答は、値SUCCESSに設定されていないパラメータ。
@@ -890,13 +917,37 @@ VendorSpecificInfo
 
 page 234
 6.3.8.3.2サービスプリミティブの意味
-MLME- REASSOCIATE.confirm（ResultCode、CapabilityInformation、AssociationID、 SupportedRates、EDCAParameterSet、RCPI.request、RSNI.request、RCPI.response、 RSNI.response、RMEnabledCapabilities、FT認証要素の内容、SupportedOperatingClasses、 HT機 能、拡張機能、40分の20 BSS共存、TimeoutInterval、BSSMaxIdlePeriod、TIMBroadcastResponse、FMSRespone、 DMSResponse、QoSMapSet、VendorSpecificInfo）NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、REFUSED_REASON_UNSPECIFIED、 REFUSED_NOT_AUTHENTICATED、REFUSED_CAPABILITIES_MISMATCH、 REFUSED_EXTERNAL_REASON、REFUSED_AP_OUT_OF_MEMORY、 REFUSED_BASIC_RATES_MISMATCH、REJECTED_EMERGENCY_SERVICES_NOT_SUPPORTED、協 会要求は一時的に拒否されました。もう一度試してください。MLME-REASSOCIATE.requestプリミティブの結果を示します。
-Capability-Information Capability Informationフィールド
-8.4.1.4で定義されている
+MLME- REASSOCIATE.confirm（
+ ResultCode、
+ CapabilityInformation、
+ AssociationID、 
+ SupportedRates、
+ EDCAParameterSet、
+ RCPI.request、
+ RSNI.request、
+ RCPI.response、 
+ RSNI.response、
+ RMEnabledCapabilities、
+ FT認証要素の内容、
+ SupportedOperatingClasses、 
+ HT機 能、
+ 拡張機能、
+ 20/40 BSS共存、
+ TimeoutInterval、
+ BSSMaxIdlePeriod、
+ TIMBroadcastResponse、
+ FMSRespone、 
+ DMSResponse、
+ QoSMapSet、
+ VendorSpecificInfo
+）
+
+アソシエーション要求は一時的に拒否されました。もう一度試してください。
+
 APによってアドバタイズされる運用機能を指定します。
-AssociationIDInteger1 2007包括的
+
 アソシエーション要求の結果がSUCCESSの場合、AssociationIDはAPによって割り当てられたアソシエーションID値を指定します。
-Supported - RateSet of integers2 127（セット内の各整数に対して）ビット7は、レートがBBSBasicRateSetのメンバーであることを示すために1に設定されます。
+
 BSSBasicRateSet（8.4.2.3による）の一部であることの表示を含む、APによってサポートされるデータレートのセット（500kb / sの単位）
 
 page 235
