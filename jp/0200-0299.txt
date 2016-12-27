@@ -65,7 +65,7 @@ SME-PLME SAP
 MLME-PLME SAP
 後者の2つのSAPは同一のプリミティブをサポートしており、実際には単一のSAP（PLME SAPと呼ばれます）と見なすことができます。これは、直接MLMEまたはSMEによって利用されます。
 このようにして、このモデルは、PLME機能がMLMEによって（SMEに代わって）制御される一般的な実装アプローチであると予想されます。
-ーーーここまでーーー
+
 page 203
 6.2汎用管理プリミティブ
 各レイヤに固有の管理情報は、そのレイヤのMIBとして表されます。
@@ -99,8 +99,8 @@ XX-RESET.request：XXはMLMEまたはPLMEです。
 6.3.1導入
 MLMEがSMEに提供するサービスは、本項で規定されている。
 これらのサービスは、抽象的な方法（ITU-T勧告X.210 [B50]に記述されたモデルに従う）で再記述され、特定の実装や公開されたインタフェースを暗示するものではない。
-ーーーここまでーーー
-MLME SAPプリミティブは、一般的な形式のACTION.requestの後に、ACTION.indepのあとにACTION.response（MLME によって開始された交換のため）が続くACTION.confirm（SAPクライアントによって開始された交換の場合）が続きます。
+
+MLME SAPプリミティブは、一般的な形式のACTION.requestの後に、ACTION.confirm（SAPクライアントによって開始された交換の場合）が続き、ACTION.indicationの後にACTION.response（MLME によって開始された交換のため）が続きます。
 
 page 204
 SMEユーザは、MLME SAPによって提供されるサービスをMLMEが使用します。
@@ -109,29 +109,101 @@ SMEユーザは、MLME SAPによって提供されるサービスをMLMEが使�
 6.3.2.1導入
 このメカニズムは、STAの電力管理モードの確立および維持のプロセスをサポートする。
 6.3.2.2 MLME-POWERMGT.request
-6.3.2.2.1 機能このプリミティブは、電力管理モードの変更を要求する.6.3.2.2.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通り である。MLME-POWERMGT.request（PowerManagementMode、WakeUp、 ReceiveDTIMs）6.3.2.2。 3生成時このプリミティブはSMEによって生成され、インプリメンテーションの省電力戦略を実装する.6.3.2.2.4受信の影響この要求は、STAの電力管理パラメータを設定する。
-その後、MLMEは、電力管理変更要求の結果を反映するMLME-POWERMGT.confirmプリミティブを発行する。
-6.3.2.3 MLME-POWERMGT.confirm
-6.3.2.3.1 機能このプリミティブは、電力管理モードの変更を確認する。名前タイプ有効範囲説明電力管理モード列挙型ACTIVE、POWER_SAVE STA.WakeUpBooleantrueの希望する電力管理モードを記述する列挙型。false真の場合、MACは直ちにアウェイク状態に入る。
+6.3.2.2.1 機能
+このプリミティブは、電力管理モードの変更を要求する.
+6.3.2.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは以下の通り である。
+MLME-POWERMGT.request（
+　PowerManagementMode、
+　WakeUp、 
+　ReceiveDTIMs
+）
+
+名前タイプ有効範囲説明電力管理モード列挙型ACTIVE、POWER_SAVE STA.WakeUpBooleantrueの希望する電力管理モードを記述する列挙型。false真の場合、MACは直ちにアウェイク状態に入る。
 現在の電力管理モードがACTIVEの場合、このパラメータは無効です。ReceiveDTIMsBooleantrue、falseこのパラメータをtrueに設定すると、STAはすべてのDTIMフレームを受信できるようになります。
 偽の場合、STAはすべてのDTIMフレームに対して起動する必要はない
 
-page 205
-MLME-POWERMGT.confirm（ResultCode）6.3.2.3.3生成されるこのプリミティブは、MLME-POWERMGT.requestプリミティブの結果としてMLMEによって生成される新しい電力管理モードを確立する。
-10.2.1で定義した変更が完了するまで生成されません。
+6.3.2.2。 3生成時
+このプリミティブはSMEによって生成され、インプリメンテーションの省電力戦略を実装する.
+6.3.2.2.4受信の影響
+この要求は、STAの電力管理パラメータを設定する。
+その後、MLMEは、電力管理変更要求の結果を反映するMLME-POWERMGT.confirmプリミティブを発行する。
+6.3.2.3 MLME-POWERMGT.confirm
+6.3.2.3.1 機能
+このプリミティブは、電力管理モードの変更を確認する。
 
-6.3.2.3.4受領の影響SMEは、電力管理モードの変更を通知される。
+page 205
+6.3.2.3.2サービスプリミティブのセマンティクス
+このプリミティブパラメタは以下の通り。
+MLME-POWERMGT.confirm（
+　ResultCode
+）
+
+
+6.3.2.3.3生成時
+このプリミティブは、MLME-POWERMGT.requestプリミティブの結果としてMLMEによって生成される新しい電力管理モードを確立する。これは、10.2.1で定義した変更が完了するまで生成されません。
+
+6.3.2.3.4受領の影響
+SMEは、電力管理モードの変更を通知される。
 6.3.3スキャン
 6.3.3.1はじめに
 このメカニズムは、利用可能なBSSの特性を決定するプロセスをサポートします。
 6.3.3.2 MLME-SCAN.request
-6.3.3.2.1機能このプリミティブは、STAが後で加入を試みることができる潜在的なBSSの調査を要求する.6.3.3.2.2サービスプリミティブのセマンティクスプリミティブパラメータは、MLME-SCAN.request（BSSType、 BSSID、 SSID、ScanType、ProbeDelay、ChannelList、MinChannelTime、MaxChannelTime、 RequestInformation、SSID List、ChannelUsage、AccessNetworkType、HESSID、MeshID、 VendorSpecificInfo）NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、NOT_SUPPORTED MLME-POWERMGT.requestの結果を示します。
+6.3.3.2.1機能
+このプリミティブは、STAが後で加入を試みることができる潜在的なBSSの調査を要求する。
+6.3.3.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは、以下の通り。
+MLME-SCAN.request（
+　BSSType、
+　BSSID、
+　SSID、
+　ScanType、
+　ProbeDelay、
+　ChannelList、
+　MinChannelTime、
+　MaxChannelTime、
+　RequestInformation、
+　SSID List、
+　ChannelUsage、
+　AccessNetworkType、
+　HESSID、
+　MeshID、
+　VendorSpecificInfo
+）
+ーーーここまでーーー
+page 206
+インフラストラクチャBSS、IBSS、MBSS、またはすべてがスキャンに含まれているかどうかを判断します。
+有効な個人またはブロードキャストMACアドレスを指定します。
+特定またはワイルドカードを識別します。 
+目的のSSIDまたはワイルドカードSSIDを指定します。 
+アクティブスキャンまたはパッシブスキャンのいずれかを示します。
+アクティブなスキャン中にプローブフレームを送信する前にDelay（マイクロ秒）を使用する 
+各チャネルは、適切なPHYおよびキャリアセットの有効なチャネル範囲か ら選択されます。 
+BSSのスキャン時に検査されるチャネルのリスト。
+スキャン時に各チャネルで費やす最小時間（TU単位）.
+スキャン時に各チャネルで費やす最大時間（TU単位）。
 
-pge 206
-6.3.3.2.3生成時このプリミティブは、STAがSMEによって生成され、参加可能な他のBSSが存在するかどうかを判断する.6.3.3.2.4受信の影響この要求は、現在のフレーム交換シーケンスが完了しました。 NameTypeValid rangeDescriptionBSSTypeEnumerationINFRASTRUCTURE、INDEPENDENT、MESH、 ANY_BSSインフラストラクチャBSS、IBSS、MBSS、またはすべてがスキャンに含まれているかどうかを判断しま す.BSSIDMACAddressAny有効な個人またはブロードキャストMACアドレスを指定します。特定またはワイルドカードを識別します。 BSSID.SSIDOctet string0 32オクテット目的のSSIDまたはワイルドカードSSIDを指定します。 ScanTypeEnumerationACTIVE、 PASSIVEアクティブスキャンまたはパッシブスキャンのいずれかを示します。アクティブなスキャン中にプローブフレームを送信する前に使用する ProbeDelayIntegerN / ADelay（マイクロ秒）.ChannelListOrderedの整数セット各チャネルは、適切なPHYおよびキャリアセットの有効なチャネル範囲か ら選択されます。 BSS.MinChannelTimeIntegerN / Aのスキャン時に検査されるチャネルのリスト。スキャン時に各チャネルで費やす最小時間（TU単位）.MaxChannelTimeInteger MinChannelTimeスキャン時に各チャネルで費やす最大時間（TU単位）。要求情報8.4.2.13 8.4.2.13で定義されている。この要素は、dot11RadioMeasurementActivatedが真であり、応答側STAに要求された情 報がProbe Responseフレームに含まれることを要求するProbe Requestフレームに置かれていれば、オプションで存在する.SSID List 8.4.2.2。 dot11MgmtOptionSSIDListActivatedがtrueの場合にオプションで存在する1つ以上のSSID要 素.ChannelUsageA 8.4.2.88で定義されるChannel Usage要素のセットChannel Usage要求の要求タイプを指定します。表8-1740〜15で定義されるAccessNetworkTypeAs必要な特定のアクセスを指定しますネットワークタイプまたはワイルドカードアクセスネットワークタイプである。
-このフィールドは、dot11InterworkingServiceActivatedがtrueのときに存在します.HESSIDMAC AddressAny有効な個々のMACアドレスまたはブロードキャストMACアドレス必要な特定のHESSIDネットワーク識別子またはワイルドカード ネットワーク識別子を指定します。
-このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。メッシュIDOctet string0 32オクテットBSSType = MESHまたはBSSType = ANY_BSSの場合のみ存在します。
-目的のメッシュIDまたはワイルドカードメッシュIDを指定します。VendorSpecificInfoA要素のセット8.4.2.28で定義されています。
+この要素は、dot11RadioMeasurementActivatedが真である場合に、オプションで存在する。そして、
+この要素は、Probe Responseフレームを応答STAに尊信する。応答STAは、Probe Requestフレームに情報を格納する。
+
+dot11MgmtOptionSSIDListActivatedがtrueの場合に、1つ以上のSSID要 素が、オプションで存在する。
+Channel Usage要求の要求タイプを指定します。
+必要な特定のアクセスを指定しますネットワークタイプまたはワイルドカードアクセスネットワークタイプ
+このフィールドは、dot11InterworkingServiceActivatedがtrueのときに存在します.
+
+ChannelUsageA 8.4.2.88で定義されるChannel Usage要素のセット表8-1740〜15で定義されるAccessNetworkTypeAs必要な特定のアクセスを指定しますネットワークタイプまたはワイルドカードアクセスネットワークタイプである。
+
+HESSIDMAC AddressAny有効な個々のMACアドレスまたはブロードキャストMACアドレス必要な特定のHESSIDネットワーク識別子またはワイルドカード ネットワーク識別子を指定します。
+このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+BSSType = MESHまたはBSSType = ANY_BSSの場合のみ存在します。
+目的のメッシュIDまたはワイルドカードメッシュIDを指定します。
+
+6.3.3.2.3生成時
+このプリミティブは、STAがSMEによって生成され、参加可能な他のBSSが存在するかどうかを判断する。
+
+6.3.3.2.4受信の影響
+この要求は、このプロセスは、現在のフレーム交換シーケンスが完了した時に、スキャンプロセスを初期化する。
+
 
 page 207
 6.3.3.3 MLME-SCANの確認
