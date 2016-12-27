@@ -1,4 +1,75 @@
-﻿ーー最後まで内容確認済み 2016/12/25ーー
+﻿page 100
+MACサービスデータユニット（MSDU）配信サービスをサポートするためのMAC手順を定義します。
+IEEE802.11 MACによって制御されるいくつかのPHYシグナリング技術およびインタフェース機能を定義する。
+複数の重複するIEEE 802.11 WLANと共存できる無線ローカルエリアネットワーク（WLAN）内のIEEE 802.11準拠デバイスの動作を許可します。
+無線媒体（WM）を介して転送されるユーザ情報およびMAC管理情報のデータ機密性と、IEEE 802.11準拠デバイスの認証を提供するための要件および手順について説明します。
+ダイナミック周波数選択（DFS）および送信電力制御（TPC）のためのメカニズムを定義し、あらゆる帯域での動作の規制要件を満たすために使用することができます。
+音声、オーディオ、およびビデオの転送を含むQoS（Quality of Service）要件を備えたローカルエリアネットワーク（LAN）アプリケーションをサポートするためのMAC手順を定義します。
+BSS移行管理、チャネル使用および共存、コロケートされた干渉レポート、診断、マルチキャスト診断およびイベントレポート、柔軟なマルチキャスト、効率的なビーコンメカニズム、プロキシARP広告、位置、タイミング測定、指示を含むSTAの無線ネットワーク管理のためのメカニズムおよびサービスを定義するマルチキャスト、拡張スリープモード、トラフィックフィルタリング、および管理通知が含まれます。
+STAによるネットワークの発見と選択、QoSマッピングを使用した外部ネットワークからの情報転送、および緊急サービスの提供のための一般的なメカニズムを支援する機能と手順を定義します。無線LANメッシュトポロジをサポートするために無線マルチホップ通信に必要なMAC手順を定義します。
+1.4単語の使用
+この文書では、単語は、必須要件を示すために使用されるものとする。
+shouldは、推奨を示すために使用されます。
+「may」は、許容される動作を示すために使用されます。
+単語canは、可能性と能力のステートメントに使用されます。
+規範的参照以下の参照される文書は、この標準の適用に不可欠である（すなわち、それらは理解され、使用されなければならない;したがって、参照される各文書は本文中に引用され、
+日付の付いた参考文献については、引用した版のみが適用される。
+期限のない参照については、参照される文書の最新版（改訂または正誤表を含む）が適用されます.
+3GPP TS 24.234、3GPPシステムからWLAN（Wireless Local Area Network） WLANユーザ機器（WLAN UE）からネットワークプロトコルへ、ステージ3。
+ETSI EN 301 893、ブロードバンド無線アクセスネットワーク（BRAN）; 5 GHzの高性能RLAN;パート2：調和したENが、R＆TTE指令の第3.2条の必須要件を満たす。
+FIPS PUB 180-3-2008、セキュアハッシュスタンダード。
+FIPS PUB 197-2001、Advanced Encryption Standard（AES）。
+3GPPのドキュメントは、第3世代パートナーシッププロジェクトのWebサイト（http://www.3gpp.org）から入手できます。
+ETSIの文書は、欧州電気通信規格協会（http://www.etsi.org）から入手できます。
+FIPSの出版物は、国家技術情報サービス（NTIS）（http://www.ntis.org/）から入手できます。
+
+page 101
+FIPS SP800-38B、ブロック暗号モードの推奨：認証のためのCMACモード、Dworkin、M.
+IANA EAPメソッドタイプ番号、http://www.iana.org/assignments/eap-numbers。
+IEEE Std 754 -2008、バイナリ浮動小数点演算のIEEE標準.4,5
+IEEE Std 802 -2001、ローカルおよびメトロポリタンエリアネットワークのためのIEEE標準：概要およびアーキテクチャ。
+IEEE Std 802.1AS、ブリッジローカルエリアネットワークにおける時間依存アプリケーションのためのローカルおよびメトロポリタンエリアネットワークタイミングおよび同期のためのIEEE標準。
+IEEE Std 802.1X -2004、ローカルおよびメトロポリタンエリアネットワークのためのIEEE標準：ポートベースのネットワークアクセス制御。
+IEEE Std 802.21 -2008、ローカルおよびメトロポリタンエリアネットワークのためのIEEE標準：メディア独立ハンドオーバーサービス。
+IEEE Std C95.1、無線周波電磁界への人間の暴露に関するIEEE標準安全レベル、3 kHz〜300 GHz。
+IETF RFC 791、インターネットプロトコル、1981年9月、IETF RFC 925、マルチLANアドレス解決、J.Postel、1984年10月。
+IETF RFC 1035、ドメインネーム実装と仕様、P.Mockapetris、1987年11月。
+IETF RFC1042、IEEE802ネットワーク上のIPデータグラムの伝送規格、J.Postel、J.Reynolds、1988年2月。
+IETF RFC 1321、MD5 Message-Digest Algorithm、1992年4月（ステータス：情報）
+IETF RFC 2104、HMAC：メッセージ認証のためのキーハッシュ、H.Krawczyk、M.
+Bellare、R.Canetti、1997年2月（ステータス：情報提供）
+IETF RFC2409、インターネットキー交換（IKE）、D.Harkins、D.Carrel、1998年11月（ステータス：StandardsTrack）。
+IETF RFC 2460、インターネットプロトコル、バージョン6（IPv6）、S.Deering、R.
+Hinden、1998年12月.IETF RFC 3164、BSD Syslogプロトコル、2001年8月.
+IETF RFC 3394、Advanced Encryption Standard（AES）鍵ラップアルゴリズム、J.Schaad、R.Housley、Sept.2002（ステータス：通知）。
+IETF RFC3610、CBC-MAC（CCM）、D.Whiting、R.Housley、N.Ferguson、2003年9月（状況：情報）のカウンター
+この条項で言及されているIEEE標準または製品は、電気電子技術者協会が所有する商標です。
+IEEEの出版物は、電気電子技術者協会（http://standards.ieee.org/）から入手可能である。
+IETF文書（すなわち、RFC）はhttp://www.rfc-archive.org/からダウンロード可能です。
+
+page 102
+FIPS SP800-38B、ブロック暗号モードの推奨：認証のためのCMACモード、Dworkin、M.
+IANA EAPメソッドタイプ番号、http://www.iana.org/assignments/eap-numbers。
+IEEE Std 754 -2008、バイナリ浮動小数点演算のIEEE標準.4,5
+IEEE Std 802 -2001、ローカルおよびメトロポリタンエリアネットワークのためのIEEE標準：概要およびアーキテクチャ。
+IEEE Std 802.1AS、ブリッジローカルエリアネットワークにおける時間依存アプリケーションのためのローカルおよびメトロポリタンエリアネットワークタイミングおよび同期のためのIEEE標準。
+IEEE Std 802.1X -2004、ローカルおよびメトロポリタンエリアネットワークのためのIEEE標準：ポートベースのネットワークアクセス制御。
+IEEE Std 802.21 -2008、ローカルおよびメトロポリタンエリアネットワークのためのIEEE標準：メディア独立ハンドオーバーサービス。
+IEEE Std C95.1、無線周波電磁界への人間の暴露に関するIEEE標準安全レベル、3 kHz〜300 GHz。
+IETF RFC 791、インターネットプロトコル、1981年9月、IETF RFC 925、マルチLANアドレス解決、J.Postel、1984年10月。
+IETF RFC 1035、ドメインネーム実装と仕様、P.Mockapetris、1987年11月。
+IETF RFC1042、IEEE802ネットワーク上のIPデータグラムの伝送規格、J.Postel、J.Reynolds、1988年2月。
+IETF RFC 1321、MD5 Message-Digest Algorithm、1992年4月（ステータス：情報）
+IETF RFC 2104、HMAC：メッセージ認証のためのキーハッシュ、H.Krawczyk、M.Bellare、R.Canetti、Feb. 1997（ステータス：情報）
+IETF RFC 2409、IKE（Internet Key Exchange）、D.Harkins、D.Carrel、1998年11月（ステータス：StandardsTrack）
+IETF RFC2460、インターネットプロトコル、バージョン6（IPv6）、S.Deering、R.Hinden、1998年12月。
+IETF RFC 3164、BSD Syslogプロトコル、2001年8月。
+IETF RFC 3394、Advanced Encryption Standard（AES）キーラップアルゴリズム、J.Schaad、R.Housley、Sept.2002（ステータス：通知）。
+IETF RFC3610、CBC-MAC（CCM）、D.Whiting、R.Housley、N.Ferguson、2003年9月（状況：情報）のカウンター。
+この条項で言及されているIEEE標準または製品は、電気電子技術者協会が所有する商標です。
+IEEEの出版物は、電気電子技術者協会（http://standards.ieee.org/）から入手可能である。
+IETF文書（すなわち、RFC）はhttp://www.rfc-archive.org/からダウンロード可能です。
+
 Page 103
 3.1定義
 この規格の目的上、以下の用語と定義が適用されます。
@@ -1871,7 +1942,7 @@ b）非認証（dot11OCBActivatedが真である場合には使用され ない�
 c）データ機密性（dot11OCBActivatedが真である場合には使用されない）
 d）MSDU配信
 e）DFS 
-f ）TPC 
+f）TPC 
 g）高位レイヤタイマ同期（QoS機能のみ）
 h）QoSトラフィックスケジューリング（QoS機能のみ）
 i）無線測定
