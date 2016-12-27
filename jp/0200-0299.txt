@@ -170,7 +170,7 @@ MLME-SCAN.request（
 　MeshID、
 　VendorSpecificInfo
 ）
-ーーーここまでーーー
+
 page 206
 インフラストラクチャBSS、IBSS、MBSS、またはすべてがスキャンに含まれているかどうかを判断します。
 有効な個人またはブロードキャストMACアドレスを指定します。
@@ -187,14 +187,15 @@ BSSのスキャン時に検査されるチャネルのリスト。
 この要素は、Probe Responseフレームを応答STAに尊信する。応答STAは、Probe Requestフレームに情報を格納する。
 
 dot11MgmtOptionSSIDListActivatedがtrueの場合に、1つ以上のSSID要 素が、オプションで存在する。
-Channel Usage要求の要求タイプを指定します。
-必要な特定のアクセスを指定しますネットワークタイプまたはワイルドカードアクセスネットワークタイプ
+Channel Usage要求の、要求タイプを指定します。
+
+必要な特定のアクセスネットワークタイプまたはワイルドカードアクセスネットワークタイプを指定します。
 このフィールドは、dot11InterworkingServiceActivatedがtrueのときに存在します.
 
-ChannelUsageA 8.4.2.88で定義されるChannel Usage要素のセット表8-1740〜15で定義されるAccessNetworkTypeAs必要な特定のアクセスを指定しますネットワークタイプまたはワイルドカードアクセスネットワークタイプである。
 
-HESSIDMAC AddressAny有効な個々のMACアドレスまたはブロードキャストMACアドレス必要な特定のHESSIDネットワーク識別子またはワイルドカード ネットワーク識別子を指定します。
-このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+必要な特定のHESSIDネットワーク識別子またはワイルドカードネットワーク識別子を指定します。
+このフィールドは、dot11InterworkingServiceActivatedがtrueのときに存在します.
+
 BSSType = MESHまたはBSSType = ANY_BSSの場合のみ存在します。
 目的のメッシュIDまたはワイルドカードメッシュIDを指定します。
 
@@ -204,13 +205,27 @@ BSSType = MESHまたはBSSType = ANY_BSSの場合のみ存在します。
 6.3.3.2.4受信の影響
 この要求は、このプロセスは、現在のフレーム交換シーケンスが完了した時に、スキャンプロセスを初期化する。
 
-
 page 207
 6.3.3.3 MLME-SCANの確認
 6.3.3.3.1機能
-こ のプリミティブは、スキャンプロセスによって検出されたBSSのセットの記述を返す。6.3.3.3.2サービスプリミティブのセマンティクスプリミティ ブパラメータは以下の通りである。MLME-SCAN.confirm（BSSDescriptionSet、 BSSDescriptionFromMeasurementPilotSet、ResultCode、VendorSpecificInfo）各 BSSDescriptionは、次の表に示される要素のうち、ピアSTAという用語は、BSS記述が決定されたビーコンフレームまたはプローブ応答フレームを送信するSTAを指し、ローカルSTAという用語は、スキャンを実行するSTAを指し、このパラメータは、IBSSに加わるSTAによって採用される.b）このパラメータは、同じIBSSのメンバーであるSTAからビーコンを受信するIBSSのメンバーであるSTAによって採用されるそれはローカルTSF値（10.1.5参照）より大きいタイムスタンプ値を持つ。BSSDescriptionsN / ATのBSSDescriptionSetのNameTypeValid rangeDescriptionBSSDescriptionSetSetは、スキャン要求の結果を示すために返される。
+こ のプリミティブは、スキャンプロセスによって検出されたBSSのセットの記述を返す。
+6.3.3.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは以下の通りである。
+MLME-SCAN.confirm（
+　BSSDescriptionSet、 
+　BSSDescriptionFromMeasurementPilotSet、
+　ResultCode、
+　VendorSpecificInfo
+)
+ーーーここまでーーー
+BSSDescriptionsN / ATのBSSDescriptionSetのNameTypeValid rangeDescriptionBSSDescriptionSetSetは、スキャン要求の結果を示すために返される。
 BSSDescriptionFromMeasurementPilotSet BSSDescriptionFromMeasurementPilotsN / ATのBSSDescriptionFromMeasurementPilotSetのセットを含むセットであり、 BSSDescriptionFromMeasurementPilotSetは、測定パイロットから得られたスキャン要求の結果を示すために返されま す。
 これはBSSDescriptionFrom-MeasurementPilotのゼロ個以上のインスタンスを含むセットです。
+
+各 BSSDescriptionは、次の表に示される要素のうち、ピアSTAという用語は、BSS記述が決定されたビーコンフレームまたはプローブ応答フレームを送信するSTAを指し、ローカルSTAという用語は、スキャンを実行するSTAを指し、このパラメータは、IBSSに加わるSTAによって採用される.
+a)このパレメータは、IBSSに参加しているSTAにより適用される。
+b）このパラメータは、STAからのビーコンを受信する同じIBSSのメンバーであるSTAにより適用される。また、このSTAは、同じIBSSのメンバであり、ローカルのTSF値(10.1.5を参照)より大きいタイムスタンプ値を持つ。
+
 dot11RMMeasurementPilotActivated の値が0以外の場合にのみ存在する.ResultCodeEnumerationSUCCESS、NOT_SUPPORTED MLME-SCAN.confirmプリミティブの結果を示す.VendorSpecificInfoA要素の集合.8.4.2.28以上の要素で定義さ れる.NameTypeValid rangeDescriptionIBSS採用BSSIDMACAddressN / AT発見されたBSSのBSSID検 出されたメッシュのMACアドレスSTA.AdoptSSIDオクテット文字列0 32オクテット検出されたBSSのSSID。AdoptBSSTypeEnumerationINFRASTRUCTURE、INDEPENDENT、 MESH検出されたBSSのタイプ。 Adop
 
 page 208
