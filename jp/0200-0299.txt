@@ -975,6 +975,412 @@ APによってアドバタイズされる運用機能を指定します。
 アソシエーション要求の結果がSUCCESSの場合、AssociationIDはAPによって割り当てられたアソシエーションID値を指定します。
 
 BSSBasicRateSet（8.4.2.3による）の一部であることの表示を含む、APによってサポートされるデータレートのセット（500kb / sの単位）
-ーーーここまで確認
 
 page 235
+EDCAParameterSet STAが使用するEDCAパラメータセットを指定します。このパラメータは、dot11QosOptionImplementedがtrueの場合にのみ存在します.
+RCPI.request RCPI値は、対応するアソシエーション要求フレームの測定されたRCPIを表す。この要素は、dot11RMRCPIMeasurementActivatedがtrueの場合に限り、オプションで存在します。
+RSNI.request 対応するアソシエーション要求フレームが受信された時点のRSNI。この要素は、dot11RMRSNIMeasurementActivatedがtrueの場合に限り、オプションで存在します。
+RCPI.response RCPI値は、対応するアソシエーション応答フレームの測定されたRCPIを表す。この要素は、dot11RMRCPIMeasurementActivatedがtrueの場合に限り、オプションで存在します。
+RSNI.response 対応するアソシエーション応答フレームが受信された時点のRSNI。この要素は、dot11RMRSNIMeasurementActivatedがtrueの場合に限り、オプションで存在します。
+RMEnabledCapabilities APによってアドバタイズされるRM対応機能を指定します。この要素は、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+FT認証要素の内容 これには、リソース要求（RIC）に対するオプションの応答が含まれます。これは、dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+Supported Operating Classes STAのサポートされている動作クラスを指定します。このパラメーターは、dot11ExtendedChannelSwitchActivatedがtrueの場合にのみ存在します。
+HT機能　MACエンティティによってサポートされるHT Capabilities要素内のパラメータを指定する。このパラメータは、dot11HighThroughputOption-Implementedがtrueの場合にのみ、オプションで存在します。
+拡張機能　MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
+20/40 BSS共存　MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。このパラメータは、dot112040BSSCoexistenceManagementSupportがtrueの場合に存在します。
+
+page 236
+TimeoutInterval このパラメータは、ResultCodeが"アソシエーション要求が一時的に拒否されました。あとでもう一度試してみてください。"の場合の際に存在する。
+
+BSSMaxIdlePeriod APのBSS最大アイドル期間パラメータを示します。このパラメータは、dot11WirelessManagementImplementedがtrueの場合に存在し、そうでない場合は存在しません.
+
+TIMブロードキャストレスポンス TIMブロードキャストのサービスパラメータを指定します。このパラメータは、dot11MgmtOptionTIMBroadcastActivatedが真で、TIMブロードキャスト要求要素が対応するアソシエーション要求フレームに存在し、それ以外の場合は存在しない場合にはオプションで存在する.
+
+FMS応答 FMS RE応答のマルチキャストパラメータを指定する。このパラメータは、dot11MgmtOptionFMSActivatedが真で、FMS Request要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない。
+
+DMS応答 DMS Responseのマルチキャストパラメータを指定します。このパラメータは、dot11MgmtOptionDMSActivatedがtrueであり、DMS Request要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない。
+
+QoSMapSet 非AP STAが使用するQoSマップセットを指定します。
+
+VendorSpecificInfoA要素のセット
+
+6.3.8.3.3生成時
+このプリミティブは、MLME-REASSOCIATE.requestプリミティブの結果として、MLMEによって生成され、AP内の指定されたピアMACエンティティと再関連付けされる。
+6.3.8.3.4受領の影響
+SMEは、再会手続きの結果を通知されます。
+6.3.8.4 MLME-REASSOCIATE.indication
+6.3.8.4.1関数
+このプリミティブは、特定のピアMACエンティティがAP内のローカルMACentityとの再アソシエーションを要求していることを示します。
+6.3.8.4.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-REASSOCIATE.indication（
+
+page 237
+ PeerSTAAddress,
+ CurrentAPAddress,
+ CapabilityInformation,
+ ListenInterval,
+ SSID,
+ SupportedRates,
+ RSN,QoSCapability,
+ RCPI,
+ RSNI,
+ RMEnabledCapabilities,
+ Content of FT Authentication elements,
+ SupportedOperatingClasses,
+ DSERegisteredLocation,
+ HT Capabilities,
+ Extended Capabilities,
+ 20/40 BSS Coexistence, 
+ QoSTrafficCapability,
+ TIMBroadcastRequest,
+ FMSRequest,DMSRequest,
+ EmergencyServices,
+ VendorSpecificInfo
+)
+
+PeerSTAAddress 有効な個々のMACアドレス再アソシエーション要求を受信したピアMACエンティティのアドレスを指定します。
+CurrentAPAddress ピアSTAが現在関連付けられているAPのアドレスを指定します。
+Capability-Information 再アソシエーション要求の一部としてピアMACエンティティによって提供される操作能力定義を指定します。ListenInterval 再アソシエーション要求の一部としてピアMACエンティティによって提供されるリスン間隔値を指定します。
+SSID 再アソシエーション要求の一部として、ピアMACエンティティによって提供される目的のSSIDを指定します。
+SupportedRates 再結合を要求しているSTAによってサポートされているデータレートのセット（500 kb /秒の単位）.
+RSN STAによって選択された暗号スイートおよびAKMスイート。
+QoSCapability　ピアMACエンティティがサポートするQoS Capability内のパラメータを指定します。このパラメーターは、dot11QosOption-Implementedがtrueの場合にのみ存在します。
+RCPI　対応する再結合要求フレームの測定されたRCPIを表す。この要素は、dot11RMRCPIMeasurementActivatedがtrueの場合に限り、オプションで存在します。
+
+page 238
+RSNI　対応するReassociation Requestフレームが受信された時点で測定されたRSNIを表す。この要素は、オプションでdot11RMRSNIMeasurementActivatedがtrueの場合にのみ存在します.
+RMEnabled-Capabilities　APによってアドバタイズされるRM対応機能を指定します。この要素は、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+FT認証要素の内容　12.8.4で説明したFT認証シーケンスの第3のメッセージに含まれる要素の集合。dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+SupportedOperatingClasses　STAのサポートされている動作クラスを指定します。このパラメーターは、dot11ExtendedChannelSwitchActivatedがtrueの場合にのみ存在します。
+DSERegisteredLocation　有効化STAによって割り当てられた従属有効化識別子を含むDSE登録位置を示す。このパラメータは、オプションでdot11LCIDSERequiredがtrueの場合にのみ存在します.
+HT機能　MACエンティティによってサポートされるHT Capabilities要素内のパラメータを指定する。このパラメータは、dot11HighThroughputOptionImplementedがtrueの場合はオプションで存在します。
+拡張機能　MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
+20/40 BSS共存　MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。このパラメータは、dot112040BSSCoexistenceManagementSupportがtrueの場合に存在します.QoS Traffic Capability
+QoSトラフィック能力　非AP STAのQoSトラフィック能力フラグを指定する。このパラメータは、dot11MgmtOptionACStationCountActivatedがtrueの場合にオプションで存在します。
+TIMBroadcastRequest　TIMブロードキャストの提案されたサービスパラメータを指定します。このパラメータは、dot11MgmtOptionTIMBroadcastActivatedがtrueの場合はオプションで存在ます。
+FMSRequest　FMS Requestに提案されたマルチキャストパラメータを指定します。このパラメータは、dot11MgmtOptionFMSActivatedがtrueの場合はオプションで存在します。
+DMSReques　DMS Requestに対して提案されたマルチキャストパラメータを指定します。このパラメータは、dot11MgmtOptionDMSActivatedがtrueの場合はオプションで存在します。
+
+page 239
+緊急サービス　Interworking要素がReassociate Requestフレームに存在した場合、非AP STAから受信したUESAフィールドの設定を指定します。このパラメーターは、dot11InterworkingServiceActivatedがtrueの場合にのみ存在します。
+
+6.3.8.4.3生成時
+このプリミティブは、その特定のピアMACエンティティによって開始された再アソシエーション手順に起因する特定のMACエンティティとの再アソシエーションの確立の結果として、MLMEによって生成される。
+6.3.8.4.4受領の影響
+SMEは、再会の確立を通知されます。
+6.3.8.5 MLME-REASSOCIATE.response
+6.3.8.5.1機能このプリミティブは、AP内にあるこのプリミティブを発行したSTAとの再アソシエーションを要求した特定のピアMACエンティティに応答を送信するために使用される。
+6.3.8.5.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-REASSOCIATE.response(
+　PeerSTAAddress,
+　ResultCode,
+　CapabilityInformation,
+　AssociationID,
+　EDCAParameterSet,
+　RCPI,
+　RSNI,
+　RMEnabledCapabilities,
+　Content of FT Authentication elements,
+　SupportedOperatingClasses,
+　DSERegisteredLocation,
+　HT Capabilities,
+　Extended Capabilities,
+　20/40 BSS Coexistence,
+　TimeoutInterval,
+　BSSMaxIdlePeriod,
+　TIMBroadcastResponse,
+　FMSResponse,
+　DMSResponse,
+　QoSMapSet,
+
+page 240
+　VendorSpecificInfo
+）
+PeerSTAAddress　再アソシエーション要求を受信したピアMACエンティティのアドレスを指定します。
+ResultCode　ピアMACエンティティからの再アソシエーション要求に対する結果応答を示します。
+Capability-Information　APによってアドバタイズされた操作能力を指定します。
+AssociationID　再アソシエーション要求の結果がSUCCESSの場合、AssociationIDは、APによって、ピアMACエンティティを指定する。
+EDCAParameter　STAが使用するEDCAパラメータセットを指定します。このパラメタは、このパラメータは、dot11Qos-OptionImplementedがtrueの場合にのみ存在します。
+RCPI　対応する再関連付け要求フレームの測定されたRCPIを表す。この要素は、dot11RMRCPIMeasurementActivatedがtrueの場合に限り、オプションで存在します.
+RSNI　対応する再アソシエーション要求フレームが受信された時点で測定されたRSNIを表す。この要素は、dot11RMRSNIMeasurementActivatedがtrueの場合に限り、オプションで存在します。
+RMEnabled-Capabilities　APによってアドバタイズされるRM対応機能を指定します。要素が存在するのは、dot11RadioMeasurementActivatedがtrueの場合のみです
+
+page 241
+ーーーここまで確認
+FT認証要素の内容要素のシーケンス12.8で定義されている
+12.8.5で説明したFT認証シーケンスの4番目のメッセージに含める要素のセット。
+これには、リソース要求（RIC）に対するオプションの応答が含まれます。
+dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+Supported Operating Classesサポートされているオペレーティングクラスの要素で定義されているもの8.4.2.56
+STAのサポートされている動作クラスを指定します。
+このパラメータは、dot11ExtendedChannelSwitchActivatedがtrueの場合に存在します。
+DSER Registered Location要素で定義されたDSERegisteredLocationAs
+8.4.2.54に定義されている
+有効化STAによって割り当てられた従属有効化識別子を含むDSE登録位置を示す。
+このパラメーターは、dot11LCIDSERequiredがtrueの場合はオプションで存在します。
+HT機能フレームフォーマットで定義されているように、8.4.2.58で定義されている
+MACエンティティによってサポートされるHT Capabilities要素内のパラメータを指定する。
+dot11HighThroughputOption-Implementedがtrueの場合、パラメータは存在します。それ以外の場合は存在しません。
+拡張機能8.4.2.29で定義されたフレームフォーマットで定義される
+MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
+フレームフォーマットで定義された20/40 BSS共存
+8.4.2.62に定義されている
+MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。
+このパラメータは、dot112040BSSCoexistenceManagementSupportがtrueの場合に存在します。
+TimeoutIntervalTimeoutインターバル要素。フレーム形式で定義されます。
+8.4.2.51に定義されているように
+このパラメータは、ResultCodeが関連付け要求が一時的に拒否された場合に存在します。あとでもう一度試してみてください。 BSS Max Idle Period elementで定義されているBSSMaxIdlePeriodAs 8.4.2.81で定義されている
+APのBSS最大アイドル期間パラメータを示します。
+このパラメータは、dot11WirelessManagementImplementedがtrueの場合は存在し、そうでない場合は存在しません.NameTypeValid rangeDescription
+
+page 242
+アソシエーション応答手順を実行するために必要な追加のパラメータは、MLMEにすでにそのデータがある（内部状態として維持されている）ため、初期パラメータリストには含まれていない.6.3.8.5.3生成されたとき、このプリミティブはSTAのSME MLME-REASSOCIATE.indicationプリミティブに対する応答として、AP。
+6.3.8.5.4受領の影響
+このプリミティブは、アソシエーションを要求した特定のピアMACエンティティへの応答の送信を開始する。
+6.3.9関連付けを解除する
+6.3.9.1 MLME-DISASSOCIATE.request
+6.3.9.1.1関数
+このプリミティブは、指定されたピアMACエンティティとのディスアソシエーションを要求します.TIMBroadcastResponse
+TIMブロードキャストレスポンス要素で定義されているように
+8.4.2.86に定義されている
+TIMブロードキャストのサービスパラメータを指定します。
+このパラメータは、dot11MgmtOptionTIMBroadcastActivatedが真であり、TIMブロードキャスト要求要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない場合、オプションで存在します.FMS応答
+FMSレスポンスエレメントで定義されているように
+8.4.2.79で定義されているように、FMS Responseのマルチキャストパラメータを指定します。
+このパラメータは、dot11MgmtOptionFMSActivatedが真であり、FMS Request要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない場合、オプションで存在します.DMSResponse
+DMS応答要素で定義されている
+8.4.2.91で定義されているように、DMS Responseのマルチキャストパラメータを指定します。
+このパラメータは、dot11MgmtOptionDMSActivatedが真で、DMS Request要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない場合、オプションで存在します。
+フレームフォーマットで定義されたQoSMapSetAs
+8.4.2.97に定義されている
+非AP STAが使用するQoSマップセットを指定します。
+VendorSpecificInfoA要素の集合8.4.2.28で定義されている
+ゼロ個以上の要素.NameTypeValid rangeDescription
+
+page 243
+6.3.9.1.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-DISASSOCIATE.request（
+ PeerSTAAddress、
+ ReasonCode、
+ VendorSpecificInfo
+）
+6.3.9.1.3生成時
+このプリミティブは、SMEがSTAと関連付けているSTAとの関連付けを解除するためにSMEによって生成されます。
+6.3.9.1.4受領の影響
+このプリミティブは、ディスアソシエーション手順を開始します。
+その後、MLMEは結果を反映するMLME-DISASSOCIATE.confirmプリミティブを発行します。
+6.3.9.2 MLME-DISASSOCIATE.confirm
+6.3.9.2.1機能
+このプリミティブは、特定のピアMACエンティティとのディスアソシエーション手順の結果を報告する。
+6.3.9.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-DISASSOCIATE.confirm（
+ ResultCode、
+ VendorSpecificInfo
+）
+6.3.9.2.3生成時
+このプリミティブは、MLME-DISASSOCIATE.requestプリミティブの結果としてMLMEによって生成され、指定されたピアMACエンティティとの関連付けを解除する。
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレスdisassociation process.ReasonCodeReasonコードフィールドを実行するピアMACエンティティのアドレスを指定します。
+8.4.1.7で定義されている
+disassociationプロシージャを開始する理由を指定します。
+VendorSpecificInfoA要素の集合8.4.2.28で定義されている
+0個以上の要素。
+NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、INVALID_PARAMETERS MLME-DISASSOCIATE.requestプリミティブの結果を示します。
+VendorSpecificInfoA要素の集合8.4.2.28で定義されている
+0個以上の要素
+
+page 244
+6.3.9.2.4受領の影響
+SMEは、分離手続きの結果を通知されます。
+6.3.9.3 MLME-DISASSOCIATE.indication
+6.3.9.3.1関数
+このプリミティブは、特定のピアMACエンティティとのディスアソシエーションを報告する。6.3.9.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：MLME-DISASSOCIATE.indication（PeerSTAAddress、ReasonCode、VendorSpecificInfo）
+6.3.9.3.3生成時
+このプリミティブは、特定のピアMACエンティティとのアソシエーション関係の無効化の結果としてMLMEによって生成される。6.3.9.3.4受信の影響SMEには、特定のアソシエーション関係の無効化が通知される。
+6.3.10リセット
+6.3.10.1はじめに
+このメカニズムは、MACをリセットするプロセスをサポートします。
+6.3.10.2 MLME-RESET.request
+6.3.10.2.1機能
+このプリミティブは、MACエンティティがリセットされることを要求する.6.3.10.2.2サービスプリミティブのセマンティクスプリミティブパラメータは、以下のとおりである：MLME-RESET.request（STAAddress、NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレス。アソシエーション関係は無効化されました.ReasonCodeReasonコードフィールド8.4.1.7で定義されています
+解消プロシージャが開始された理由を指定します。VendorSpecificInfoA要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 245
+6.3.9.2.4受領の影響
+SMEは、分離手続きの結果を通知されます。
+6.3.9.3 MLME-DISASSOCIATE.indication
+6.3.9.3.1関数
+このプリミティブは、特定のピアMACエンティティとのディスアソシエーションを報告する。
+6.3.9.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-DISASSOCIATE.indication（
+ PeerSTAAddress、
+ ReasonCode、
+ VendorSpecificInfo
+）
+6.3.9.3.3生成時
+このプリミティブは、特定のピアMACエンティティとのアソシエーション関係の無効化の結果としてMLMEによって生成される。
+6.3.9.3.4受領の影響SMEは特定の関連関係の無効を通知される。
+6.3.10リセット
+6.3.10.1はじめに
+このメカニズムは、MACをリセットするプロセスをサポートします。
+6.3.10.2 MLME-RESET.request
+6.3.10.2.1機能
+このプリミティブは、MACエンティティがリセットされることを要求する.6.3.10.2.2サービスプリミティブのセマンティクスプリミティブパラメータは、以下のとおりである：MLME-RESET.request（STAAddress、NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレス。アソシエーション関係は無効化されました.ReasonCodeReasonコードフィールド8.4.1.7で定義されています
+解消プロシージャが開始された理由を指定します。VendorSpecificInfoA要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 246
+BSSBasicRateSet、
+ OperationalRateSet、
+ 国、
+ IBSS DFS回復間隔、
+ EDCAParameterSet、
+ DSERegisteredLocation、
+ HT能力、
+ HTオペレーション、
+ BSSMembershipSelectorSet、
+ BSSBasicMCSSet、
+ HTOperationalMCSSet、
+ 拡張機能、
+ 20/40 BSS共存、
+ オーバーラッピングBSSスキャンパラメータ、
+ マルチBSSID、
+ InterworkingInfo、
+ AdvertismentProtocolInfo、
+ RoamingConsortiumInfo、
+ メッシュID、メッシュ設定、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionSSIDOctet string0 32オクテット
+BSSのSSID。
+SSIDEncodingEnumerationUNSPECIFIED、UTF8
+SSIDBSSTypeEnumerationINFRASTRUCTURE、INDEPENDENT、MESHに使用されるエンコーディング
+BSS.Beacon PeriodInteger1のタイプ.BSSTypeがMESHでない場合はBSSのビーコン期間（TU単位）、BSSTypeがMESHの場合はメッシュSTAのビーコン期間（TU単位）。
+DTIM PeriodInteger 8.4.2.7で定義されている
+BSSTypeがMESHでない場合のBSSのDTIM期間（ビーコン期間内）、またはBSSTypeがMESHの場合はメッシュSTAのビーコン期間。
+CFパラメータsetCFパラメータセット要素8.4.2.6で定義されている
+CF期間を設定するパラメータ（BSSがCFモードをサポートしている場合）.PHYパラメータsetsFHパラメータセット要素またはDSSSパラメータセット要素8.4.2.4または8.4.2.5で定義されている
+PHY.IBSSパラメータに関連するパラメータセットsetIBSSパラメータセット要素8.4.2.8で定義されている
+BSSがIBSSの場合、IBSSのパラメータセット。
+プローブ遅延
+CapabilityInformationCapability情報フィールド8.4で定義されているように、フレームシーケンスが検出されない場合、DozeからAwakeに変更するときに送信する前に、STAがこのBSSのメンバである間に使用される遅延（マイクロ秒）。 1.4
+BSSのために広告されるべき能力
+
+page 247
+BSSBasicRateSetSet of integers1 127（セット内の各整数に対して）このBSSに参加するすべてのSTAがサポートするデータレートのセット。
+BSSを作成しているSTAは、セットに記載されている各データレートで送受信できる必要があります。
+OperationalRateSet of integers1 127（集合内の各整数に対して）STAがBSS内の通信に使用したいデータレートのセット。
+STAは、セットに記載されている各データレートで受信できるものとする。
+このセットは、BSSBasicRateSetパラメータに含まれるレートのスーパーセットです。
+Country要素で定義されているように
+Country要素で定義されているように
+STAが位置する規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報。
+10.8で指定されているTPC機能が必要な場合、またはdot11MultiDomainCapabilityActivatedがtrueの場合のみ存在します。
+IBSS DFS回復インターバル1 255
+BSSType = INDEPENDENTの場合にのみ存在します.DFSリカバリに使用される時間間隔。10.9で指定されているようにDFS機能が必要な場合にのみ表示されます。
+EDCAParameterSet（QoSのみ）EDCAパラメータセット要素8.4.2.31で定義されている
+初期EDCAパラメータは、BSSで使用される値を設定します。
+このパラメーターは、dot11QosOptionImplementedがtrueの場合にのみ存在します。
+DSE Registered Location要素で定義されたDSERegisteredLocationAs DSE Registered Location要素の情報。8.4.2.54で定義されている。
+CapabilitiesAsフレームフォーマットで定義されているHT Capabilities要素8.4.2.58で定義されているように、BSSのために広告されるHT機能。
+このパラメータは、dot11HighThroughputOptionImplementedがtrueの場合に存在します。さもなければ、このパラメタは存在しません.HTの操作フレームフォーマットHT操作要素
+8.4.2.59に定義されている
+追加のHT機能がBSSのために広告されます。
+このパラメータは、BSSType = INFRASTRUCTUREで、dot11HighThroughputOptionImplementedがtrueの場合に存在します。それ以外の場合、このパラメータは存在しません.BSSMembership-SelectorSet整数のセット
+セットの各メンバーの表8-55の値
+このBSSに参加するすべてのSTAによってサポートされる機能のセットを表すBSSメンバーシップセレクタ。
+BSSを作成しているSTAは、セットによって表される各フィーチャをサポートできなければならない。
+BSSBasicMCSSet整数のセット
+セットの各メンバは、MCSインデックス値を表す0〜76の範囲の値をとる。このBSSに参加するすべてのHT STAによってサポートされるMCS値のセット。
+BSSを生成しているSTAは、その集合に列挙されている各MCS値を受信し、送信することができなければならない。
+HT動作パラメータが、デュアルビーコンフィールドまたはデュアルCTS保護フィールドのいずれかの値を1に含む場合、BSSBasicMCSSetパラメータは、0〜7の範囲内の少なくとも1つの整数値を含まなければならない。
+NameTypeValid rangeDescription
+
+page 248
+6.3.11.2.3生成時
+このプリミティブは、インフラストラクチャBSS（AP内のMACエンティティを持つ）、IBSS（IBSSの最初のSTAとして動作するMACエンティティを持つ）、またはMBSSを開始するためにSMEによって生成されますMBSSのメッシュSTA）、または既存のMBSSのメンバーになることができます。
+MBSSでは、このプリミティブはメッシュビーコン処理のプロセスを開始します。
+HTOperationalMCSSet整数のセット
+セットの各メンバーは、BSS内の通信にSTAが使用することを望むMCSインデックス値を表す0〜76の範囲の値をとる。
+STAは、セットに記載されている各データレートで受信できるものとする。
+このセットは、BSSBasicMCSSetパラメータに含まれるMCS値のスーパーセットです。拡張機能フレームフォーマットで定義されているように、8.4.2.29
+MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
+20/40 BSS共存
+フレームフォーマットで定義されているように
+8.4.2.62に定義されている
+MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。
+このパラメータは、dot112040BSSCoexistence-ManagementSupportがtrueの場合に存在します。オーバーラッピングBSSスキャンパラメータフレームフォーマットで定義されているように、8.4.2.61
+MACエンティティによって示されるオーバーラッピングBSSスキャンパラメータ要素内のパラメータを指定する。
+このパラメータは、dot11FortyMHzOptionImplementedがtrueの場合はオプションで存在します。さもなければ、それは存在しません。多重BSSID
+8.4.2.48のMultiple BSSID Elementで定義されているように
+8.4.2.48のMultiple BSSID Elementで定義されているように
+この要素は、dot11RMMeasurementPilotCapabilityが2〜7の値で、APが2つ以上のメンバーを持つMultiple BSSID Set（10.11.14参照）のメンバーである場合、またはdot11MgmtOptionMultiBSSIDActivatedがtrueの場合にオプションで存在します.InterworkingInfo
+フレームフォーマットで定義されているように
+8.4.2.94のインターワーキング要素で定義されている
+STAのインターワーキング機能を指定します。
+このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+AdvertisementProtocolInfoIntegerまたは整数のシーケンス
+表8-175のAdvertisement Protocol要素に定義されているように、BSSで使用される0個以上のAdvertisement ProtocolsとAdvertisement Controlを示します。
+このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+RoamingConsortiumInfo
+フレームフォーマットで定義されているように
+8.4.2.98のローミングコンソーシアム要素で定義されているように
+セキュリティ資格情報を使用してAPで認証できるSSPの識別情報を指定します。
+このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+メッシュID
+オクテット文字列0 32オクテットMeshIDの値。
+この要素は、BSSType = MESH.MeshConfiguration
+フレームフォーマットで定義されているように、8.4.2.100で定義されている
+メッシュSTAの構成を指定します。
+この要素は、BSSType = MESH.VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+ゼロ個以上の要素.NameTypeValid rangeDescription
+
+page 249
+MLME-START.requestプリミティブは、MLME-RESET.requestプリミティブがMACエンティティをリセットするために使用され、MLME-JOIN.requestprimitiveが既存のインフラストラクチャBSSに正常に参加するために使用される前にのみインフラストラクチャBSSまたはIBSSで生成されるまたはIBSS。
+MLME-RESET.requestprimitiveがMACエンティティをリセットするために使用され、すべての同期およびメッシュピアリングが確立される前に、MLME-START.requestプリミティブがMBSSで生成されることがあります。
+メッシュSTAがデフォルトの同期方法とデフォルトのメッシュピアリングプロトコルを使用する場合、MLME-START.requestプリミティブは、MLME-MESHNEIGHBOROFFSETSYNCSTART.requestプリミティブとMLME-MESHPEERINGMANAGEMENT.requestプリミティブが使用される前に生成されなければならない。
+MLME-START.requestプリミティブは、介在MLME-RESET.requestプリミティブを生成せずに、MLME-START.requestprimitiveまたはMLME-JOIN.requestプリミティブの使用が成功した後で使用されてはならない。6.3.12.2.4レシートこのプリミティブは、現在のフレーム交換シーケンスが完了すると、BSS初期化手順を開始する。
+その後、MLMEは、作成手順の結果を反映するMLME-START.confirmプリミティブを発行する。
+MLMEがサポートされていない速度を含むBSSBasicRateSetパラメータを持つMLME-START.requestプリミティブを受信した場合、MLME-START.confirmプリミティブのMLME応答には、値がSUCCESSに設定されていないResultCodeパラメータが含まれます.HTのMLME STAは、サポートされていないMCSを含むBSSBasicMCSSetparameterを持つMLME-START.requestプリミティブを受信すると、結果のMLME-START.confirmprimitiveのMLMEレスポンスには、SUCCESSという値に設定されていないResultCodeパラメータが含まれます。MLMEがMLME-START .requestプリミティブをSSIDEncodingパラメータ値UTF8と組み合わせると、MLMEは、Extended Capabilities要素のUTF-8 SSIDサブフィールドをBeaconおよびProbe Responseフレームの1に設定する。
+6.3.11.3 MLME-START.confirm
+6.3.11.3.1関数
+このプリミティブは、BSS作成プロシージャの結果またはanBSDのメンバになるプロシージャを報告します。
+6.3.11.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-START.confirm（
+ ResultCode
+）
+NameTypeValid rangeresetDescriptionResultCodeEnumerationSUCCESS、BSS_ALREADY_STARTED_OR_JOINED、RESET_REQUIRED_BEFORE_ START、NOT_SUPPORTED
+MLME-START.requestプリミティブの結果を示す
+
+page 250
+6.3.11.3.3生成された場合、このプリミティブはMLME-START.requestプリミティブの結果としてMLMEによって生成され、新しいBSSを作成するか、またはMBSSのメンバになる。
+6.3.11.3.4受領の影響
+SMEには、BSS作成手順の結果またはMBSSのメンバーになる手順が通知されます。
+6.3.12停止
+6.3.12.1一般
+このメカニズムは、既存のBSSを終了するプロセスをサポートします。
+6.3.12.2 MLME-STOP.request
+6.3.12.2.1機能
+このプリミティブは、MACエンティティがMLME-START.requestプリミティブを使用して以前に開始したBSSを停止することを要求する
+6.3.12.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。MLME-STOP.request（SSID）
+6.3.12.2.3生成時
+このプリミティブは、インフラストラクチャBSS（anAP内のMACエンティティ）を終了するためにSMEによって生成されます。
+MLME-STOP.requestプリミティブは、MLME-START.confirmプリミティブの使用が成功した後にのみ生成されるものとする。
+MLME-STOP終了手順は、MACを初期状態にリセットしない。
+MLME-RESET.requestプリミティブは、MLME-START.requestプリミティブを使用する前に、MLME-STOP.requestプリミティブを使用する前に発行されなければならない。
+SMEは、MLME-STOP.requestを発行する前に、近い将来インフラストラクチャのBSS終了に関する関連非AP STAに通知する必要があります。これは、BSS Transition Management手順で、TheTermination情報を使用して行うことができます。
+6.3.12.2.4受領の影響
+このプリミティブは、BSSの終了を開始する。
+ビーコン、プローブ応答、およびDSへのアクセスを含む、APによってインフラストラクチャBSSに提供されるすべてのサービスは、終了によって停止されます。
+インフラストラクチャBSS内のすべてのSTAは、終端によって認証解除されます.NameTypeValid rangeDescriptionSSIDOctet string0 32オクテット
+停止するBSSのSSID
+
+page 251
