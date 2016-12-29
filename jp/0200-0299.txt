@@ -1108,64 +1108,47 @@ RSNI　対応する再アソシエーション要求フレームが受信され�
 RMEnabled-Capabilities　APによってアドバタイズされるRM対応機能を指定します。要素が存在するのは、dot11RadioMeasurementActivatedがtrueの場合のみです
 
 page 241
-ーーーここまで確認
-FT認証要素の内容要素のシーケンス12.8で定義されている
-12.8.5で説明したFT認証シーケンスの4番目のメッセージに含める要素のセット。
-これには、リソース要求（RIC）に対するオプションの応答が含まれます。
-dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
-Supported Operating Classesサポートされているオペレーティングクラスの要素で定義されているもの8.4.2.56
-STAのサポートされている動作クラスを指定します。
-このパラメータは、dot11ExtendedChannelSwitchActivatedがtrueの場合に存在します。
-DSER Registered Location要素で定義されたDSERegisteredLocationAs
-8.4.2.54に定義されている
-有効化STAによって割り当てられた従属有効化識別子を含むDSE登録位置を示す。
-このパラメーターは、dot11LCIDSERequiredがtrueの場合はオプションで存在します。
-HT機能フレームフォーマットで定義されているように、8.4.2.58で定義されている
-MACエンティティによってサポートされるHT Capabilities要素内のパラメータを指定する。
-dot11HighThroughputOption-Implementedがtrueの場合、パラメータは存在します。それ以外の場合は存在しません。
-拡張機能8.4.2.29で定義されたフレームフォーマットで定義される
-MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
-フレームフォーマットで定義された20/40 BSS共存
-8.4.2.62に定義されている
-MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。
-このパラメータは、dot112040BSSCoexistenceManagementSupportがtrueの場合に存在します。
-TimeoutIntervalTimeoutインターバル要素。フレーム形式で定義されます。
-8.4.2.51に定義されているように
-このパラメータは、ResultCodeが関連付け要求が一時的に拒否された場合に存在します。あとでもう一度試してみてください。 BSS Max Idle Period elementで定義されているBSSMaxIdlePeriodAs 8.4.2.81で定義されている
-APのBSS最大アイドル期間パラメータを示します。
-このパラメータは、dot11WirelessManagementImplementedがtrueの場合は存在し、そうでない場合は存在しません.NameTypeValid rangeDescription
+FT認証要素の内容 12.8.5で説明したFT認証シーケンスの4番目のメッセージに含める要素のセット。これには、リソース要求（RIC）に対するオプションの応答が含まれます。dot11FastBSSTransitionActivatedがtrueの場合のみ存在します。
+SupportedOperatingClasses STAのサポートされている動作クラスを指定します。このパラメータは、dot11ExtendedChannelSwitchActivatedがtrueの場合に存在します。
+DSERRegisteredLocation 有効化STAによって割り当てられた従属有効化識別子を含むDSE登録位置を示す。このパラメーターは、dot11LCIDSERequiredがtrueの場合はオプションで存在します。
+HT機能 MACエンティティによってサポートされるHT Capabilities要素内のパラメータを指定する。dot11HighThroughputOption-Implementedがtrueの場合、パラメータが存在する。
+拡張機能　MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
+20/40 BSS共存　MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。このパラメータは、dot112040BSSCoexistenceManagementSupportがtrueの場合に存在します。
+TimeoutInterval　このパラメータは、ResultCodeが以下の場合に存在します。"アソシエーション要求が一時的に拒否された場合に存在します。あとでもう一度試してみてください。"
+BSSMaxIdlePeriod　APのBSS最大アイドル期間パラメータを示します。このパラメータは、dot11WirelessManagementImplementedがtrueの場合は存在し、そうでない場合は存在しません.
 
 page 242
+
+TIMBroadcastResponse　TIMブロードキャストのサービスパラメータを指定します。以下に示す条件を満たす場合、オプションで存在します。dot11MgmtOptionTIMBroadcastActivatedが真であり、TIMブロードキャスト要求要素が対応するAssociation Requestフレームに存在する。
+
+FMS応答　FMS Responseのマルチキャストパラメータを指定します。
+このパラメータは、以下に示す条件を満たす場合、オプションで存在します。dot11MgmtOptionFMSActivatedが真であり、FMS Request要素が対応するAssociation Requestフレームに存在する場合。
+
+DMSResponse　DMS Responseのマルチキャストパラメータを指定します。このパラメータは、以下に示す条件を満たす場合、オプションで存在します。
+
+dot11MgmtOptionDMSActivatedが真で、DMS Request要素が対応するAssociation Requestフレームに存在する場合。
+
+QoSMapSet　非AP STAが使用するQoSマップセットを指定します。
+
 アソシエーション応答手順を実行するために必要な追加のパラメータは、MLMEにすでにそのデータがある（内部状態として維持されている）ため、初期パラメータリストには含まれていない.6.3.8.5.3生成されたとき、このプリミティブはSTAのSME MLME-REASSOCIATE.indicationプリミティブに対する応答として、AP。
 6.3.8.5.4受領の影響
 このプリミティブは、アソシエーションを要求した特定のピアMACエンティティへの応答の送信を開始する。
 6.3.9関連付けを解除する
 6.3.9.1 MLME-DISASSOCIATE.request
 6.3.9.1.1関数
-このプリミティブは、指定されたピアMACエンティティとのディスアソシエーションを要求します.TIMBroadcastResponse
-TIMブロードキャストレスポンス要素で定義されているように
-8.4.2.86に定義されている
-TIMブロードキャストのサービスパラメータを指定します。
-このパラメータは、dot11MgmtOptionTIMBroadcastActivatedが真であり、TIMブロードキャスト要求要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない場合、オプションで存在します.FMS応答
-FMSレスポンスエレメントで定義されているように
-8.4.2.79で定義されているように、FMS Responseのマルチキャストパラメータを指定します。
-このパラメータは、dot11MgmtOptionFMSActivatedが真であり、FMS Request要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない場合、オプションで存在します.DMSResponse
-DMS応答要素で定義されている
-8.4.2.91で定義されているように、DMS Responseのマルチキャストパラメータを指定します。
-このパラメータは、dot11MgmtOptionDMSActivatedが真で、DMS Request要素が対応するAssociation Requestフレームに存在し、それ以外の場合には存在しない場合、オプションで存在します。
-フレームフォーマットで定義されたQoSMapSetAs
-8.4.2.97に定義されている
-非AP STAが使用するQoSマップセットを指定します。
-VendorSpecificInfoA要素の集合8.4.2.28で定義されている
-ゼロ個以上の要素.NameTypeValid rangeDescription
+このプリミティブは、指定されたピアMACエンティティとのディスアソシエーションを要求します.
 
 page 243
+
 6.3.9.1.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
 MLME-DISASSOCIATE.request（
  PeerSTAAddress、
  ReasonCode、
  VendorSpecificInfo
 ）
+PeerSTAAddress　ディスアソシエーション手順を実施する際、ピアMACサービスエントリのアドレスを指定する。
+ReasonCode　ディスアソシエーション手順を開始する理由を指定する。
+
 6.3.9.1.3生成時
 このプリミティブは、SMEがSTAと関連付けているSTAとの関連付けを解除するためにSMEによって生成されます。
 6.3.9.1.4受領の影響
@@ -1180,23 +1163,27 @@ MLME-DISASSOCIATE.confirm（
  ResultCode、
  VendorSpecificInfo
 ）
+ResultCode　MLME-DISASSOCIATE.repuestプリミティブの結果を示す。
+
 6.3.9.2.3生成時
 このプリミティブは、MLME-DISASSOCIATE.requestプリミティブの結果としてMLMEによって生成され、指定されたピアMACエンティティとの関連付けを解除する。
-NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレスdisassociation process.ReasonCodeReasonコードフィールドを実行するピアMACエンティティのアドレスを指定します。
-8.4.1.7で定義されている
-disassociationプロシージャを開始する理由を指定します。
-VendorSpecificInfoA要素の集合8.4.2.28で定義されている
-0個以上の要素。
-NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、INVALID_PARAMETERS MLME-DISASSOCIATE.requestプリミティブの結果を示します。
-VendorSpecificInfoA要素の集合8.4.2.28で定義されている
-0個以上の要素
 
 page 244
+
 6.3.9.2.4受領の影響
 SMEは、分離手続きの結果を通知されます。
 6.3.9.3 MLME-DISASSOCIATE.indication
 6.3.9.3.1関数
-このプリミティブは、特定のピアMACエンティティとのディスアソシエーションを報告する。6.3.9.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：MLME-DISASSOCIATE.indication（PeerSTAAddress、ReasonCode、VendorSpecificInfo）
+このプリミティブは、特定のピアMACエンティティとのディスアソシエーションを報告する。
+6.3.9.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは以下の通りである：
+MLME-DISASSOCIATE.indication（
+　PeerSTAAddress、
+　ReasonCode、
+　VendorSpecificInfo
+）
+PeerSTAAddress　アソシエーション関係が無効な時に、ピアMACエンティティのアドレスを指定する。
+ReasonCode　ディスアソシエーション手順が開始された理由を指定する。
 6.3.9.3.3生成時
 このプリミティブは、特定のピアMACエンティティとのアソシエーション関係の無効化の結果としてMLMEによって生成される。6.3.9.3.4受信の影響SMEには、特定のアソシエーション関係の無効化が通知される。
 6.3.10リセット
@@ -1204,38 +1191,45 @@ SMEは、分離手続きの結果を通知されます。
 このメカニズムは、MACをリセットするプロセスをサポートします。
 6.3.10.2 MLME-RESET.request
 6.3.10.2.1機能
-このプリミティブは、MACエンティティがリセットされることを要求する.6.3.10.2.2サービスプリミティブのセマンティクスプリミティブパラメータは、以下のとおりである：MLME-RESET.request（STAAddress、NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレス。アソシエーション関係は無効化されました.ReasonCodeReasonコードフィールド8.4.1.7で定義されています
-解消プロシージャが開始された理由を指定します。VendorSpecificInfoA要素のセット
-8.4.2.28に定義されている
-0個以上の要素
+このプリミティブは、MACエンティティがリセットされることを要求する.6.3.10.2.2サービスプリミティブのセマンティクスプリミティブパラメータは、以下のとおりである：
+MLME-RESET.request（
+　STAAddress、
 
 page 245
-6.3.9.2.4受領の影響
-SMEは、分離手続きの結果を通知されます。
-6.3.9.3 MLME-DISASSOCIATE.indication
-6.3.9.3.1関数
-このプリミティブは、特定のピアMACエンティティとのディスアソシエーションを報告する。
-6.3.9.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
-MLME-DISASSOCIATE.indication（
- PeerSTAAddress、
- ReasonCode、
- VendorSpecificInfo
+SetDefaultMIB
 ）
-6.3.9.3.3生成時
-このプリミティブは、特定のピアMACエンティティとのアソシエーション関係の無効化の結果としてMLMEによって生成される。
-6.3.9.3.4受領の影響SMEは特定の関連関係の無効を通知される。
-6.3.10リセット
-6.3.10.1はじめに
-このメカニズムは、MACをリセットするプロセスをサポートします。
-6.3.10.2 MLME-RESET.request
-6.3.10.2.1機能
-このプリミティブは、MACエンティティがリセットされることを要求する.6.3.10.2.2サービスプリミティブのセマンティクスプリミティブパラメータは、以下のとおりである：MLME-RESET.request（STAAddress、NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレス。アソシエーション関係は無効化されました.ReasonCodeReasonコードフィールド8.4.1.7で定義されています
-解消プロシージャが開始された理由を指定します。VendorSpecificInfoA要素のセット
-8.4.2.28に定義されている
-0個以上の要素
+STAAddress　リセットされるMACエンティティによって使用されるMACアドレスを指定します。この値は、ローカル管理されたSTAアドレスを提供するために使用できます。
+SetDefaultMIB　trueの場合、すべてのMIB属性はデフォルト値に設定されます。デフォルト値は実装に依存します。偽の場合、MACはリセットされるが、すべてのMIB属性は、MLME-RESET.requestプリミティブの生成前の値を保持する
+
+6.3.10.2.3生成されたとき
+このプリミティブは、MACを初期状態にリセットするためにSMEによって生成される。
+MLME-RESET.requestprimitiveは、MLME-START.requestプリミティブの使用前に使用されなければならない。
+6.3.10.2.4受領の影響
+このプリミティブは、MACを初期条件に設定し、すべての内部変数をデフォルト値にクリアします。
+SetDefaultMIBフラグをtrueに設定すると、MIBattributesを実装依存のデフォルト値にリセットできます。
+dot11OCBActivatedが真であり、かつSetDefaultMIBパラメータが偽である場合、STAAddressパラメータが変更された後、MAC操作は2TU以上に再開しなければならない。
+6.3.11開始
+6.3.11.1はじめに
+このメカニズムは、新しいBSSを作成するプロセス、またはMBSSのメンバになるプロセスをサポートします。
+6.3.11.2 MLME-START.request
+6.3.11.2.1機能
+このプリミティブは、MACエンティティが新しいBSSを開始するか、またはMBSSのメンバになることを要求する。
+6.3.11.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-START.request（
+ SSID、
+ SSIDE符号化、
+ BSSType、
+ ビーコン周期、
+ DTIMPeriod、
+ CFパラメータセット、
+ PHYパラメータセット、
+ IBSSパラメータセット、
+ ProbeDelay、
+ 能力情報、
 
 page 246
-BSSBasicRateSet、
+　BSSBasicRateSet、
  OperationalRateSet、
  国、
  IBSS DFS回復間隔、
@@ -1256,98 +1250,66 @@ BSSBasicRateSet、
  メッシュID、メッシュ設定、
  VendorSpecificInfo
 ）
-NameTypeValid rangeDescriptionSSIDOctet string0 32オクテット
-BSSのSSID。
-SSIDEncodingEnumerationUNSPECIFIED、UTF8
-SSIDBSSTypeEnumerationINFRASTRUCTURE、INDEPENDENT、MESHに使用されるエンコーディング
-BSS.Beacon PeriodInteger1のタイプ.BSSTypeがMESHでない場合はBSSのビーコン期間（TU単位）、BSSTypeがMESHの場合はメッシュSTAのビーコン期間（TU単位）。
-DTIM PeriodInteger 8.4.2.7で定義されている
-BSSTypeがMESHでない場合のBSSのDTIM期間（ビーコン期間内）、またはBSSTypeがMESHの場合はメッシュSTAのビーコン期間。
-CFパラメータsetCFパラメータセット要素8.4.2.6で定義されている
-CF期間を設定するパラメータ（BSSがCFモードをサポートしている場合）.PHYパラメータsetsFHパラメータセット要素またはDSSSパラメータセット要素8.4.2.4または8.4.2.5で定義されている
-PHY.IBSSパラメータに関連するパラメータセットsetIBSSパラメータセット要素8.4.2.8で定義されている
-BSSがIBSSの場合、IBSSのパラメータセット。
-プローブ遅延
-CapabilityInformationCapability情報フィールド8.4で定義されているように、フレームシーケンスが検出されない場合、DozeからAwakeに変更するときに送信する前に、STAがこのBSSのメンバである間に使用される遅延（マイクロ秒）。 1.4
-BSSのために広告されるべき能力
+SSID　BSSのSSID。
+SSIDEncoding　SSIDに使用されるエンコード方法
+BSSType　BSSのタイプ
+Beacon Period　BSSTypeがMESHでない場合はBSSのビーコン期間（TU単位）、BSSTypeがMESHの場合はメッシュSTAのビーコン期間（TU単位）。
+DTIM Period　BSSTypeがMESHでない場合のBSSのDTIM期間（ビーコン期間内）、またはBSSTypeがMESHの場合はメッシュSTAのビーコン期間。
+CFパラメータセット　CF期間を設定するパラメータ（BSSがCFモードをサポートしている場合）.
+PHYパラメータセット　PHYに関連して設定されたパラメタセット
+IBSSパラメータセット　IBSSパラメータに関連するパラメータセット
+ProbleDelay フレームシーケンスが検出されない場合、DozeからAwakeに変更するときに送信する前に、STAがこのBSSのメンバである間に使用される遅延（マイクロ秒）。
+CapailityInformatin BSSのために広告されるべき能力
 
 page 247
-BSSBasicRateSetSet of integers1 127（セット内の各整数に対して）このBSSに参加するすべてのSTAがサポートするデータレートのセット。
-BSSを作成しているSTAは、セットに記載されている各データレートで送受信できる必要があります。
-OperationalRateSet of integers1 127（集合内の各整数に対して）STAがBSS内の通信に使用したいデータレートのセット。
-STAは、セットに記載されている各データレートで受信できるものとする。
-このセットは、BSSBasicRateSetパラメータに含まれるレートのスーパーセットです。
-Country要素で定義されているように
-Country要素で定義されているように
-STAが位置する規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報。
-10.8で指定されているTPC機能が必要な場合、またはdot11MultiDomainCapabilityActivatedがtrueの場合のみ存在します。
-IBSS DFS回復インターバル1 255
-BSSType = INDEPENDENTの場合にのみ存在します.DFSリカバリに使用される時間間隔。10.9で指定されているようにDFS機能が必要な場合にのみ表示されます。
-EDCAParameterSet（QoSのみ）EDCAパラメータセット要素8.4.2.31で定義されている
-初期EDCAパラメータは、BSSで使用される値を設定します。
-このパラメーターは、dot11QosOptionImplementedがtrueの場合にのみ存在します。
-DSE Registered Location要素で定義されたDSERegisteredLocationAs DSE Registered Location要素の情報。8.4.2.54で定義されている。
-CapabilitiesAsフレームフォーマットで定義されているHT Capabilities要素8.4.2.58で定義されているように、BSSのために広告されるHT機能。
-このパラメータは、dot11HighThroughputOptionImplementedがtrueの場合に存在します。さもなければ、このパラメタは存在しません.HTの操作フレームフォーマットHT操作要素
-8.4.2.59に定義されている
-追加のHT機能がBSSのために広告されます。
-このパラメータは、BSSType = INFRASTRUCTUREで、dot11HighThroughputOptionImplementedがtrueの場合に存在します。それ以外の場合、このパラメータは存在しません.BSSMembership-SelectorSet整数のセット
-セットの各メンバーの表8-55の値
-このBSSに参加するすべてのSTAによってサポートされる機能のセットを表すBSSメンバーシップセレクタ。
+
+BSSBasicRateSet BSSを作成しているSTAは、セットに記載されている各データレートで送受信できる必要があります。
+OperationalRateSet STAがBSS内の通信に使用したいデータレートのセット。STAは、セットに記載されている各データレートで受信できるものとする。このセットは、BSSBasicRateSetパラメータに含まれるレートのスーパーセットです。
+Country STAが位置する規制ドメインを識別し、その規制ドメインでの運用のためにPHYを構成するために必要な情報。10.8で指定されているTPC機能が必要な場合、またはdot11MultiDomainCapabilityActivatedがtrueの場合のみ存在します。
+IBSS DFS回復インターバル BSSType = INDEPENDENTの場合にのみ存在します.
+DFSリカバリに使用される時間間隔 DFS機能が必要な場合にのみ表示されます。
+EDCAParameterSet（QoSのみ） 初期EDCAパラメータは、BSSで使用される値を設定します。このパラメーターは、dot11QosOptionImplementedがtrueの場合にのみ存在します。
+DSERegisteredLocation DSE Registered Location要素の情報。このパラメタは、dot11LCIDSERequiredが真の場合のみ、このパラメタが存在します。
+HT Capabilities　BSSのために広告されるHT機能。このパラメータは、dot11HighThroughputOptionImplementedがtrueの場合に存在します。
+HT　Operation　追加のHT機能がBSSのためにアドバタイズされます。このパラメータは、BSSType = INFRASTRUCTUREで、dot11HighThroughputOptionImplementedがtrueの場合に存在します。それ以外の場合、このパラメータは存在しません.
+BSSMembership-SelectorSet　このBSSに参加するすべてのSTAによってサポートされる機能のセットを表すBSSメンバーシップセレクタ。
 BSSを作成しているSTAは、セットによって表される各フィーチャをサポートできなければならない。
-BSSBasicMCSSet整数のセット
-セットの各メンバは、MCSインデックス値を表す0〜76の範囲の値をとる。このBSSに参加するすべてのHT STAによってサポートされるMCS値のセット。
-BSSを生成しているSTAは、その集合に列挙されている各MCS値を受信し、送信することができなければならない。
-HT動作パラメータが、デュアルビーコンフィールドまたはデュアルCTS保護フィールドのいずれかの値を1に含む場合、BSSBasicMCSSetパラメータは、0〜7の範囲内の少なくとも1つの整数値を含まなければならない。
-NameTypeValid rangeDescription
+
+BSSBasicMCSSet　このBSSに参加するすべてのHT STAによってサポートされるMCS値のセット。BSSを生成しているSTAは、その集合に列挙されている各MCS値を受信し、送信することができなければならない。HT動作パラメータが、デュアルビーコンフィールドまたはデュアルCTS保護フィールドのいずれかの値を1に含む場合、BSSBasicMCSSetパラメータは、0〜7の範囲内の少なくとも1つの整数値を含まなければならない。
 
 page 248
+HTOperationalMCSSet　STAは、セットに記載されている各データレートで受信できるものとする。このセットは、BSSBasicMCSSetパラメータに含まれるMCS値のスーパーセットです。
+拡張機能　MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
+20/40 BSS共存　MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。このパラメータは、dot112040BSSCoexistence-ManagementSupportがtrueの場合に存在します。
+オーバーラッピングBSSスキャンパラメータ　MACエンティティによって示されるオーバーラッピングBSSスキャンパラメータ要素内のパラメータを指定する。このパラメータは、dot11FortyMHzOptionImplementedがtrueの場合はオプションで存在します。。
+多重BSSID　この要素は、dot11RMMeasurementPilotCapabilityが2〜7の値で、APが2つ以上のメンバーを持つMultiple BSSID Set（10.11.14参照）のメンバーである場合、またはdot11MgmtOptionMultiBSSIDActivatedがtrueの場合にオプションで存在します.
+
+InterworkingInfo　STAのインターワーキング機能を指定します。このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+AdvertisementProtocolInfo　BSSで使用される0個以上のAdvertisement ProtocolsとAdvertisement Controlを示します。このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+RoamingConsortiumInfo　セキュリティ資格情報を使用してAPで認証できるSSPの識別情報を指定します。このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
+メッシュID　メッシュSTAの設定により指定されます。また、BSSType = MESH.MeshConfigurationの時のみ存在します。
+
 6.3.11.2.3生成時
-このプリミティブは、インフラストラクチャBSS（AP内のMACエンティティを持つ）、IBSS（IBSSの最初のSTAとして動作するMACエンティティを持つ）、またはMBSSを開始するためにSMEによって生成されますMBSSのメッシュSTA）、または既存のMBSSのメンバーになることができます。
+このプリミティブは、インフラストラクチャBSS（AP内のMACエンティティを持つ）、IBSS（IBSSの最初のSTAとして動作するMACエンティティを持つ）、またはMBSSのメッシュSTA(MBSSを開始するためにSMEによって生成される）、または既存のMBSSのメンバーになることができます。
 MBSSでは、このプリミティブはメッシュビーコン処理のプロセスを開始します。
-HTOperationalMCSSet整数のセット
-セットの各メンバーは、BSS内の通信にSTAが使用することを望むMCSインデックス値を表す0〜76の範囲の値をとる。
-STAは、セットに記載されている各データレートで受信できるものとする。
-このセットは、BSSBasicMCSSetパラメータに含まれるMCS値のスーパーセットです。拡張機能フレームフォーマットで定義されているように、8.4.2.29
-MACエンティティによってサポートされる拡張機能要素内のパラメータを指定する。
-20/40 BSS共存
-フレームフォーマットで定義されているように
-8.4.2.62に定義されている
-MACエンティティによって示される20/40 BSS共存要素内のパラメータを指定します。
-このパラメータは、dot112040BSSCoexistence-ManagementSupportがtrueの場合に存在します。オーバーラッピングBSSスキャンパラメータフレームフォーマットで定義されているように、8.4.2.61
-MACエンティティによって示されるオーバーラッピングBSSスキャンパラメータ要素内のパラメータを指定する。
-このパラメータは、dot11FortyMHzOptionImplementedがtrueの場合はオプションで存在します。さもなければ、それは存在しません。多重BSSID
-8.4.2.48のMultiple BSSID Elementで定義されているように
-8.4.2.48のMultiple BSSID Elementで定義されているように
-この要素は、dot11RMMeasurementPilotCapabilityが2〜7の値で、APが2つ以上のメンバーを持つMultiple BSSID Set（10.11.14参照）のメンバーである場合、またはdot11MgmtOptionMultiBSSIDActivatedがtrueの場合にオプションで存在します.InterworkingInfo
-フレームフォーマットで定義されているように
-8.4.2.94のインターワーキング要素で定義されている
-STAのインターワーキング機能を指定します。
-このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
-AdvertisementProtocolInfoIntegerまたは整数のシーケンス
-表8-175のAdvertisement Protocol要素に定義されているように、BSSで使用される0個以上のAdvertisement ProtocolsとAdvertisement Controlを示します。
-このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
-RoamingConsortiumInfo
-フレームフォーマットで定義されているように
-8.4.2.98のローミングコンソーシアム要素で定義されているように
-セキュリティ資格情報を使用してAPで認証できるSSPの識別情報を指定します。
-このフィールドは、dot11InterworkingServiceActivatedがtrueの場合に存在します。
-メッシュID
-オクテット文字列0 32オクテットMeshIDの値。
-この要素は、BSSType = MESH.MeshConfiguration
-フレームフォーマットで定義されているように、8.4.2.100で定義されている
-メッシュSTAの構成を指定します。
-この要素は、BSSType = MESH.VendorSpecificInfo
-8.4.2.28で定義されている要素の集合
-ゼロ個以上の要素.NameTypeValid rangeDescription
 
 page 249
-MLME-START.requestプリミティブは、MLME-RESET.requestプリミティブがMACエンティティをリセットするために使用され、MLME-JOIN.requestprimitiveが既存のインフラストラクチャBSSに正常に参加するために使用される前にのみインフラストラクチャBSSまたはIBSSで生成されるまたはIBSS。
+
+MLME-START.requestプリミティブは、MLME-RESET.requestプリミティブがMACエンティティをリセットするために使用され、MLME-JOIN.requestprimitiveが既存のインフラストラクチャBSSに、正常に参加するために使用される前にのみ、インフラストラクチャBSSまたはIBSSで生成されます。
+
 MLME-RESET.requestprimitiveがMACエンティティをリセットするために使用され、すべての同期およびメッシュピアリングが確立される前に、MLME-START.requestプリミティブがMBSSで生成されることがあります。
-メッシュSTAがデフォルトの同期方法とデフォルトのメッシュピアリングプロトコルを使用する場合、MLME-START.requestプリミティブは、MLME-MESHNEIGHBOROFFSETSYNCSTART.requestプリミティブとMLME-MESHPEERINGMANAGEMENT.requestプリミティブが使用される前に生成されなければならない。
-MLME-START.requestプリミティブは、介在MLME-RESET.requestプリミティブを生成せずに、MLME-START.requestprimitiveまたはMLME-JOIN.requestプリミティブの使用が成功した後で使用されてはならない。6.3.12.2.4レシートこのプリミティブは、現在のフレーム交換シーケンスが完了すると、BSS初期化手順を開始する。
-その後、MLMEは、作成手順の結果を反映するMLME-START.confirmプリミティブを発行する。
-MLMEがサポートされていない速度を含むBSSBasicRateSetパラメータを持つMLME-START.requestプリミティブを受信した場合、MLME-START.confirmプリミティブのMLME応答には、値がSUCCESSに設定されていないResultCodeパラメータが含まれます.HTのMLME STAは、サポートされていないMCSを含むBSSBasicMCSSetparameterを持つMLME-START.requestプリミティブを受信すると、結果のMLME-START.confirmprimitiveのMLMEレスポンスには、SUCCESSという値に設定されていないResultCodeパラメータが含まれます。MLMEがMLME-START .requestプリミティブをSSIDEncodingパラメータ値UTF8と組み合わせると、MLMEは、Extended Capabilities要素のUTF-8 SSIDサブフィールドをBeaconおよびProbe Responseフレームの1に設定する。
+メッシュSTAがデフォルトの同期方法とデフォルトのメッシュピアリングプロトコルを使用する場合、MLME-START.requestプリミティブは、MLME-MESHNEIGHBOROFFSETSYNCSTART.requestプリミティブと、MLME-MESHPEERINGMANAGEMENT.requestプリミティブが使用される前に生成されなければならない。
+MLME-START.requestプリミティブは、介在MLME-RESET.requestプリミティブを生成せずに、MLME-START.requestprimitiveまたはMLME-JOIN.requestプリミティブの使用が成功した後で使用されてはならない。
+
+6.3.12.2.4受領の効果
+このプリミティブは、現在のフレーム交換シーケンスが完了すると、BSS初期化手順を開始する。その後、MLMEは、作成手順の結果を反映するMLME-START.confirmプリミティブを発行する。
+
+MLMEがサポートされていない速度を含むBSSBasicRateSetパラメータを持つMLME-START.requestプリミティブを受信した場合、MLME-START.confirmプリミティブのMLME応答には、値がSUCCESSに設定されていないResultCodeパラメータが含まれます.
+
+HTのMLME STAは、サポートされていないMCSを含むBSSBasicMCSSetparameterを持つMLME-START.requestプリミティブを受信すると、結果のMLME-START.confirmプリミティブのMLMEレスポンスには、SUCCESSという値に設定されていないResultCodeパラメータが含まれます。
+
+MLMEがMLME-START.requestプリミティブをSSIDEncodingパラメータ値UTF8と組み合わせると、MLMEは、Extended Capabilities要素のUTF-8 SSIDサブフィールドをBeaconおよびProbe Responseフレームの1に設定する。
+
 6.3.11.3 MLME-START.confirm
 6.3.11.3.1関数
 このプリミティブは、BSS作成プロシージャの結果またはanBSDのメンバになるプロシージャを報告します。
@@ -1356,10 +1318,10 @@ MLMEがサポートされていない速度を含むBSSBasicRateSetパラメー�
 MLME-START.confirm（
  ResultCode
 ）
-NameTypeValid rangeresetDescriptionResultCodeEnumerationSUCCESS、BSS_ALREADY_STARTED_OR_JOINED、RESET_REQUIRED_BEFORE_ START、NOT_SUPPORTED
-MLME-START.requestプリミティブの結果を示す
+ResultCode　MLME-START.requestプリミティブの結果を示す
 
 page 250
+
 6.3.11.3.3生成された場合、このプリミティブはMLME-START.requestプリミティブの結果としてMLMEによって生成され、新しいBSSを作成するか、またはMBSSのメンバになる。
 6.3.11.3.4受領の影響
 SMEには、BSS作成手順の結果またはMBSSのメンバーになる手順が通知されます。
@@ -1380,7 +1342,1500 @@ SMEは、MLME-STOP.requestを発行する前に、近い将来インフラスト
 6.3.12.2.4受領の影響
 このプリミティブは、BSSの終了を開始する。
 ビーコン、プローブ応答、およびDSへのアクセスを含む、APによってインフラストラクチャBSSに提供されるすべてのサービスは、終了によって停止されます。
-インフラストラクチャBSS内のすべてのSTAは、終端によって認証解除されます.NameTypeValid rangeDescriptionSSIDOctet string0 32オクテット
-停止するBSSのSSID
+インフラストラクチャBSS内のすべてのSTAは、終端によって認証解除されます.
+
+SSID　停止するBSSのSSID
 
 page 251
+ーーーここまで
+6.3.13スペクトル管理と無線測定のためのプロトコル層モデル
+測定、TPC、及びチャネル切り替えのためのレイヤ管理拡張は、MLMEとSMEとの間の機能の特定の分割を前提とする。
+このパーティショニングは、測定、切り替えタイミング、および関連するフレーム交換のプロトコルがMLME内に存在する間に（例えば、測定およびチャネル交換に関する）ポリシングがSMEに存在することを前提としています（図6-2を参照）。この節の有益な図は、採用されたプロトコル層モデルをさらに示している。
+図6-3と図6-4は、ピアSTAが測定要求を受け入れ、拒否するための測定プロセスをそれぞれ示しています。
+図6-5にTPCアダプテーションプロセスを示します。
+最後に、図6-6に、チャネルスイッチアナウンスメントフレームを使用するチャネルスイッチの管理プロセスを示します。これらの図は、例として意図されており、可能なすべてのプロトコルシナリオを示していないことに注意してください。 10.9.7および10.11に記載されている1つの測定報告フレーム。
+図6-2レイヤー管理モデル
+
+MAC TimingMeasurementProtocolMeasurementPolicyChannelスイッチDecisionMeasurementFramesSMEMLMEChannelスイッチタイミングPLMEMEASURECHANNELSWITCHMREQUEST＆MREPOR
+
+page 252
+図6-3測定要求が受け入れられました
+ピアからの測定を要求する決定
+  STASMEMLMEIEEE802.11 STAMLME-MREQUEST.requestMLME-MREQUEST.indicationMeasurement / Radio MeasurementRequestフレーム
+ピアからの測定要求を受け入れることを決定STAMLME-MEASURE.request測定プロセス
+MLME-MEASURE.confirmコンパイル測定レポートMLME-MREQPORT.request測定/無線測定報告フレームMLME-MREQPORT.confirm測定要求完了MLMESMEIEEE802.11同位体からの測定を要求するSTASMEMLMEIEEE802.11 STAMLME-MREQUEST.requestMLME-MREQUEST.indicationMeasurement / Radio MeasurementRequestフレーム
+ピアSTAからの測定要求を拒否または不能として拒否する決定MLME-MREQPORT.request測定/無線測定報告フレームMLME-MREQPORT.confirm測定要求完了MLMESMEIEEE802.11図6-4測定要求が拒否された
+
+page 253
+送信電力を決定する決定
+SMEMLMEIEEE802.11 STAMLME-TPCADAPT.requestTPC要求フレームTPCプロトコルTPCレポートフレームMLME-TPCADAPT.confirmMLMESMEIEEE802.11 STATPCプロトコル図6-5 TPC適応図6-6チャネルスイッチMLME-CHANNEL SWITCH.confirm
+チャネルスイッチアナウンスフレーム（複数）MLME-CHANNEL SWITCH.indication MLME-CHANNEL SWITCH.response MLME-CHANNEL SWITCH.request SME MLME IEEE 802.11 STA MLME SME IEEE 802.11
+STAチャンネルを切り替えるかどうかの判断PLGA経由でのチャンネル切り替えPLACEによるチャンネル切り替え完了PLME経由のチャンネル切り替え
+
+page 254
+6.3.14測定依頼
+6.3.14.1はじめに
+このプリミティブセットは、ピアSME間の測定要求のシグナリングをサポートします。
+6.3.14.2 MLME-MREQUEST.request
+6.3.14.2.1機能このプリミティブは、ピアエンティティへの測定要求の送信を要求する。
+6.3.14.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-MREQUEST.request（
+ ピアMACアドレス、
+ ダイアログトークン、
+ 測定要求セット、
+ 反復回数、
+ 測定カテゴリ、
+ VendorSpecificInfo
+）
+
+ピアMACアドレス
+MACAddress任意の有効な個人またはグループMACアドレス
+測定要求が送信されるピアMACエンティティのアドレス。
+Dialog TokenInteger1 255
+測定トランザクションを識別するダイアログトークン。
+Measurement Request Set 8.4.2.23で定義されている測定要求の要素フォーマットのセットで定義されている測定要求のセットセット。
+各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれています。
+繰返し回数整数0 65 535
+測定要求セットが繰り返される回数。
+このパラメータは、Measurement CategoryがRadio Measurementでdot11RadioMeasurementActivatedがtrueの場合にのみ表示されます。
+測定カテゴリ列挙SPECTRUM MANAGEMENT、またはRADIO MEASUREMENT測定レポート
+
+Setは、Spectrum ManagementまたはRadio Measurementの測定要求のセットです。
+このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+
+page 255
+6.3.14.2.3生成時
+このプリミティブはSMEによって生成され、1つまたは複数の測​​定を開始するために測定要求フレームがピアエンティティに送信されることを要求します。
+6.3.14.2.4受領の影響
+このプリミティブを受信すると、MLMEは、指定された測定要求要素のセットを含む測定要求フレームを構成する。
+このフレームは、その後、送信のためにスケジュールされる。
+6.3.14.3 MLME-MREQUEST.indication
+6.3.14.3.1機能
+このプリミティブは、1つ以上のチャネルの測定を要求する測定要求フレームが受信されたことを示す。
+6.3.14.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-MREQUEST.indication（
+ ピアMACアドレス、ダイアログトークン、
+ 測定要求セット、
+ 反復回数、
+ 測定カテゴリ、
+ VendorSpecificInfo
+）
+ピアMACアドレス
+MACAddressAny有効な個々のMACアドレス
+測定要求を受信したピアMACエンティティのアドレス。
+ダイアログトークン
+整数1 255
+測定トランザクションを識別するダイアログトークン。測定要求セット
+Measurement Request要素フォーマットで定義されている測定要求のセット
+8.4.2.23に定義されている測定要求の集合
+各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれています。
+繰返し回数整数0 65 535
+測定要求セットが繰り返される回数。
+このパラメータは、Measurement CategoryがRadio Measurementでdot11RadioMeasurementActivatedがtrueの場合にのみ表示されます。
+Measurement Category Enumeration SPECTRUM MANAGEMENT、またはRADIO MEASUREMENは、Measurement Report SetがSpectrum ManagementまたはRadio Measurement測定要求のセットであるかどうかを示します。
+このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+
+page 256
+6.3.14.3.3有効な測定要求フレームが受信されたときに、このプリミティブがMLMEによって生成される.6.3.14.3.4このプリミティブの受信が有効である場合、SMEは要求を拒絶するか、要求された測定を開始する。
+6.3.15チャネル測定
+6.3.15.1導入
+このプリミティブのセットは、測定データの要求と報告をサポートします。
+6.3.15.2 MLME-MEASURE.request
+6.3.15.2.1機能このプリミティブは、MLMEが特定の測定を開始するよう要求するためにSMEによって生成される。
+6.3.15.2.2サービスプリミティブのセマンティクスプリミティブパラメータは次のとおりです。
+MLME-MEASURE.request（
+ ダイアログトークン、
+ 測定要求セット、
+ VendorSpecificInfo
+）
+6.3.15.2.3生成されたこのプリミティブは、MLMEが指定された測定を開始するよう要求するためにSMEによって生成される。
+6.3.15.2.4受領の影響このプリミティブを受信すると、MLMEは測定プロセスを開始する。
+6.3.15.3 MLME-MEASURE.confirm
+6.3.15.3.1 Functionこのプリミティブは、測定結果を報告する。
+
+NameTypeValid rangeDescriptionDialog TokenInteger0 255
+測定トランザクションを識別するためのダイアログトークン。測定要求の測定要求要素セットに定義されている測定要求の測定セットセット。それぞれ8.4.2.23で定義されている
+各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれます.VendorSpecificInfo
+要素の集合8.4.2.28で定義されている0個以上の要素
+
+page 257
+6.3.15.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-MEASURE.confirm（
+ ResultCode、
+ ダイアログトークン、計測レポートセット、
+ VendorSpecificInfo
+）
+6.3.15.3.3生成時
+このプリミティブは、測定セットが完了したときに結果を報告するためにMLMEによって生成されます。
+6.3.15.3.4受領の影響
+このプリミティブを受信すると、SMEは結果コードを評価し、必要であれば、要求しているエンティティへの通信を保留しているチャネル測定値をローカルに使用するために格納する。
+6.3.16測定レポート
+6.3.16.1はじめに
+このプリミティブセットは、測定レポートのシグナリングをサポートします。
+6.3.16.2 MLME-MREPORT.request
+6.3.16.2.1機能このプリミティブは、ピアSME間の測定報告のシグナリングをサポートする。
+6.3.16.2.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-MREPORT.request（
+ ピアMACアドレス、
+ ダイアログトークン、
+ 測定レポートセット、
+ 測定カテゴリ、
+ VendorSpecificInfo
+）
+
+NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、UNSPECIFIED_FAILURE
+測定要求の結果。
+Dialog TokenInteger0 255
+測定トランザクションを識別するダイアログトークン。
+測定レポートセット
+測定レポートのセットは、それぞれ測定レポート要素で定義されています
+8.4.2.24に定義されている測定レポートのセット
+各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれています。
+VendorSpecificInfoA要素の集合8.4.2.28で定義されている0個以上の要素
+
+page 258
+6.3.16.2.3生成時このプリミティブはSMEによって生成され、1つ以上のチャネルを測定した結果を報告するためにフレームがピアエンティティに送信されることを要求する。
+6.3.16.2.4受領の影響
+このプリミティブを受信すると、MLMEは、測定レポートのセットを含む測定レポートフレームを構成する。
+このフレームは、その後、送信のためにスケジュールされる。
+6.3.16.3 MLME-MREPORT.indication
+6.3.16.3.1機能
+このプリミティブは、ピアエンティティから測定レポートフレームが受信されたことを示します。
+この管理レポートは、以前の測定要求（例えば、MLME-MREQUEST.requestプリミティブ）に対する応答か、自律型レポートのいずれかです。
+6.3.16.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-MREPORT.indication（
+ ピアMACアドレス、
+ ダイアログトークン、
+ 測定レポートセット、
+ 測定カテゴリ、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionPeer MAC AddressMACAddressAny有効な個々のMACアドレス
+測定報告が送信されるピアMACエンティティのアドレス。
+Dialog TokenInteger0 255
+測定トランザクションを識別するダイアログトークン。
+自律型レポートの場合は0に設定します。測定レポートセット
+測定レポートのセット。測定レポートの要素フォーマットで定義されています。
+8.4.2.24に定義されている測定レポートのセット
+各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれています。
+Measurement Category Enumeration SPECTRUM MANAGEMENT、またはRADIO MEASUREMENは、Measurement Report SetがSpectrum ManagementレポートまたはRadio Measurementレポートのセットであるかどうかを示します。
+このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+ゼロ個以上の要素.NameTypeValid rangeDescription
+ピアMACアドレスMACアドレス
+有効な個々のMACアドレス
+測定報告フレームが受信されたピアMACエンティティのアドレス
+
+page 259
+6.3.16.3.3 When generated
+This primitive is generated by the MLME when a valid Measurement Report frame is received.
+6.3.16.3.4 Effect of receipt
+On receipt of this primitive, measurement data might be available for SME processes, such as channelselection.
+6.3.17 Channel switch
+6.3.17.1 MLME-CHANNELSWITCH.request
+6.3.17.1.1 Function
+This primitive requests a switch to a new operating channel.
+6.3.17.1.2 Semantics of the service primitive
+The primitive parameters are as follows:
+MLME-CHANNELSWITCH.request(
+ Mode,
+ Channel Number,
+ Secondary Channel Offset,
+ Channel Switch Count,
+ Mesh Channel Switch Parameters,
+ VendorSpecificInfo
+)
+Dialog TokenInteger0  255
+The dialog token to identify the measurement transaction.
+Set to 0 for an autonomous report.
+Measurement Report SetSet of measurement reports, each as defined in the Measurement Report element format
+Set of measurement reports, each as defined in 8.4.2.24
+A set of measurement reports, each containing a Measurement Token, Measurement Report Mode, Measurement Type, and Measurement Report.Measurement Category Enumeration SPECTRUM MANAGEMENT, or RADIO MEASUREMENTIndicates whether the Measurement Report Set is a set of Spectrum Management or Radio Measurement reports.
+The parameter is present only if dot11RadioMeasurementActivated is true.
+VendorSpecificInfo
+A set of elementsAs defined in 8.4.2.28
+Zero or more elements.NameTypeValid rangeDescriptionModeInteger0, 1
+Channel switch mode, as defined for the Channel Switch Announcement element.
+Channel NumberIntegerAs defined in 18.3.8.4.3
+Specifies the new channel number.NameTypeValid rangeDescriptio
+
+page 260
+セカンダリチャネルオフセットパラメータは、HT STAに存在してもよい。
+6.3.17.1.3生成時
+このプリミティブは、チャネルスイッチをスケジューリングし、この切り替えをBSS内のピアエンティティに通知するために、SMEによって生成されます。
+6.3.17.1.4受領の影響
+このプリミティブを受信すると、MLMEはチャネルスイッチイベントをスケジューリングし、チャネルスイッチアナウンスメントフレームまたは要素を使用してBSS内の他のSTAにこのスイッチをアナウンスする。
+MLMEは、アクティベーション遅延を考慮して、フレーム送信のタイミングを設定します。
+6.3.17.2 MLME-CHANNELSWITCH.confirm
+6.3.17.2.1機能このプリミティブは、チャネルの切り替え要求の結果を報告する。6.3.17.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-CHANNELSWITCH.confirm（
+ ResultCode、
+ VendorSpecificInfo
+）
+6.3.17.2.3生成時
+このプリミティブは、チャネル切り替え要求が完了したときにMLMEによって生成されます。
+可能性のある不特定の障害原因には、チャネルスイッチアナウンスをスケジュールする能力が含まれます。
+セカンダリチャネルのオフセット整数表8-57のように
+プライマリチャネルに関連するセカンダリチャネルの位置を指定します。
+このパラメータは、dot11FortyMHzOperationImplementedがtrueの場合に存在します。それ以外の場合、パラメータは存在しません。チャネルスイッチCount 8.4.2.21で定義されています
+8.4.2.21に定義されている
+チャネル切り替えイベントまでの時間を指定します（8.4.2.21を参照）。
+メッシュチャネルスイッチのパラメータ
+8.4.2.105に定義されている
+8.4.2.105に定義されている
+メッシュSTAによって使用されるMBSSチャネルスイッチパラメータを指定します。
+このパラメータは、dot11MeshActivatedがtrueの場合に存在します。それ以外の場合、パラメータは存在しません。VendorSpecificInfoA要素のセット
+8.4.2.28に定義されている
+0個以上の要素。
+NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、UNSPECIFIED FAILURERチャネル切り替え要求の結果を出力します.VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+0個以上の要素。
+NameTypeValid rangeDescriptio
+
+page 261
+6.3.17.2.4受領の影響
+SMEは、チャネル切り替え手順の結果を通知される。
+6.3.17.3 MLME-CHANNELSWITCH.indication
+6.3.17.3.1機能
+このプリミティブは、ピアエンティティからチャネルスイッチ通知が受信されたことを示します。
+6.3.17.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-CHANNELSWITCH.indication
+ ピアMACアドレス、
+ モード、
+ チャネル番号、
+ セカンダリチャネルオフセット、
+ チャネルスイッチカウント、
+ メッシュチャネルスイッチパラメータ、
+ VendorSpecificInfo
+）
+6.3.17.3.3生成時
+このプリミティブは、有効なChannel Switch Announcementフレームが受信されたときにMLMEによって生成されます。
+6.3.17.3.4受領の影響
+このプリミティブを受信すると、SMEはスイッチを受け入れるかどうかを決定します。
+NameTypeValid rangeDescription
+ピアMACアドレス
+MACAddressAny有効な個々のMACアドレス
+測定報告フレームが受信されたピアMACエンティティのアドレス。
+ModeInteger0、1
+チャネルスイッチアナウンスメントエレメントに定義されているチャネルスイッチモード。
+18.3.8.4.3で定義されたチャネル番号識別子
+新しいチャンネル番号を指定します。
+セカンダリチャネルオフセット整数
+表8-57のように
+プライマリチャネルに関連するセカンダリチャネルの位置を指定します。
+このパラメータは、dot11FortyMHzOperationImplementedがtrueの場合にのみ、オプションで存在します。
+8.4.2.21で定義されたチャネルスイッチカウント
+8.4.2.21に定義されているように、8.4.2.21に記述されているように、チャネル切り替えイベントまでの時間を指定する
+メッシュチャネルスイッチのパラメータ8.4.2.105で定義されている
+8.4.2.105で定義されているように、メッシュSTAによって使用されるMBSSチャネルスイッチパラメータを指定する。
+このパラメータは、dot11MeshActivatedがtrueの場合に存在します。それ以外の場合、パラメータは存在しません。
+VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+0個以上の要素
+
+page 262
+6.3.17.4 MLME-CHANNELSWITCH.response
+6.3.17.4.1関数
+このプリミティブは、受け入れられたチャネルスイッチをスケジュールするために使用されます。
+6.3.17.4.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-CHANNELSWITCH.response（
+ モード、チャネル番号、
+ セカンダリチャネルオフセット、
+ チャネルスイッチカウント、
+ メッシュチャネルスイッチパラメータ、
+ VendorSpecificInfo
+）
+6.3.17.4.3生成時
+このプリミティブは、SMEによって生成され、受け入れられたチャネル切り替え要求をスケジュールする。
+6.3.17.4.4受領の影響
+このプリミティブを受信すると、MLMEはチャネルスイッチをスケジューリングします。
+6.3.18 TPC要求
+6.3.18.1はじめに
+このプリミティブのセットは、10.8.6で説明されているように、ピアエンティティ間の送信電力の適応をサポートします。
+NameTypeValid rangeDescriptionModeInteger0、1
+チャネルスイッチアナウンスメントエレメントに定義されているチャネルスイッチモード。
+Channel NumberInteger
+18.3.8.4.3で定義されている
+新しいチャネル番号を指定します。二次チャネルオフセット整数
+表8-57のように
+プライマリチャネルに関連するセカンダリチャネルの位置を指定します。
+このパラメータは、dot11FortyMHzOperationImplementedがtrueの場合にのみ、オプションで存在します。
+8.4.2.21で定義されたチャネルスイッチカウント
+8.4.2.21に定義されている
+チャネル切り替えイベントまでの時間を指定します（8.4.2.21を参照）。
+メッシュチャネルスイッチのパラメータ8.4.2.105で定義されている
+8.4.2.105に定義されている
+メッシュSTAによって使用されるMBSSチャネルスイッチパラメータを指定します。
+このパラメータは、dot11MeshActivatedがtrueの場合に存在します。それ以外の場合、パラメータは存在しません。
+
+page 263
+6.3.18.2 MLME-TPCADAPT.request
+6.3.18.2.1機能
+このプリミティブは、10.8.6で規定されているピアエンティティ間の送信電力の適応をサポートする。
+6.3.18.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-TPCADAPT.request（
+ ピアMACアドレス、
+ ダイアログトークン、
+ VendorSpecificInfo
+）
+6.3.18.2.3生成時
+このプリミティブは、TPC要求フレームが送信エンティティに送信電力およびリンクマージン情報を報告することを要求するためにピアエンティティに送信されることを要求するためにSMEによって生成される。
+6.3.18.2.4受領の影響
+このプリミティブを受信すると、MLMEはTPC Requestフレームを構築する。
+このフレームはその後、送信が予定されています。
+6.3.18.3 MLME-TPCADAPT.confirm
+6.3.18.3.1機能このプリミティブは、TPCアダプテーション手順の結果を報告する。
+6.3.18.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-TPCADAPT.confirm（
+ 結果コード送信電力、
+ リンクマージン、レート、
+ VendorSpecificInfo
+）
+ピアMACアドレス
+Macアドレス
+有効な個人またはグループのMACアドレス
+TPC要求が送信されるピアMACエンティティのアドレス。
+Dialog TokenInteger1 255
+TPCトランザクションを識別するダイアログトークン。
+
+page 264
+6.3.18.3.3生成時
+このプリミティブは、TPC適応手順が完了したときにMLMEによって生成される。
+6.3.18.3.4受領の影響
+SMEは、TPC適応手順の結果を通知される。
+6.3.19 SetKeys
+6.3.19.1 MLME-SETKEYS.request
+6.3.19.1.1機能
+このプリミティブは、プリミティブのパラメータで識別されたキーをMACにセットし、使用可能にする。
+6.3.19.1.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-SETKEYS.request（
+ キーリスト
+）
+各SetKeyDescriptorは、次の要素で構成されます。
+NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、UNSPECIFIED FAILURER TPC要求フレームを送信する要求の結果を示します。送信
+PowerInteger 127〜127
+TPCレポートフレームのTPCレポート要素の送信電力フィールドの値。
+Link MarginInteger 127〜127
+TPCレポートフレームのTPCレポート要素のリンク余白フィールドの値。
+RateInteger
+8.4.2.3で定義されているように
+TPC Requestフレームが送信されたレート。VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+ゼロ個以上の要素.NameType
+有効なrangeDescriptionKeylist
+SetKeyDescriptorsのセット.M / MACによって使用されるキーのリスト。
+NameTypeValid rangeDescriptionKeyBit stringN / A
+時間的キー値LengthIntegerN / A
+使用する鍵のビット数。
+キーIDInteger0 3は、WEP、TKIP、およびCCMPで使用する必要があります。 4 5とBIP; 6 4095はreservedKey identifierKey TypeIntegerGroup、Pairwise、PeerKey、IGTKです。
+このキーがグループキー、ペアワイズキー、PeerKey、またはIntegrity Groupキーのいずれであるかを定義します。
+
+page 265
+6.3.19.1.3生成時
+このプリミティブは、MACに1つまたは複数のキーを設定する必要があるときはいつでもSMEによって生成されます。
+6.3.19.1.4受領の影響
+このプリミティブを受信すると、MLME-SETPROTECTION.requestプリミティブが発行されていれば、MACは以下のようにキーを適用する。SetKeyDescriptorのDirection要素がTransmitまたはBothを示している場合、MACはキー情報を使用して、キーが適用されます。 SetKeyDescriptorのDirection要素がReceiveまたはBothを示している場合、MACは関連するKey IDを持つキーをインストールし、一致するKey IDを含む適切なタイプの受信フレームがそのキーと関連する状態情報を使用して処理されるようにします。
+6.3.20 Deleteキー
+6.3.20.1 MLME-DELETEKEYS.request
+6.3.20.1.1機能
+このプリミティブは、プリミティブのパラメータで識別されたキーをMACから削除し、使用不能にする。 6.3.20.1.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：MLME-DELETEKEYS.request（キーリスト）AddressMACAddressAny有効な個々のMACアドレス
+このパラメータは、Key Type値がPairwiseの場合、Key Type値がGroup、STAがIBSSの場合、またはKey Type値がPeerKeyの場合にのみ有効です。
+受信シーケンス数8オクテットN / A
+RSCが初期化される値はオーセンティケータです
+Booleantrue、false
+鍵がAuthenticatorまたはSupplicantによって構成されているかどうかを示します。
+値trueはAuthenticatorを示します。
+暗号スイートセレクタ
+4オクテット
+8.4.2.27に定義されている
+この関連付けに必要な暗号スイート。
+DirectionIntegerReceive、Transmit、Bothキーがインストールされる方向を示します。
+Receiveは、キーが受信方向にインストールされていることを示します。
+Transmitは、キーが送信方向にインストールされていることを示します。
+両方とも、受信方向と送信方向の両方にキーがインストールされていることを示します。
+NameTypeValid rangeDescriptionKeylistA DeleteKeyDescriptorsNのセット/ MAC.NameTypeValidから削除されるキーのリストrangeDescriptio
+
+page 266
+Each DeleteKeyDescriptor consists of the following elements:
+6.3.20.1.3 When generated
+This primitive is generated by the SME at any time when keys for a security association are to be deleted in the MAC.
+6.3.20.1.4 Effect of receipt
+Receipt of this primitive causes the MAC to delete the temporal keys identified by the Keylist Address,including Group, Pairwise and PeerKey, and to cease using them. 
+6.3.21 MIC (Michael) failure event
+6.3.21.1 MLME-MICHAELMICFAILURE.indication
+6.3.21.1.1 FunctionThis primitive reports that a MIC failure event was detected.
+6.3.21.1.2 Semantics of the service primitive
+The primitive parameters are as follows:
+MLME-MICHAELMICFAILURE.indication (
+ Count,Address,
+ Key Type,Key ID,
+ TSC
+)
+NameTypeValid rangeDescriptionKey IDIntegerN/AKey identifier.
+Key TypeIntegerGroup, Pairwise, PeerKey, IGTK Defines whether this key is a group key, pairwise key, PeerKey, or Integrity Group key.
+AddressMACAddress
+Any valid individual MAC address
+This parameter is valid only when the Key Type value is Pairwise, or when the Key Type value is Group and is from an IBSS STA, or when the Key Type value is PeerKey.
+NameTypeValid rangeDescriptionCount
+Integer1 or 2
+The current number of MIC failure events.
+AddressMACAddressAny valid individual MAC address
+The source MAC address of the frame.
+Key TypeIntegerGroup, Pairwise, PeerKeyThe key type that the received frame used.
+Key IDInteger0  3Key identifier.TSC6 octetsN/A
+The TSC value of the frame that generated the MIC failure
+
+page 267
+6.3.21.1.3生成時
+このプリミティブは、MICの障害を検出したときにMACによって生成されます。
+6.3.21.1.4受領の影響
+SMEは、MACがMIC障害を検出したことを通知されます。 11.4.2.4を参照してください。
+6.3.22 EAPOL
+6.3.22.1 MLME-EAPOL.request
+6.3.22.1.1 FunctionThisプリミティブは、SMEがIEEE 802.1X EAPOL-Keyフレームを送信するときに、SMEによって生成されます。
+6.3.22.1.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-EAPOL.request（
+ ソースアドレス、
+ 宛先アドレス、
+ データ
+）
+6.3.22.1.3生成時
+このプリミティブは、SMEが802.1X EAPOL-Keyフレームを送信するときにSMEによって生成されます。
+6.3.22.1.4受領の影響
+MACは、このEAPOL-Keyフレームを送信する。
+6.3.22.2 MLME-EAPOLの確認
+6.3.22.2.1機能
+このプリミティブは、このEAPOL-KeyフレームがIEEE 802.11 MACによって送信されたことを示します。
+6.3.22.2.2サービスプリミティブの意味
+プリミティブパラメータは次のとおりです。
+MLME-EAPOL.confirm（
+ ResultCode
+）
+NameTypeValid rangeDescriptionSourceアドレス
+Macアドレス
+N / A
+EAPOL-Keyフレームが送信されるMACサブレイヤアドレス。
+宛先アドレスMACアドレス
+N / A
+EAPOL-Keyフレームが送信されるMACサブレイヤエンティティアドレス。
+DataIEEE 802.1X EAPOLキーフレームN / EEPOLキーフレーム送信する
+
+page 268
+6.3.21.1.3生成時
+このプリミティブは、MICの障害を検出したときにMACによって生成されます。
+6.3.21.1.4受領の影響
+SMEは、MACがMIC障害を検出したことを通知されます。 11.4.2.4を参照してください。
+6.3.22 EAPOL
+6.3.22.1 MLME-EAPOL.request
+6.3.22.1.1 FunctionThisプリミティブは、SMEがIEEE 802.1X EAPOL-Keyフレームを送信するときに、SMEによって生成されます。
+6.3.22.1.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-EAPOL.request（
+ ソースアドレス、
+ 宛先アドレス、
+ データ
+）
+6.3.22.1.3生成時
+このプリミティブは、SMEが802.1X EAPOL-Keyフレームを送信するときにSMEによって生成されます。
+6.3.22.1.4受領の影響
+MACは、このEAPOL-Keyフレームを送信する。
+6.3.22.2 MLME-EAPOLの確認
+6.3.22.2.1機能
+このプリミティブは、このEAPOL-KeyフレームがIEEE 802.11 MACによって送信されたことを示します。
+6.3.22.2.2サービスプリミティブの意味
+プリミティブパラメータは次のとおりです。
+MLME-EAPOL.confirm（
+ ResultCode
+）
+NameTypeValid rangeDescriptionSourceアドレス
+Macアドレス
+N / A
+EAPOL-Keyフレームが送信されるMACサブレイヤアドレス。
+宛先アドレスMACアドレス
+N / Aa6.3.22.2.3生成されたとき
+このプリミティブは、EAPOL-Keyフレームを送信するために生成されたMLME-EAPOL.requestプリミティブの結果として、MACによって生成される。
+6.3.22.2.4受領の影響
+このEAPOL-KeyフレームがIEEE802.11MACに送信されたかどうかは常にSMEに通知される。
+このプリミティブは、フレームが送信されたことを通信します。 11.4.2.4.1の手順を参照してください。
+6.3.23 MLME-PeerKeySTART
+6.3.23.1 MLME- PeerKeySTART.request
+6.3.23.1.1 FunctionThisプリミティブは、SMEによって生成され、同輩とのPeerKeyハンドシェイクを開始する。
+6.3.23.1.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-PeerKeySTART.request（
+ PeerSTAAddress、RSN
+）
+6.3.23.1.3生成時
+このプリミティブは、STAが2つのSTA間の安全なリンクを作成するために指定されたpeerMACエンティティとのPeerKeyハンドシェイクを開始するためにSMEによって生成されます。
+6.3.23.1.4受領の影響
+このプリミティブは、EAPOL-Keymessageを送信することによって、PeerKey Handshakeの一部としてSMKハンドシェイクを開始します。
+NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、TRANSMISSION_FAILURE
+EAPOL-KeyフレームがターゲットSTAに送信されたかどうかを示します.NameTypeValid rangeDescriptionPeerSTAAddressMACAddress
+有効な個々のMACアドレスは、PeerKey Handshakeプロセスを実行するピアMACエンティティのアドレスを指定します。
+RSNRSNE 8.4.2.27で定義されている
+イニシエータSTAによってサポートされている暗号スイートの説明
+EAPOL-Keyフレームが送信されるMACサブレイヤエンティティアドレス。
+DataIEEE 802.1X EAPOLキーフレームN / EEPOLキーフレーム送信する
+
+page 269
+6.3.24 SetProtection
+6.3.24.1 MLME-SETPROTECTION.request
+6.3.24.1.1機能
+このプリミティブは、指定されたMACアドレスとの間で送受信されるフレームに保護が必要かどうかを示します。
+6.3.24.1.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-SETPROTECTION.request（
+ 保護リスト
+）
+各Protectリストは、次の要素で構成されています。
+6.3.24.1.3生成された場合、指示されたMACアドレスとの間で送受信されるフレームに対して保護が必要な場合、SMEによってこのプリミティブが生成される。
+6.3.24.1.4このプリミティブのreceiptReceiptの効果により、MACはProtectListパラメータのProtectType要素に示されているように、保護を設定し、データフレームを保護する。
+ なし：MACアドレスとMACアドレスのどちらのデータフレームも保護されないように指定します。
+  Rx：MACアドレスからのデータフレームが保護される（すなわち、MACアドレスから受信された保護なしのデータフレームは破棄される）ことを指定する。
+  Tx：MACアドレスへのデータフレームが保護されることを指定します。
+  Rx_Tx：MACアドレスとの間のデータフレームを保護することを指定します。データフレームが指定されたMACアドレスに保護されている場合、MLME-SETPROTECTION.requestプリミティブを使用して以前の設定がリセットされます。
+MLME-SETPROTECTION.requestプリミティブのProtectTypeがNoneの呼び出しは、保護状態を削除する。
+NameTypeValid rangeDescriptionProtectlist保護要素のセットN /各キーが現在どのように使用されているかのリスト.NameTypeValid rangeDescriptionAddressMACAddressAny有効な個々のMACアドレスこのパラメータは、Key Type値がPairwiseまたはKey Type値がGroupでIBSS STAまたはPeerKey.ProtectTypeEnumerationNone、Rx、Tx、Rx_Tx
+このMACの保護値.Key TypeIntegerGroup、Pairwise、PeerKey、IGTK
+このキーがグループキー、ペアワイズキー、PeerKey、またはIntegrity Groupキーのいずれであるかを定義します。
+
+page 270
+6.3.25 MLME-PROTECTEDFRAMEDROPPED
+6.3.25.1 MLME-PROTECTEDFRAMEDROPPED.indication
+6.3.25.1.1関数
+このプリミティブは、一時的なキーが利用できないためにフレームがドロップされたことをSMEに通知します。
+6.3.25.1.2サービスプリミティブのセマンティクス
+このプリミティブには、2つのパラメータ、2つのSTAのMACアドレスがあります。
+プリミティブパラメータは以下の通りである：MLME-PROTECTEDFRAMEDROPPED.indication（Address1、Address2）
+6.3.25.1.3生成時
+このプリミティブは、そのフレームに対して一時的なキーが利用できないため、フレームがドロップされたときにMACによって生成される。
+6.3.25.1.4受領の影響
+SMEは、フレームがドロップされたことを通知されます。
+SMEは、この情報をIBSS内で使用して、ピアSTAとのセキュリティアソシエーションを開始することができます。
+6.3.26 TS管理インタフェース
+6.3.26.1一般
+このメカニズムは、10.4で定義された手順を使用して、BSS内でTSを追加、変更、または削除するプロセスをサポートします。
+このメカニズムに使用されるプリミティブは、MLME-ADDTS.xxxプリミティブとMLME-DELTS.xxxプリミティブを含むTS管理プリミティブと呼ばれ、xxxは要求、確認、表示、または応答を示します。
+各プリミティブは、QoSアクションフレームに対応するパラメータを含む。
+要求および応答は、対応するQoSアクションフレームの送信を引き起こす可能性がある。
+確認および表示は、適切なQoSアクションフレームの受信時に発行されます。
+表6-1は、TAのどのタイプのSTA.NameTypeValid rangeDescriptionAddress1MACAddressAny有効な個々のMACアドレスでサポートされているかを定義しています。
+Address2MACAddressAny有効な個々のMACアドレスRAのMACアドレス
+
+page 271
+6.3.26.2 MLME-ADDTS.request
+6.3.26.2.1機能
+このプリミティブは、TSの追加（または変更）を要求する。
+HCが新しいTSまたは変更されたTSを認めるように要請する。
+6.3.26.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDTS.request（
+ DialogToken、
+ TSPEC、
+ TCLAS、
+ TCLAS処理、
+ ADDTSFailureTimeout、
+ U-APSD共存、
+ EBR、VendorSpecificInfo
+）
+表6-1サポートされているTS管理プリミティブ
+STAnon-AP QoS STAおよびHCnon-AP QoS STAおよびHCnon-AP QoS STAおよびHC NameTypeValid rangeDescriptionDialogTokenInteger0 127このプリミティブ要求応答は、
+対象TSの追加（または変更）に使用されるQoSアクションプリミティブおよびフレームに固有の番号を指定します。
+TSPEC要素に定義されたTSPECA（余剰帯域幅許容値、最小PHYレート、およびオプションで指定されている最大および最小SIを除く）
+8.4.2.32に定義されているように、余分な帯域幅許容値、最小PHYレート、およびオプションで指定される最大および最小SIを除きます。TSのトラヒック特性、QoS要件を指定します.TCLASTCLAS要素8.4に定義されています。 2.33ゼロ以上のTCLAS要素。
+MSDUが指定されたTS.TCLASProcessingTCLASに分類される規則とパラメータを指定する。処理要素8.4.2.35で定義されている。
+複数のTCLAS要素がある場合のTCLAS要素の処理方法を指定します。
+
+page 272
+6.3.26.2.3生成されたとき、上位層のプロトコルまたはメカニズムがこのTSに属するMSDUのパラメータ化されたQoS転送をサポートするために新しい（または既存の変更）TSin命令の追加を要求するためにSMEによって生成される。 STAはそのような追加（または変更）を開始する。
+6.3.26.2.4受領の影響
+STAは10.4で定義された手順に従って動作する。
+6.3.26.3 MLME-ADDTS確認
+6.3.26.3.1機能
+このプリミティブは、TS追加（または変更）試行の結果を報告する.6.3.26.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDTS.confir（
+ ResultCode、
+ DialogToken、
+ TSDelay、
+ TSPEC、
+ スケジュール、
+ TCLAS、
+ TCLAS処理、
+ EBR、
+ VendorSpecificInfo
+）
+ADDTSFailure-TimeoutInteger
+1より大きいか等しいTSセットアップ手順が終了するまでの時間制限（TU単位）を指定する.U-APSD共存U-APSD共存要素8.4.2.93で定義されている。
+U-APSDサービス期間中に要求された送信のための共存パラメータを示す.EBRExpedited Bandwidth Request要素8.4.2.96で定義されているように、TS要求の優先順位レベルを指定する。
+この要素は、dot11EBRActivatedがtrueの場合はオプションで存在します.VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+0個以上の要素。
+NameTypeValid rangeDescriptio
+
+page 273
+ResultCode値がSUCCESSの場合、TSPECおよびオプションのTCLASパラメータは、作成（または変更）されたTSの特性を記述します。 [サービス開始時間、中時間、および指定されていないパラメータの最小セット（9.19.4.3参照）を除いて、指定された（非ゼロ）パラメータ]は、一致するMLME-ADDTS.requestプリミティブ。
+ResultCodeの他の値については、新しいTSは作成されていない。
+REJECTED_WITH_SUGGESTED_CHANGESの場合、TSPECは、MACエンティティの現在の状況に関する情報に基づいて、HCによる代替の提案を表す。
+REJECTED_HOME_WITH_SUGGESTED_CHANGESの場合には、TSPECは、NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、INVALID_PARAMETERS、REJECTED_WITH_SUGGESTED_CHANGES、REJECTED_FOR_DELAY_PERIOD、REJECTED_WITH_SUGGESTED_BSS_TRANSITION、REQUESTED_TCLAS_NOT_SUPPORTED、TCLAS_RESOURCES_EXHAUSTED、REJECTED_HOME_WITH_SUGGESTED_CHANGESによって代替案を表すSSPNインタフェースから受信した情報に基づいて、HCの結果をREJECTED_FOR_SSP_PERMISSIONSIndicates。
+
+ 対応するMLME-ADDTS.requestプリミティブ。
+DialogTokenInteger
+対応するMLME-ADDTS.requestプリミティブに定義されている
+TSの追加（または変更）に使用されるQoSアクションプリミティブおよびフレームに固有の番号を指定します。
+TSDelayInteger 0結果コードがREJECTED_FOR_DELAY_ PERIODの場合、別のADDTS要求フレームを試行する前にSTAが待機する時間を指定します.TSPECTSPEC要素
+8.4.2.32に定義されている
+TS情報、トラフィック特性、およびTSのQoS要件を指定します。スケジュール
+スケジュール要素
+8.4.2.36に定義されている
+スケジュール情報、サービス開始時刻、SI、および指定間隔を指定します。
+TCLASTCLAS要素8.4.2.33で定義されている
+ゼロ以上のTCLAS要素。MSDUが指定されたTS.TCLASProcessingTCLASに分類される規則とパラメータを指定します。処理要素
+8.4.2.35に定義されている
+複数のTCLAS要素がある場合に、TCLAS要素をどのように処理するかを指定します。
+EBRExpedited Bandwidth要求要素8.4.2.96で定義されている
+TS要求の優先レベルを指定します。
+この要素は、dot11EBRActivatedがtrueの場合はオプションで存在します。
+
+page 274
+TSはこの定義では作成されません。
+提案された変更がSTAに受理可能である場合、その変更内容でTSをセットアップするのはSTAの責任である。 REJECTED_WITH_SUGGESTED_BSS_TRANSITIONの場合、non-AP STAは、移行が完了すると、新たに関連付けられたAPでTS setupprocessを再試行する必要があります。これが既存のTSの変更の結果である場合、そのTSの状態は変更されないままである。
+6.3.26.3.3生成時
+このプリミティブは、その要求の結果を示すMLME-ADDTS.requestプリミティブの結果として、MLMEによって生成される。
+このプリミティブは、そのMLME-ADDTS.requestプリミティブが、タイムアウトが発生したとき、またはSTAがHCからの対応するQoSアクションフレーム内のADDTSResponseフレームの形式で応答を受信したときに、無効パラメータを含むことが分かったときに生成される。
+6.3.26.3.4受領の影響
+中小企業は、TS追加（または変更）手順の結果を通知される。中小企業は、10.4で定義された手順に従って動作しなければならない。
+6.3.26.4 MLME-ADDTS.indication
+6.3.26.4.1関数
+このプリミティブは、TSを追加（または変更）する要求をHC SMEに報告する.6.3.26.4.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDTS.indication
+ DialogToken、STAAddress、
+ TSPEC、
+ TCLAS、
+ TCLAS処理、
+ U-APSD共存、
+ EBR、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionDialogTokenInteger
+受信したADDTS要求フレームで定義されているように
+TSの追加（または変更）に使用されるQoSアクションプリミティブおよびフレームに固有の番号を指定します。
+STAAddressMACAddressは、MLME-ADDTS.requestプリミティブを開始したSTAのMACアドレスを含む
+
+page 275
+TCLASは、要求を発したSTAの裁量により任意である。
+6.3.26.4.3生成時
+このプリミティブは、指定されたSTAによってTSをADDTS要求フレームの形で追加（または変更）する要求の受信の結果としてMLMEによって生成される。
+6.3.26.4.4受領の影響
+SMEは、指定されたSTAによるTS追加（または変更）の要求を通知される。このプリミティブは、追加要求されたTS上のHCでのアドミッション制御の結果を反映するSMEからMLME-ADDTS.responseプリミティブを要求するまたは変更された）。
+中小企業は10.4で定義された手順に従って運用されるべきである。 SMEは、dot11ADDTSResponseTimeout内にMLME-ADDTS.responseプリミティブを生成する。
+6.3.26.5 MLME-ADDTS.response
+6.3.26.5.1機能
+このプリミティブは、指定されたSTA MACエンティティによるTS追加（または変更）要求に応答する。余剰帯域幅許容値、最小PHYレート、および最大および最小SIを除いて、TPEC要素で定義されたTSPECA指定された
+余分な帯域幅許容値、最小PHYレート、およびオプションで指定される最大および最小SIを除く8.4.2.32で定義されているように、TS.TCLASTCLAS要素のTSID、トラフィック特性、およびQoS要件を指定する
+8.4.2.33で定義されている
+ゼロ以上のTCLAS要素。MSDUが指定されたTS.TCLASProcessingTCLASに分類される規則とパラメータを指定します。処理要素
+8.4.2.35に定義されている
+複数のTCLAS要素がある場合にTCLAS要素をどのように処理するかを指定します.U-APSD CoexistenceU-APSD共存要素8.4.2.93で定義されています
+U-APSDサービス期間中に要求された送信の共存パラメータを示します。
+EBRExpedited Bandwidth要求要素8.4.2.96で定義されている
+TS要求の優先レベルを指定します。
+この要素は、dot11EBRActivatedがtrueの場合はオプションで存在します。VendorSpecificInfoA要素の集合
+8.4.2.28に定義されている
+ゼロ個以上の要素.NameTypeValid rangeDescriptio
+
+page 276
+6.3.26.5.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDTS.response（
+ ResultCode、
+ DialogToken、
+ STAAddress、
+ TSDelay、
+ TSPEC、
+ スケジュール、
+ TCLAS、
+ TCLAS処理、
+ EBR、
+ VendorSpecificInfo
+）
+NameTypeValid
+rangeDescriptionResultCodeEnumerationSUCCESS、INVALID_PARAMETERS、REJECTED_WITH_SUGGESTED_CHANGES、REJECTED_FOR_DELAY_PERIOD、REJECTED_WITH_SUGGESTED_BSS_TRANSITION、REQUESTED_TCLAS_NOT_SUPPORTED、TCLAS_RESOURCES_EXHAUSTED、REJECTED_HOME_WITH_SUGGESTED_CHANGES、REJECTED_FOR_SSP_PERMISSIONS
+対応するMLME-ADDTS.indicationの結果は原始的なことを示します。
+DialogTokenInteger
+マッチングMLME-ADDTS.indication primitive.STAAddressMACAddressContainsプリミティブ一致MLME-ADDTS.indicationのSTAアドレスの対応MLME-ADDTS.indicationDialogTokenで定義されているように。
+TSDelayInteger 0Whenは、結果コードは、REJECTED_FOR_DELAY_期間であるSTAが別のADDTS request.TSPECTSPEC要素を試行するまでの待ち時間を提供します
+8.4.2.32に定義されている
+8.4.2.36で定義されているTS.ScheduleSchedule要素のQoSパラメータを指定します。
+スケジュール情報、サービス開始時刻、SI、および指定間隔を指定します.TCLASTCLASエレメント
+8.4.2.33で定義されている
+0個以上のTCLAS要素。
+MSDUが指定されたTSに分類されるルールとパラメータを指定します
+
+page 277
+DialogTokenおよびSTAAddressパラメータは、対応するMLME-ADDTS.indicationプリミティブからの値を含む。結果コードがSUCCESSの場合、TSPECおよび（オプションの）TCLASパラメータには、MLME-ADDTSの指示に従って、値が含まれます。結果コードがREJECTED_WITH_SUGGESTED_CHANGESまたはREJECTED_HOME_WITH_SUGGESTED_CHANGESの場合、TSPECおよびTCLASパラメータは、ローカルの情報MACエンティティ、またはSSPNインターフェイスを介して受信された追加情報を使用します。
+ただし、TSは作成されません。
+TSPEC内のTSIDと方向値は、MLME-ADDTS.indicationプリミティブをマッチングするときと同じである。
+この差は、STAによって追加（または変更）されることが要求されたTS上のHCのSMEにおいて実行される許可制御の結果として、QoS（例えば、最小データレート、平均データレート、および遅延限界）値にある可能性がある。
+十分な帯域幅が利用可能でない場合、QoS値を低減することができる。
+1つの極端な場合、最小データレート、平均データレート、および遅延境界はすべて0に設定され、このTSにQoSが提供されないことを示します。結果コードがREJECTED_WITH_SUGGESTED_BSS_TRANSITIONの場合、非AP STAは移行を開始する必要があります10.23.6で定義されているクエリ。
+移行が完了したら、STAは10.4.4で定義されているように、TSセットアッププロセスを再試行する必要があります。
+6.3.26.5.3生成時
+このプリミティブは、MLME-ADDTS.indicationプリミティブの結果としてHCのSMEによって生成され、指定されたピアMACエンティティとのTSの追加（または変更）を開始する。
+6.3.26.5.4受領の影響
+このプリミティブは、TSPECを変更してもしなくても、指定されたSTA MACエンティティによって要求されたTSの追加（または変更）を承認する。このプリミティブは、HCのMACエンティティに、対応するQoSアクション管理フレームのADDTS応答フレームを指定されたパラメータを含むSTAを要求する。
+6.3.26.6 MLME-DELTS.request
+6.3.26.6.1関数
+このプリミティブは、指定されたピアMACを有するTSの削除を要求する。このプリミティブは、非AP STAまたはHCのいずれかで生成することができる。
+TCLAS処理TCLAS処理エレメント
+8.4.2.35に定義されている
+複数のTCLAS要素がある場合に、TCLAS要素をどのように処理するかを指定します。 EBRExpedited Bandwidth要求要素
+8.4.2.96に定義されている
+TS要求の優先レベルを指定します。この要素は、dot11EBRActivatedがtrueの場合はオプションで存在します。
+VendorSpecificInfoA要素の集合8.4.2.28で定義されている0個以上の要素。 NameTypeValid rangeDescription
+
+page 278
+6.3.26.6.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-DELTS.request（
+ STAAddress、
+ TSInfo、
+ ReasonCode、
+ VendorSpecificInfo
+）
+6.3.26.6.3生成時
+このプリミティブは、STAのSMEによって生成され、上位層のプロトコルまたは機構がSTAにそのような削除を開始するように通知するときにTSの削除を開始する。
+6.3.26.6.4受領の影響
+このプリミティブは、TS削除手順を開始する。
+このプリミティブは、ローカルMACエンティティに、指定されたパラメータを含むDELTSフレームを送出させる。このプリミティブがHCで生成された場合、フレームは指定されたSTA MACアドレスに送信されます。
+このプライマリがnon-AP STAで生成された場合、フレームはそのHCに送信されます。
+いずれの場合も、DELTSフレームは、フレームの受信に対する肯定応答以外の受信側フレームからの応答を要求しない。
+6.3.26.7 MLME-DELTS.indication
+6.3.26.7.1機能
+このプリミティブは、指定されたピアMACエンティティによるTSの削除、または非アクティブタイムアウト（HCのみ）によるTSの削除を報告する。
+6.3.26.7.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-DELTS.indication（
+ STAAddress、
+ TSInfo、
+ ReasonCode、
+ VendorSpecificInfo
+）
+STAAddressMACAddressこのTSを開始したSTAのMACアドレスを指定します。
+HCのみに存在する。
+TSInfoTS情報フィールド8.4.2.32で定義されている
+削除するTSを指定します。
+ReasonCodeEnumerationSTA_LEAVING、END_TS、UNKNOWN_TS、TIMEOUT、SERVICE_CHANGE_PRECLUDES_TS
+TSが削除されている理由を示します。
+VendorSpecificInfoA要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 279
+6.3.26.7.3生成時
+このプリミティブは、指定されたピアMACentityからDELTSフレームを受信したときにMLMEによって生成されます。
+このプリミティブは、特定のTSの非活動の結果としてHC上のMLMEによって生成されてもよい。
+TSのTSPECの非活動間隔に等しい期間が経過すると、非活動が生じる
+HCがそのTSのソースSTAである場合、MAのUNITDATA.requestプリミティブを介して、そのTSに属するMSDUがHCのMACエンティティに到着することなく、
+HCがそのTSのソースSTAでない場合、HCのMACエンティティによってそのTSに属するMSDUを受信しない。
+このプリミティブは、MAC内のTSID /方向に関する他の状態が破棄された後に生成される。
+6.3.26.7.4受領の影響
+SMEは、指定されたピアMACエンティティによるTS削除の開始を通知される。
+6.3.27直接リンクの管理
+6.3.27.1
+導入
+この節では、直接リンクに関連する管理手順について説明します。
+6.3.27.2 MLME-DLS.request
+6.3.27.2.1機能
+このプリミティブは、指定されたピアMACエンティティとの直接リンクの設定を要求する。
+6.3.27.2.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである。
+MLME-DLS.request（
+ PeerMACAddress、
+ DLSTimeoutValue、
+ DLSResponseTimeout、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionSTAAddressMACAddress
+TSが削除されるSTAのMACアドレスを指定します。 HCのみに存在する。 TSInfoTS情報フィールド8.4.2.32で定義されている
+TSのTS情報を指定する。 ReasonCodeEnumerationSTA_LEAVING、END_TS、UNKNOWN_TS、TIMEOUT、SERVICE_CHANGE_PRECLUDES_TS TSが削除される理由を示します.VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 280
+6.3.27.2.3生成時
+このプリミティブは、STAのSMEによって生成され、別のSTAとのダイレクトリンクを設定します。
+6.3.27.2.4レシートの効果このプリミティブはDLS手順を開始する。
+その後、MLMEは結果を反映するMLME-DLS.confirmprimitiveを発行します。
+6.3.27.3 MLME-DLS確認
+6.3.27.3.1関数
+このプリミティブは、指定されたピアMACエンティティでDLS試行の結果を報告する.6.3.27.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-DLS.confirm（
+ PeerMACAddress、
+ ResultCode、
+ 能力情報、
+ DLSTimeoutValue、
+ サポートされているRates、
+ HT能力、
+ VendorSpecificInfo
+）
+PeerMACAddressMACAddressAny有効な個々のMACアドレス
+データフローの意図した即時受信者であるSTAのMACアドレスを指定します。 DLSTimeoutValueInteger 0
+ピアとフレーム交換シーケンスがない場合、ダイレクトリンクが終了するまでの時間制限（秒）を指定します。
+値0は、ダイレクトリンクがタイムアウトに基づいて決して終了されないことを意味します。 DLSResponseTimeoutInteger 1
+dot11DLSResponseTimeoutからDLSプロシージャが終了するまでの時間制限（TU単位）を指定します。 VendorSpecificInfo要素のセット
+8.4.2.28に定義されている
+0個以上の要素。
+
+NameTypeValid rangeDescription
+PeerMACAddress
+Macアドレス
+任意の有効な個別MACアドレスデータフローの意図した直接受信者であるSTAのMACアドレスを指定します。
+ResultCodeEnumerationSUCCESS、DLS_NOT_ALLOWED、NOT_PRESENT、NOT_QOS_STA、REFUSED
+対応するMLME-DLS.requestプリミティブの結果を示す。
+CapabilityInformationCapability情報フィールド
+8.4.1.4で定義されている
+ピアMACエンティティの能力を指定する
+
+page 281
+6.3.27.3.3生成時
+このプリミティブは、MLME-DLS.requestプリミティブの結果としてMLMEによって生成され、指定されたピアMACエンティティとの直接リンクを確立する。
+6.3.27.3.4受領の影響SMEは、DLS手続きの結果を通知される。
+6.3.27.4 MLME-DLS.indication
+6.3.27.4.1関数
+このプリミティブは、指定されたピアMACエンティティとの直接リンクの確立を報告する。
+6.3.27.4.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-DLS.indication（
+ PeerMACAddress、
+ 能力情報、
+ DLSTimeoutValue、
+ サポートされているRates、
+ HT能力、
+ VendorSpecificInfo
+）
+DLSTimeoutValueInteger 0
+ピアとフレーム交換シーケンスがない場合、ダイレクトリンクが終了するまでの時間制限（秒）を指定します。
+値0は、ダイレクトリンクがタイムアウトに基づいて決して終了されないことを意味します。
+サポートされている整数の有用セット1,277（集合内の各整数に対して）ピアMACエンティティによってサポートされるデータレートのセット.HTの能力フレームフォーマットで定義されるように、8.4.2.58で定義されるように、サポートされるHT Capabilities要素内のパラメータを指定するMACエンティティによって提供される。
+このパラメータは、dot11HighThroughputOptionImplementedがtrueの場合にのみ、オプションで存在します。
+VendorSpecificInfo要素のセット
+8.4.2.28で定義されているように、ゼロ以上の要素。
+NameTypeValid rangeDescriptionPeerMACAddressMACAddressAny有効な個々のMACアドレスデータフローの送信者であるSTAのMACアドレスを指定します。
+CapabilityInformationCapability情報フィールド
+8.4.1.4で定義されている
+ピアMACエンティティによって使用される操作能力定義を指定する。
+NameTypeValid rangeDescription
+
+page 282
+6.3.27.4.3生成されたときこのプリミティブは、その特定のピアMACエンティティによって開始されたDLS手順から生じた特定のピアMACエンティティとの直接リンクの確立の結果として、MLMEによって生成される。
+6.3.27.4.4受領の影響SMEはDLSの設定を通知される。
+6.3.27.5 MLME-DLSTeardown.request
+6.3.27.5.1機能非AP STAによって開始された場合、このプリミティブは、指定されたpeerMACエンティティとのダイレクトリンクのティアダウンを要求する。
+APによって開始されるとき、このプリミティブは、2つのMACエンティティ間の直接リンクのティアダウンを要求する。
+6.3.27.5.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-DLSTeardown.request（
+ PeerMACAddress1、
+ PeerMACAddress2、
+ ReasonCode、
+ VendorSpecificInfo
+）
+DLSTimeoutValueInteger 0
+ピアとフレーム交換シーケンスがない場合、ダイレクトリンクが終了するまでの時間制限（秒）を指定します。
+値0は、ダイレクトリンクがタイムアウトに基づいて決して終了されないことを意味します。サポートされている整数のサポートセット1 127（セット内の各整数に対して）ピアMACエンティティによってサポートされるデータレートのセット。
+HT機能フレームフォーマットで定義されている
+8.4.2.58に定義されている
+MACエンティティによってサポートされるHT Capabilities要素内のパラメータを指定する。
+このパラメータは、dot11HighThroughputOptionImplementedがtrueの場合にのみ、オプションで存在します。
+VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素。
+NameTypeValid rangeDescriptionPeerMACAddress1MACAddressAny有効な個々のMACアドレスティアダウンの意図された即時受信者であるSTAのMACアドレスを指定します。
+PeerMACAddress2MACAddress
+ny有効な個々のMACアドレスDLSが解体されるSTAのMACアドレスを指定します。
+このパラメータは、APでのみ適用されます。 NameTypeValid rangeDescription
+
+page 283
+6.3.27.5.3生成時
+このプリミティブは、別のSTAとの直接リンクを引き裂くためにSTAのSMEによって生成されます。
+6.3.27.5.4受領の影響
+このプリミティブはダイレクトリンクティアダウン手順を開始します。
+その後、MLMEは結果を反映するMLME-DLSTeardown.confirmプリミティブを発行します。
+6.3.27.6 MLME-DLSTARARD.indication
+6.3.27.6.1機能
+このプリミティブは、特定のピアMACエンティティと既に確立されたダイレクトリンクのティアダウンを示す。
+6.3.27.6.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-DLSTARTARD.indication
+ PeerMACAddress、
+ ReasonCode、
+ VendorSpecificInfo
+）
+6.3.27.6.3生成時
+このプリミティブは、その特定のピアMACエンティティまたはローカルMACエンティティのいずれかによって開始された直接リンクティアダウン手順に起因する特定のピアMACエンティティとの直接リンクの分解の結果として、MLMEによって生成される。
+6.3.27.6.4受領の影響
+中小企業は、DLS.ReasonCodeEnumerationSTA_LEAVING、END_DLS、PEERKEY_MISMATCH、UNKNOWN_DLS、TIMEOUT、PEER_INITIATED、AP_INITIATEDのティアダウンを通知されます。ダイレクトリンクが切断される理由を示します。
+VendorSpecificInfo
+要素のセット
+8.4.2.28で定義されているように、ゼロ以上の要素。
+NameTypeValid rangeDescriptionPeerMACAddressMACAddressAny有効な個々のMACアドレスデータフローの送信者であるSTAのMACアドレスを指定します.ReasonCodeEnumerationSTA_LEAVING、END_DLS、PEERKEY_MISMATCH、UNKNOWN_DLS、TIMEOUT、PEER_INITIATED、AP_INITIATED直接リンクが切断されている理由を示します。VendorSpecificInfo
+ 要素のセット
+8.4.2.28に定義されている
+0個以上の要素。
+NameTypeValid rangeDescriptio
+
+page 284
+6.3.28上位層の同期サポート
+6.3.28.1はじめに
+このメカニズムは、異なる無線STA内に存在する上位層のプロトコルエンティティ間の同期プロセスをサポートします。
+上位レイヤの実際の同期メカニズムは、この規格の範囲外です。
+原理的には、MLMEは、データMPDUのアドレス1フィールドに特定のグループアドレスを持つフレームの送受信を示します。
+6.3.28.2 MLME-HL-SYNC.request
+6.3.28.2.1機能
+このプリミティブは、同期サポート機構の起動を要求する。
+6.3.28.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。MLME-HL-SYNC.request（GroupAddress）
+6.3.28.2.3生成時
+このプリミティブは、上位層のプロトコルが同期プロセスを開始するときにSMEによって生成されます。
+6.3.28.2.4領収書の影響
+この要求は、STAの同期サポートメカニズムをアクティブにします。
+MLMEは、アドレス1フィールドに指定されたグループアドレスを有するデータフレームである上位レイヤ同期フレームが受信または送信されたときに、MLME-HL-SYNC.indicationプリミティブを発行する。
+6.3.28.3 MLME-HL-SYNC.indication
+6.3.28.3.1機能
+このプリミティブは、送信されたか、またはMACによって受信されたかにかかわらず、上位レイヤの同期フレームの最後のシンボルを示します。
+6.3.28.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-HL-SYNC.indication（
+ SourceAddress、
+ SequenceNumber
+）
+NameTypeValid rangeDescriptionGroupAddressMACAddress
+グループMACアドレス
+同期フレームがアドレス指定されるグループMACアドレスを指定します。
+同期フレームは、より高いレイヤ同期情報を有するデータフレームである
+
+page 285
+6.3.28.3.3生成時
+このプリミティブは、PHYによって生成されたPHY_RXEND.indicationまたはPHY_TXEND.confirmprimitivesによって示されるように、上位レイヤ同期フレームの受信または送信が成功した場合にMLMEによって生成されます。
+上位レイヤの同期フレームは、データフレームのアドレス1フィールドの以前のMLME-HL-SYNC.requestプリミティブによって登録されたグループMACaddressによって識別されます。
+6.3.28.3.4領収書の効果
+SMEは、上位レイヤ同期フレームの受信または送信を通知される。
+6.3.29ブロックACK
+6.3.29.1一般
+このメカニズムは、ブロックAckの開始（または変更）と終了をサポートします。このメカニズムに使用されるプリミティブは、MLME-ADDBA.xxxおよびMLME-DELBA.xxxプリミティブを含むBlock Ackプリミティブと呼ばれ、xxxは要求、確認、または応答。
+各プリミティブには、Block Ack Actionフレーム本体に対応するパラメータが含まれています。
+要求と応答によって、これらのフレームが送信されることがあります。
+適切なBlock AckActionフレームが受信されると、確認と表示が行われます。
+6.3.29.2 MLME-ADDBA.request
+6.3.29.2.1機能
+このプリミティブは、ピアMACエンティティを用いてブロックACKの開始（または変更）を要求する。
+6.3.29.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDBA.reque（
+ PeerSTAAddress、
+ DialogToken、
+ TID、
+ BlockAckPolicy、
+ BufferSize、
+ BlockAckTimeout、
+ ADDBAFailureTimeout、
+ BlockAckStartingSequenceControl、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionSourceAddressMACAddressAny有効な個々のMACアドレス
+上位レイヤ同期フレームを送信したSTAのSAを指定する。
+SequenceNumberInteger
+8.2.4.4.2で定義されている
+受信または送信された上位レイヤ同期フレームのシーケンス番号を指定します。
+
+page 286
+6.3.29.2.3生成時
+このプリミティブは、STAのSMEによって生成され、指定されたピアMACエンティティでブロックACKの開始（または変更）を要求する。
+6.3.29.2.4受領の影響
+STAは、ADDBA要求フレームを指定されたピアMACエンティティに送信する。
+6.3.29.3 MLME-ADDBAの確認
+6.3.29.3.1機能
+プリミティブは、指定されたピアMACエンティティでBlock Ack試行の開始（または変更）の結果を報告する。
+6.3.29.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDBA.confirm（
+ PeerSTAAddress、
+ DialogToken、
+ TID、
+ ResultCode、
+ BlockAckPolicy、
+ BufferSize、
+ BlockAckTimeout、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressN / A
+ブロックACK開始（または変更）を実行するピアMACエンティティのアドレスを指定します。
+DialogTokenInteger0 255S
+Block Ack Actionプリミティブに固有の番号とブロックAckの定義に使用されるフレームを示します.TIDInteger0 15
+データのTIDを指定します。
+BlockAckPolicyEnumerationImmediate、DelayedブロックACKポリシーを指定します.BufferSizeInteger0 127
+バッファに保持できるMPDUの数を指定します。
+BlockAckTimeoutInteger0 65535
+Block Ackが切断されたと見なされた後のピア間のフレーム交換のないTUの数を指定します.ADDBAFailureTimeoutIntegerGreater 1より大きい場合は、ブロックAckの設定手順が終了するまでの時間制限（TU単位）をdot11ADDBAResponseTimeout.BlockAckStartingSequenceControlBlockから指定しますAck開始シーケンス制御フィールド
+8.3.1.8で定義されている
+Block Ack開始シーケンス制御の値を指定します。
+VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 287
+6.3.29.3.3生成時
+このプリミティブは、その要求の結果を示すMLME-ADDBA.requestプリミティブの結果としてMLMEによって生成される。
+6.3.29.3.4受領の影響
+ブロックAck開始（または変更）の結果がSMEに通知されます。
+6.3.29.4 MLME-ADDBA.indication
+6.3.29.4.1関数
+このプリミティブは、ピアMACエンティティによるブロックACKの開始（または変更）を報告する。
+6.3.29.4.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDBA.indication
+ PeerSTAAddress、
+ DialogToken、
+ TID、
+ BlockAckPolicy、
+ BufferSize、
+ BlockAckTimeout、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressN / A
+Block Ackの開始（または変更）が試みられたピアMACエンティティのアドレスを指定します。
+この値は、MLME-ADDBA.requestプリミティブに指定されたPeerSTAAddressパラメータと一致する。
+DialogTokenInteger0 255
+Block AckアクションプリミティブとブロックACKの定義に使用されるフレームに固有の番号を指定します。
+この値は、MLME-ADDBA.requestプリミティブで指定されたDialogTokenパラメータと一致する。
+TIDInteger0 15
+データのTIDを指定します。
+この値は、MLME-ADDBA.requestプリミティブで指定されたTIDと一致する.ResultCodeEnumerationSUCCESS、INVALID_PARAMETERS、REFUSED対応するMLME-ADDBA.requestプリミティブの結果を示す。
+BlockAckPolicyEnumerationImmediate、Delayed Block Ackポリシーを指定します。
+BufferSizeInteger0 127
+指定されたTIDのブロック内のMPDUの最大数を指定します。
+BlockAckTimeoutInteger0 65535
+ブロックAckが切断されたとみなされるピア間のフレーム交換のないTUの数を指定します。
+VendorSpecificInfo要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 288
+6.3.29.4.3生成時
+このプリミティブは、指定されたピアMACエンティティによるブロックACK開始（または変更）をADDBA要求フレームの形で受信した結果としてMLMEによって生成されます。
+6.3.29.4.4受領の影響
+SMEは、指定されたピアMACエンティティによるブロックACKの開始（または変更）を通知されます。
+6.3.29.5 MLME-ADDBA.response
+6.3.29.5.1機能
+プリミティブは、特定のピアMACエンティティによる開始（または変更）に応答します。
+6.3.29.5.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-ADDBA.response（
+ PeerSTAAddress、
+ DialogToken、
+ TID、ResultCode、
+ BlockAckPolicy、
+ BufferSize、
+ BlockAckTimeout、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressN / A
+ブロックACK開始（または変更）を要求したピアMACエンティティのアドレスを指定します。
+DialogTokenInteger0 255
+Block AckアクションプリミティブとブロックACKの定義に使用されるフレームに固有の番号を指定します。
+TIDInteger0 15
+データのTIDを指定します。
+BlockAckPolicyEnumerationImmediate、DelayedブロックACKポリシーを指定します.BufferSizeInteger0 127
+peerSTAAddressバッファに保持できるMPDUの数を指定します。
+BlockAckTimeoutInteger0 65535
+ピアAckが分解されたとみなされるピア間のフレーム交換のないTUの数を指定します。VendorSpecificInfo 8.4.2.28で定義されている要素のセット
+0個以上の要素。
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressN / A
+Block Ackの開始（または変更）を試みたピアMACエンティティのアドレスを指定します。
+この値は、MLME-ADDBA.indicationプリミティブで指定されたPeerSTAAddressパラメータと一致する
+
+page 289
+6.3.29.5.3生成時
+このプリミティブは、MLME-ADDBA.indicationプリミティブの結果としてMLMEによって生成され、指定されたピアMACエンティティによってBlock Ackを開始する。
+6.3.29.5.4受領の影響
+プリミティブは、MACエンティティにADDBA応答フレームを指定されたピアMACエンティティに送信させる。
+6.3.29.6 MLME-DELBA.request
+6.3.29.6.1関数
+このプリミティブは、ピアMACエンティティでBlock Ackの削除を要求する。
+6.3.29.6.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである。
+MLME-DELBA.request（
+ PeerSTAAddress、
+ 方向、
+ TID、
+ ReasonCode、
+ VendorSpecificInfo
+）
+DialogTokenInteger0 255
+Block AckアクションプリミティブとブロックACKの定義に使用されるフレームに固有の番号を指定します。
+この値は、MLME-ADDBA.indicationプリミティブで指定されたDialogTokenパラメータと一致する。
+TIDInteger0 15データのTIDを指定します。
+この値は、MLME-ADDBA.indicationプリミティブで指定されたTIDと一致する。
+ResultCodeEnumerationSUCCESS、REFUSED、INVALID_PARAMETERは、対応するMLME-ADDBA.indicationプリミティブの結果を示す。
+BlockAckPolicyEnumerationImmediate、Delayed
+Block Ackポリシーを指定します。
+結果コードがREFUSED.BufferSizeInteger0の場合は未定義です。
+指定されたTIDのブロック内のMPDUの最大数を指定します。
+結果コードがREFUSED.BlockAckTimeoutInteger0の場合は未定義65535
+ブロックAckが切断されたとみなされたピア間のフレーム交換のないTUの数を指定します.VendorSpecificInfo
+要素のセット
+8.4.2.28で定義されているように、ゼロ以上の要素。
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressN / A
+Block Ack削除を実行するピアMACエンティティのアドレスを指定します。
+NameTypeValid rangeDescription
+
+page 290
+6.3.29.6.3生成時
+このプリミティブは、STAのSMEによって生成され、指定されたpeerMACエンティティでBlock Ackの削除を要求します。
+6.3.29.6.4受領の影響
+STAは、DELBAフレームを指定されたピアMACエンティティに送信する。
+6.3.29.7 MLME-DELBA.indication
+6.3.29.7.1機能
+このプリミティブは、ピアMACエンティティによるブロックACKの削除を報告する。
+6.3.29.7.2サービスプリミティブのセマンティクスプリミティブパラメータは次のとおりです。
+MLME-DELBA.indication（
+ PeerSTAAddress、
+ 方向、
+ TID、
+ ReasonCode、
+ VendorSpecificInfo
+）
+DirectionEnumerationOriginator、受信者
+MLME-DELBA.requestプリミティブを開始するMACエンティティがブロックACKを使用するデータストリームの発信者または受信者であるかどうかを指定する。
+TIDInteger0 15
+このブロックACKが設定されているMSDUのTIDを指定します.ReasonCodeEnumerationSTA_LEAVING、END_BA、UNKNOWN_BA、TIMEOUは、ブロックACKが削除されている理由を示します.VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素。
+
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressN / A
+Block Ack削除を実行するピアMACエンティティのアドレスを指定します。
+DirectionEnumerationOriginator、Recipient MLME-DELBA.requestプリミティブを開始するMACエンティティが、Block Ackを使用するデータストリームの発信者または受信者であるかどうかを指定します。
+TIDInteger0 15
+このBlock Ackが設定されているMSDUのTIDを指定します。
+ReasonCodeEnumerationSTA_LEAVING、END_BA、UNKNOWN_BA、TIMEOUT
+Block Ackが削除されている理由を示します.VendorSpecificInfo
+8.4.2.28で定義されている要素の集合
+0個以上の要素。
+NameTypeValid rangeDescriptio
+
+page 291
+6.3.29.7.3生成時
+このプリミティブは、指定されたpeerMACエンティティがDELBAフレームの形式でBlock Ack削除を受信した結果としてMLMEによって生成されます。
+6.3.29.7.4受領の影響
+SMEは、指定されたピアMACエンティティによるブロックACKの削除を通知されます。
+6.3.30スケジュール要素管理
+6.3.30.1はじめに
+この節では、QoSスケジュール要素に関連する管理手順について説明します。定義されるプリミティブは、MLME-SCHEDULE.requestおよびMLME-SCHEDULE.indicationである。
+6.3.30.2 MLME-SCHEDULE.request
+6.3.30.2.1機能
+このプリミティブは、スケジュールフレームの送信を要求する。
+HCで有効です。
+6.3.30.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。MLME-SCHEDULE.request（STAAddress、Schedule）
+6.3.30.2.3生成時
+このプリミティブは、STAのスケジュール情報が変更されたときに、スケジューリングフレームの形式でスケジュール情報を指定されたSTAに送信するために、HCのSMEによって生成される。
+6.3.30.2.4受領の影響
+このプリミティブは、HCのMACエンティティに、指定されたスケジュールパラメータを含むプライマリで指定されたSTAにスケジュールフレームを送信させる。
+6.3.30.3 MLME-SCHEDULE.indication
+6.3.30.3.1機能
+このプリミティブは、スケジュールフレームの形でSTAによって新しいスケジュールの受信を報告する。
+NameTypeValid rangeDescriptionSTAAddressMACAddressAny有効な個別アドレスScheduleフレームが送信されるSTAのMACアドレス.ScheduleSchedule要素8.4.2.36で定義されている
+SI（最小および最大）、TXOP期間（最小および最大）、および指定間隔など、STAのスケジュールを指定します
+
+page 292
+6.3.30.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-SCHEDULE.indication（
+ スケジュール
+）
+6.3.30.3.3生成時
+このプリミティブは、Scheduleframeの形式で新しいスケジュールを受け取った結果としてMLMEによって生成されます。 6.3.30.3.4受領の影響
+SMEは、スケジュールフレームの形でQoSスケジュールの受信を通知される。
+新しいScheduleパラメータは、以前に格納された値を上書きします。
+6.3.31ベンダー固有のアクション
+6.3.31.1はじめに
+このセットのプリミティブは、ピアSME間の（保護された）ベンダー固有アクションフレームのシグナリングをサポートします。
+6.3.31.2 MLME-VSPECIFIC.request
+6.3.31.2.1機能
+このプリミティブは、Vendor Specific Actionフレームの送信を要求する。
+6.3.31.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-VSPECIFIC.request（
+ PeerMACAddress、
+ 保護された、
+ 組織識別子、
+ VendorSpecificContent
+）
+ NameTypeValid rangeDescriptionScheduleSchedule要素
+8.4.2.36に定義されている
+SI（最小および最大）、TXOP期間（最小および最大）、および指定間隔を含む、STAのスケジュールを指定します。
+NameTypeValid rangeDescriptionPeerMACAddressMACAddress
+任意の有効な個別MACアドレスまたは任意の有効なグループMACアドレス
+Vendor Specific Actionフレームが送信されるピアMACエンティティまたはエンティティグループのアドレス
+
+page 293
+6.3.31.2.3生成時
+このプリミティブは、SMEによって生成され、Vendor Specific Actionフレームの送信を要求します。
+6.3.31.2.4受領の影響
+このプリミティブを受信すると、MLMEは、要素のセットとベンダ固有のフィールドを含むベンダ固有アクションフレームを構築する。
+STAはフレームを送信しようとする。
+6.3.31.3 MLME-VSPECIFIC.indication
+6.3.31.3.1機能
+このプリミティブは、ベンダー固有のアクションフレームがピアエンティティから受信されたことを示します。
+6.3.31.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-VSPECIFIC.indication（
+ PeerMACAddress、
+ 保護された、
+ 組織識別子、
+ RCPI、
+ VendorSpecificContent
+）
+ProtectedBooleantrue、false
+ロバスト管理フレームを使用して要求を送信するかどうかを指定します。
+trueの場合、要求は保護ベンダー固有のフレームを使用して送信されます。 falseの場合、要求はVendor Specificフレームを使用して送信されます。
+組織識別子
+8.4.1.31に定義されている
+8.4.1.31に定義されている
+特定のベンダー固有のアクションの内容を定義した組織を識別するために、IEEEによって割り当てられた公開値を含みます。 VendorSpecificContent組織識別子が登録されているエンティティによって決定されます。組織識別子が登録されているエンティティによって決定されます。ベンダー固有のコンテンツ。 NameTypeValid rangeDescriptionPeerMACAddressMACAddressAny有効な個別のMACアドレスベンダー固有のアクションフレームを受信したピアMACエンティティのアドレス。 NameTypeValid rangeDescription
+
+page 294
+6.3.31.3.3生成時
+このプリミティブは、有効なVendor Specific Actionフレームが受信されたときにMLMEによって生成されます。
+6.3.31.3.4受領の影響
+このプリミティブを受け取ると、ベンダー固有のコンテンツをSMEプロセスで利用できるようにすることができます。
+6.3.32近隣レポート要求
+6.3.32.1一般
+次のMLMEプリミティブは、ネイバーレポート要求のシグナリングをサポートします。
+6.3.32.2 MLME-NEIGHBORREPREQ.request
+6.3.32.2.1機能
+このプリミティブは、近隣報告要求フレームがSTAが関連付けられているAPに送信されることを要求する。
+これは無線測定が可能なSTAでのみ有効です。
+6.3.32.2.2サービスプリミティブのセマンティクス
+MLME-NEIGHBORREPREQ.request（DialogToken、SSID、VendorSpecificInfo）ProtectedBooleantrue、false要求がロバスト管理フレームを使用して受信されたかどうかを指定します。
+trueの場合、要求は保護ベンダー固有のフレームを使用して受信されました。
+falseの場合、Vendor Specificフレームを使用して要求を受信しました。
+組織識別子8.4.1.31で定義されている
+8.4.1.31に定義されている
+特定のベンダー固有のアクションの内容を定義した組織を識別するために、IEEEによって割り当てられた公開値を含みます。
+8.4.2.40で定義された8.4.2.40Asで定義されたRCPIAは、dot11OCBActivatedがtrueのときに表示されます。
+RCPIは、受信したVendor Specific Actionフレーム上の受信チャネル電力の測定値である。
+VendorSpecificContent組織識別子が登録されているエンティティによって決定されます。組織識別子が登録されているエンティティによって決定されます。ベンダー固有のコンテンツ。
+NameTypeValid rangeDescription
+
+page 295
+6.3.32.2.3生成時
+このプリミティブは、近隣レポートを要求するためにSTAが関連付けられている近隣レポート要求フレームがAPに送信されることを要求するためにSMEによって生成される。
+6.3.32.2.4受領の影響
+このプリミティブを受信すると、MLMEは近隣レポート要求フレームを構築する。
+STAはこれを関連するAPに送信しようとする。
+6.3.32.3 MLME-NEIGHBORREPREQ.indication
+6.3.32.3.1機能
+このプリミティブは、近隣レポート要求フレームが受信されたことを示します。
+これは、RadioMeasurement対応APでのみ有効です。
+6.3.32.3.2サービスプリミティブのセマンティクスプリミティブパラメータは以下の通りである：
+MLME-NEIGHBORREPREQ.indication
+ PeerSTAAddress、
+ DialogToken、
+ SSID、
+ VendorSpecificInfo
+）
+6.3.32.3.3生成時
+このプリミティブは、有効な近隣レポート要求フレームが受信されたときにMLMEによって生成されます。
+NameTypeValid rangeDescriptionDialogToken
+整数1 255
+ネイバーレポートのトランザクションを識別するダイアログトークン。
+SSID要素で定義されたSSIDA
+SSID要素で定義されているように
+オプションのSSID要素を使用して、特定のSSIDのネイバーリストを要求します。
+Vendor-SpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素。
+NameTypeValid rangeDescription
+PeerSTA-AddressMACAddressAny有効な個々のMACアドレス
+近隣レポート要求フレームが受信されたSTA MACエンティティのアドレス。
+DialogTokenInteger1 255
+受信したNeighbor Report Requestフレームのダイアログトークン。
+SSID
+SSID要素で定義されているように
+SSID要素で定義されているように
+オプションのSSID要素を使用して、特定のSSIDのネイバーリストを要求します。
+Vendor-SpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
+
+page 296
+6.3.32.3.4受領の影響
+このプリミティブを受け取ると、SMEは10.11.10.3の手順に従って動作します。
+6.3.33近隣レポートの応答
+6.3.33.1一般
+次のMLMEプリミティブは、ネイバーレポート応答のシグナリングをサポートします。
+6.3.33.2 MLME-NEIGHBORREPRESP.request
+6.3.33.2.1機能
+このプリミティブは、ネイバー報告応答が送信されることを要求する。
+これは、MLME-NEIGHBORREPREQ.indicationプリミティブまたは自律的要求に応答してもよい。
+これは、RadioMeasurement対応APでのみ有効です。
+6.3.33.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-NEIGHBORREPRESP.request（
+ PeerSTAAddress、
+ DialogToken、
+ NeighborListSet、
+ VendorSpecificInfo
+）
+6.3.33.2.3生成時
+このプリミティブは、SMEによって生成され、ネイバーレポートの送信を要求します。
+これは、最先端のMLME-NEIGHBORREPREQ.indicationプリミティブまたは自律型レポートの送信要求に応答している可能性があります。
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddress
+有効な個々のMACアドレス
+近隣レポート応答フレームが送信されるSTA MACエンティティのアドレス。
+DialogTokenInteger0 255
+ネイバーレポートのトランザクションを識別するダイアログトークン。
+対応するMLME-NEIGHBORREPREQ.indicationプリミティブで受信した値に設定するか、自律型レポートで0に設定する。
+NeighborListSet
+Neighbor Report要素形式で定義されたNeighbor List要素の集合
+8.4.2.39に定義されている
+Neighbor List要素のセットであり、それぞれNeighbor Report要素形式で定義されているようにレポートされている隣接APを表します。
+Vendor-SpecificInfo要素の集合8.4.2.28で定義されているように0個以上の要素
+
+page 297
+6.3.33.2.4受領の影響
+このプリミティブを受信すると、MLMEは近隣レポート応答フレームを構築する。
+STAは、PeerSTAAddressパラメータによって示されるSTAにこれを送信しようと試みる。
+6.3.33.3 MLME-NEIGHBORREPRESP.indication
+6.3.33.3.1ファンクションこのプリミティブは、ネイバーレポート応答が受信されたことを示します。
+これは、最近のネイバーレポート要求（MLME-NEIGHBORREPREQ.request）または自律レポートに応答している可能性があります。
+これは無線測定が可能なSTAのみで有効です。
+6.3.33.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-NEIGHBORREPRESP.indication
+ PeerSTAAddress、
+ DialogToken、
+ NeighborListSet、
+ VendorSpecificInfo
+）
+6.3.33.3.3生成時
+このプリミティブは、有効な近隣レポート応答フレームが受信されたときにMLMEによって生成されます。
+6.3.33.3.4受領の影響
+このプリミティブを受信すると、近隣レポートデータをSMEが利用できるようにすることができます。
+6.3.34リンクメジャーリクエスト
+6.3.34.1一般
+次のプリミティブは、リンク経路損失の測定とピアエンティティ間のリンクマージンの推定をサポートします。
+NameTypeValid rangeDescriptionPeerSTAAddressMACAddressAny有効な個々のMACアドレス
+近隣レポート応答フレームが受信されたAPのアドレス。
+DialogTokenInteger0 255
+ネイバレポート応答フレームで受信したダイアログトークンは、ネイバーレポートトランザクションを識別します。
+NeighborListSet
+Neighbor List要素の集合。それぞれはNeighbor Report要素の形式で定義されている。8.4.2.39で定義されている。
+MIBテーブルdot11RMNeighborReportTableから派生したNeighbor List要素のセット。Neighbor Report要素形式で定義されているように報告されている隣接APを表します。
+Vendor-SpecificInfo要素の集合8.4.2.28で定義されているように0個以上の要素
+
+page 298
+6.3.34.2 MLME-LINKMEASURE.request
+6.3.34.2.1機能
+このプリミティブは、リンク経路損失の測定とピアエンティティ間のリンクマージンの推定をサポートする。
+注記使用されるレイヤ管理モデルは、受信されたリンク測定要求フレームの取り扱いがMLME内で完全に行われることを前提としている。
+これに対応して、リンク測定要求トランザクションのピア側に指定されたMLME-SMEプリミティブは存在しない。
+6.3.34.2.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+MLME-LINKMEASURE.request（
+ PeerMACAddress、
+ DialogToken、
+ 送信電力、
+ 最大送信電力、
+ VendorSpecificInfo
+）
+6.3.34.2.3生成時
+このプリミティブは、SMEによって生成され、エンティティに送信電力およびリンクマージン情報を報告するよう要求するリンク測定要求フレームをピアエンティティに送信することを要求する。
+6.3.34.2.4受領の影響
+このプリミティブを受信すると、MLMEはリンク測定要求フレームを構築する。
+STAは、PeerMACAddressパラメータに示されているSTAにこれを送信しようとします。
+6.3.34.3 MLME-LINKMEASURE.confirm
+6.3.34.3.1機能
+このプリミティブはリンク測定要求の結果を報告する。
+6.3.34.3.2サービスプリミティブのセマンティクス
+プリミティブパラメータは次のとおりです。
+NameTypeValid rangeDescription
+PeerMACAddressMACAddress
+任意の有効な個々のMACアドレスリンクメジャーリクエストが送信されるピアMACエンティティのアドレス。
+DialogTokenInteger1 255
+Link Measuretransactionを識別するダイアログトークン。
+Transmit PowerInteger
+8.5.7.4で定義されている
+リンク測定要求フレームを送信する際に使用され、フレーム本体に含まれる送信電力。
+8.5.7.4を参照してください。
+最大送信PowerInteger
+8.5.7.4で定義されている
+送信側STAがその動作チャネル上で使用する最大送信電力。
+8.5.7.5.VendorSpecificInfoを参照してください。
+8.4.2.28で定義されている要素の集合
+0個以上の要素
+
+page 299
+MLME-LINKMEASURE.confirm（
+ ResultCode、
+ DialogToken、
+ TransmitPower、
+ LinkMargin、
+ RCPI.request、
+ RSNI.request、
+ RCPI.report、
+ RSNI.report、
+ ReceiveAntennaID、
+ TransmitAntennaID、
+ VendorSpecificInfo
+）
+NameTypeValid rangeDescription
+ResultCode
+EnumerationSUCCESS、UNSPECIFIED FAILURE
+対応するMLME-LINKMEASURE.requestプリミティブの結果を示す。
+DialogTokenInteger
+対応するMLME-LINK-MEASURE.requestプリミティブに定義されている
+リンク測定トランザクションを識別するダイアログトークン。
+TransmitPower
+TPC Report要素で定義されているように
+TPC Report要素で定義されているように
+受信したLink Measurement ReportフレームのTransmit Powerフィールドの内容。
+TPC Report要素で定義されたResultCode = SUCCESS.LinkMarginAsの場合のみ存在するTPC Report要素で定義される
+受信したLink Measurement ReportフレームのLink Marginフィールドの内容。
+ResultCode = SUCCESS.RCPI.requestIntegerAsが16.4.8.6、または18.3.10.7、または17.4.8.6で定義されている場合にのみ存在する
+報告STAで受信された対応するリンク測定要求フレームのRCPIレベル。
+ResultCode = SUCCESS.RSNI.requestIntegerの場合のみ存在する
+8.4.2.43に定義されている
+報告STAで受信された対応するリンク測定要求フレームのRSNI。
+ResultCode = SUCCESSRCPI.reportIntegerの場合のみ存在する
+16.4.8.6、または18.3.10.7、または17.4.8.6
+要求しているSTAで受信された、対応するリンク測定レポートフレームのRCPIレベル。
+ResultCode = SUCCESS.RSNI.reportIntegerの場合のみ存在する
+要求側STAで受信された対応するリンク測定報告フレームの8.4.2.43RSNIで定義される。
+ResultCode = SUCCESSReceiveの場合のみ存在する。AntennaIDInteger0 255リンク測定要求フレームが報告STAで受信されたアンテナに対応するアンテナID。
+アンテナIDは8.4.2.31で定義されている。
+Transmit AntennaIDInteger0 255
+Link Measurement Reportフレームを送信するために使用されたアンテナに対応するアンテナID。
+アンテナIDは8.4.2.31で定義されている。
+VendorSpecificInfo
+要素のセット
+8.4.2.28に定義されている
+0個以上の要素
