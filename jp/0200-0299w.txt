@@ -1347,30 +1347,18 @@ SMEは、MLME-STOP.requestを発行する前に、近い将来インフラスト
 SSID　停止するBSSのSSID
 
 page 251
-ーーーここまで
+
 6.3.13スペクトル管理と無線測定のためのプロトコル層モデル
 測定、TPC、及びチャネル切り替えのためのレイヤ管理拡張は、MLMEとSMEとの間の機能の特定の分割を前提とする。
-このパーティショニングは、測定、切り替えタイミング、および関連するフレーム交換のプロトコルがMLME内に存在する間に（例えば、測定およびチャネル交換に関する）ポリシングがSMEに存在することを前提としています（図6-2を参照）。この節の有益な図は、採用されたプロトコル層モデルをさらに示している。
+このパーティショニングは、測定、切り替えタイミング、および関連するフレーム交換のプロトコルがMLME内に存在する間に（例えば、測定およびチャネル交換に関する）ポリシーの決定がSMEに存在することを前提としています（図6-2を参照）。この節の有益な図は、採用されたプロトコル層モデルをさらに示している。
 図6-3と図6-4は、ピアSTAが測定要求を受け入れ、拒否するための測定プロセスをそれぞれ示しています。
-図6-5にTPCアダプテーションプロセスを示します。
-最後に、図6-6に、チャネルスイッチアナウンスメントフレームを使用するチャネルスイッチの管理プロセスを示します。これらの図は、例として意図されており、可能なすべてのプロトコルシナリオを示していないことに注意してください。 10.9.7および10.11に記載されている1つの測定報告フレーム。
+図6-5にTPCアダプテーション（適応）プロセスを示します。
+最後に、図6-6に、チャネルスイッチアナウンスメントフレームを使用するチャネルスイッチの管理プロセスを示します。 10.9.7および10.11に記載されているように、これらの図は測定報告フレームの例として意図されており、可能なすべてのプロトコルシナリオを示していないことに注意してください。。
 図6-2レイヤー管理モデル
 
-MAC TimingMeasurementProtocolMeasurementPolicyChannelスイッチDecisionMeasurementFramesSMEMLMEChannelスイッチタイミングPLMEMEASURECHANNELSWITCHMREQUEST＆MREPOR
-
 page 252
-図6-3測定要求が受け入れられました
-ピアからの測定を要求する決定
-  STASMEMLMEIEEE802.11 STAMLME-MREQUEST.requestMLME-MREQUEST.indicationMeasurement / Radio MeasurementRequestフレーム
-ピアからの測定要求を受け入れることを決定STAMLME-MEASURE.request測定プロセス
-MLME-MEASURE.confirmコンパイル測定レポートMLME-MREQPORT.request測定/無線測定報告フレームMLME-MREQPORT.confirm測定要求完了MLMESMEIEEE802.11同位体からの測定を要求するSTASMEMLMEIEEE802.11 STAMLME-MREQUEST.requestMLME-MREQUEST.indicationMeasurement / Radio MeasurementRequestフレーム
-ピアSTAからの測定要求を拒否または不能として拒否する決定MLME-MREQPORT.request測定/無線測定報告フレームMLME-MREQPORT.confirm測定要求完了MLMESMEIEEE802.11図6-4測定要求が拒否された
 
 page 253
-送信電力を決定する決定
-SMEMLMEIEEE802.11 STAMLME-TPCADAPT.requestTPC要求フレームTPCプロトコルTPCレポートフレームMLME-TPCADAPT.confirmMLMESMEIEEE802.11 STATPCプロトコル図6-5 TPC適応図6-6チャネルスイッチMLME-CHANNEL SWITCH.confirm
-チャネルスイッチアナウンスフレーム（複数）MLME-CHANNEL SWITCH.indication MLME-CHANNEL SWITCH.response MLME-CHANNEL SWITCH.request SME MLME IEEE 802.11 STA MLME SME IEEE 802.11
-STAチャンネルを切り替えるかどうかの判断PLGA経由でのチャンネル切り替えPLACEによるチャンネル切り替え完了PLME経由のチャンネル切り替え
 
 page 254
 6.3.14測定依頼
@@ -1389,27 +1377,18 @@ MLME-MREQUEST.request（
  VendorSpecificInfo
 ）
 
-ピアMACアドレス
-MACAddress任意の有効な個人またはグループMACアドレス
-測定要求が送信されるピアMACエンティティのアドレス。
-Dialog TokenInteger1 255
-測定トランザクションを識別するダイアログトークン。
-Measurement Request Set 8.4.2.23で定義されている測定要求の要素フォーマットのセットで定義されている測定要求のセットセット。
-各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれています。
-繰返し回数整数0 65 535
-測定要求セットが繰り返される回数。
-このパラメータは、Measurement CategoryがRadio Measurementでdot11RadioMeasurementActivatedがtrueの場合にのみ表示されます。
-測定カテゴリ列挙SPECTRUM MANAGEMENT、またはRADIO MEASUREMENT測定レポート
-
-Setは、Spectrum ManagementまたはRadio Measurementの測定要求のセットです。
-このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+ピアMACアドレス　測定要求が送信されるピアMACエンティティのアドレス。
+Dialog Token　測定トランザクションを識別するダイアログトークン。
+測定要求セット　測定要求セットには、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれています。
+繰返し回数　測定要求セットが繰り返される回数。このパラメータは、Measurement CategoryがRadio Measurementでdot11RadioMeasurementActivatedがtrueの場合にのみ表示されます。
+測定カテゴリ　Spectrum ManagementまたはRadio Measurementの測定要求のセットです。このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
 
 page 255
+
 6.3.14.2.3生成時
 このプリミティブはSMEによって生成され、1つまたは複数の測​​定を開始するために測定要求フレームがピアエンティティに送信されることを要求します。
 6.3.14.2.4受領の影響
-このプリミティブを受信すると、MLMEは、指定された測定要求要素のセットを含む測定要求フレームを構成する。
-このフレームは、その後、送信のためにスケジュールされる。
+このプリミティブを受信すると、MLMEは、指定された測定要求要素のセットを含む測定要求フレームを構成する。その後、このフレームは、送信のためにスケジュールされる。
 6.3.14.3 MLME-MREQUEST.indication
 6.3.14.3.1機能
 このプリミティブは、1つ以上のチャネルの測定を要求する測定要求フレームが受信されたことを示す。
@@ -1423,22 +1402,18 @@ MLME-MREQUEST.indication（
  VendorSpecificInfo
 ）
 ピアMACアドレス
-MACAddressAny有効な個々のMACアドレス
-測定要求を受信したピアMACエンティティのアドレス。
-ダイアログトークン
-整数1 255
-測定トランザクションを識別するダイアログトークン。測定要求セット
-Measurement Request要素フォーマットで定義されている測定要求のセット
-8.4.2.23に定義されている測定要求の集合
-各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれています。
-繰返し回数整数0 65 535
-測定要求セットが繰り返される回数。
-このパラメータは、Measurement CategoryがRadio Measurementでdot11RadioMeasurementActivatedがtrueの場合にのみ表示されます。
-Measurement Category Enumeration SPECTRUM MANAGEMENT、またはRADIO MEASUREMENは、Measurement Report SetがSpectrum ManagementまたはRadio Measurement測定要求のセットであるかどうかを示します。
+MACAddress　測定要求を受信したピアMACエンティティのアドレス。
+ダイアログトークン　測定トランザクションを識別するダイアログトークン。
+測定要求セット　各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれています。
+繰り返し回数　測定要求セットが繰り返される回数。
+このパラメータは、Measurement Categoryが無線測定でdot11RadioMeasurementActivatedがtrueの場合にのみ表示されます。
+測定カテゴリ　測定報告セットがSpectrum Managementまたは無線測定要求のセットであるかどうかを示します。
 このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
 
 page 256
-6.3.14.3.3有効な測定要求フレームが受信されたときに、このプリミティブがMLMEによって生成される.6.3.14.3.4このプリミティブの受信が有効である場合、SMEは要求を拒絶するか、要求された測定を開始する。
+6.3.14.3.3有効な測定要求フレームが受信されたときに、このプリミティブがMLMEによって生成される.
+6.3.14.3.4受信の効果
+このプリミティブの受信時、SMEは要求を拒絶するか、要求された測定を開始する。
 6.3.15チャネル測定
 6.3.15.1導入
 このプリミティブのセットは、測定データの要求と報告をサポートします。
@@ -1450,24 +1425,28 @@ MLME-MEASURE.request（
  測定要求セット、
  VendorSpecificInfo
 ）
+
+ダイアログトークン　測定トランザクションを識別する。
+測定要求セット　各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれます.
+
 6.3.15.2.3生成されたこのプリミティブは、MLMEが指定された測定を開始するよう要求するためにSMEによって生成される。
 6.3.15.2.4受領の影響このプリミティブを受信すると、MLMEは測定プロセスを開始する。
 6.3.15.3 MLME-MEASURE.confirm
 6.3.15.3.1 Functionこのプリミティブは、測定結果を報告する。
-
-NameTypeValid rangeDescriptionDialog TokenInteger0 255
-測定トランザクションを識別するためのダイアログトークン。測定要求の測定要求要素セットに定義されている測定要求の測定セットセット。それぞれ8.4.2.23で定義されている
-各測定要求には、測定トークン、測定要求モード、測定タイプ、および測定要求が含まれます.VendorSpecificInfo
-要素の集合8.4.2.28で定義されている0個以上の要素
 
 page 257
 6.3.15.3.2サービスプリミティブのセマンティクス
 プリミティブパラメータは次のとおりです。
 MLME-MEASURE.confirm（
  ResultCode、
- ダイアログトークン、計測レポートセット、
+ ダイアログトークン、
+ 計測レポートセット、
  VendorSpecificInfo
 ）
+ResultCode　測定要求の結果。
+タイアログトークン　測定トランザクションを識別する。
+測定レポートセット　各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれています。
+
 6.3.15.3.3生成時
 このプリミティブは、測定セットが完了したときに結果を報告するためにMLMEによって生成されます。
 6.3.15.3.4受領の影響
@@ -1486,25 +1465,22 @@ MLME-MREPORT.request（
  VendorSpecificInfo
 ）
 
-NameTypeValid rangeDescriptionResultCodeEnumerationSUCCESS、UNSPECIFIED_FAILURE
-測定要求の結果。
-Dialog TokenInteger0 255
-測定トランザクションを識別するダイアログトークン。
-測定レポートセット
-測定レポートのセットは、それぞれ測定レポート要素で定義されています
-8.4.2.24に定義されている測定レポートのセット
-各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれています。
-VendorSpecificInfoA要素の集合8.4.2.28で定義されている0個以上の要素
 
 page 258
-6.3.16.2.3生成時このプリミティブはSMEによって生成され、1つ以上のチャネルを測定した結果を報告するためにフレームがピアエンティティに送信されることを要求する。
+
+Peer MAC Address　測定報告が送信されるピアMACエンティティのアドレス。
+ダイアログトークン　測定トランザクションを識別する。自律型レポートの場合は0に設定します。
+測定レポートセット　各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれています。
+測定カテゴリ 測定レポートセットがSpectrum ManagementレポートまたはRadio Measurementレポートのセットであるかどうかを示します。このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+
+6.3.16.2.3生成時
+このプリミティブはSMEによって生成され、1つ以上のチャネルを測定した結果を報告するためにフレームがピアエンティティに送信されることを要求する。
 6.3.16.2.4受領の影響
 このプリミティブを受信すると、MLMEは、測定レポートのセットを含む測定レポートフレームを構成する。
 このフレームは、その後、送信のためにスケジュールされる。
 6.3.16.3 MLME-MREPORT.indication
 6.3.16.3.1機能
-このプリミティブは、ピアエンティティから測定レポートフレームが受信されたことを示します。
-この管理レポートは、以前の測定要求（例えば、MLME-MREQUEST.requestプリミティブ）に対する応答か、自律型レポートのいずれかです。
+このプリミティブは、ピアエンティティから測定レポートフレームが受信されたことを示します。この管理レポートは、以前の測定要求（例えば、MLME-MREQUEST.requestプリミティブ）に対する応答か、自律型レポートのいずれかです。
 6.3.16.3.2サービスプリミティブのセマンティクス
 プリミティブパラメータは次のとおりです。
 MLME-MREPORT.indication（
@@ -1514,24 +1490,15 @@ MLME-MREPORT.indication（
  測定カテゴリ、
  VendorSpecificInfo
 ）
-NameTypeValid rangeDescriptionPeer MAC AddressMACAddressAny有効な個々のMACアドレス
-測定報告が送信されるピアMACエンティティのアドレス。
-Dialog TokenInteger0 255
-測定トランザクションを識別するダイアログトークン。
-自律型レポートの場合は0に設定します。測定レポートセット
-測定レポートのセット。測定レポートの要素フォーマットで定義されています。
-8.4.2.24に定義されている測定レポートのセット
-各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれています。
-Measurement Category Enumeration SPECTRUM MANAGEMENT、またはRADIO MEASUREMENは、Measurement Report SetがSpectrum ManagementレポートまたはRadio Measurementレポートのセットであるかどうかを示します。
-このパラメーターは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
-VendorSpecificInfo
-8.4.2.28で定義されている要素の集合
-ゼロ個以上の要素.NameTypeValid rangeDescription
-ピアMACアドレスMACアドレス
-有効な個々のMACアドレス
-測定報告フレームが受信されたピアMACエンティティのアドレス
+
+ピアMACアドレスMACアドレス　測定報告フレームが受信されたピアMACエンティティのアドレス。
 
 page 259
+
+ダイアログトークン　測定トランザクションを識別する。自律型レポートの場合は0に設定します。
+測定レポートセット　各測定レポートには、測定トークン、測定レポートモード、測定タイプ、および測定レポートが含まれます。
+測定カテゴリ　スペクトル管理レポートまたは無線測定レポートのセットであるかどうかを示す電波測定。このパラメータは、dot11RadioMeasurementActivatedがtrueの場合にのみ存在します。
+
 6.3.16.3.3 When generated
 This primitive is generated by the MLME when a valid Measurement Report frame is received.
 6.3.16.3.4 Effect of receipt
@@ -1550,21 +1517,11 @@ MLME-CHANNELSWITCH.request(
  Mesh Channel Switch Parameters,
  VendorSpecificInfo
 )
-Dialog TokenInteger0  255
-The dialog token to identify the measurement transaction.
-Set to 0 for an autonomous report.
-Measurement Report SetSet of measurement reports, each as defined in the Measurement Report element format
-Set of measurement reports, each as defined in 8.4.2.24
-A set of measurement reports, each containing a Measurement Token, Measurement Report Mode, Measurement Type, and Measurement Report.Measurement Category Enumeration SPECTRUM MANAGEMENT, or RADIO MEASUREMENTIndicates whether the Measurement Report Set is a set of Spectrum Management or Radio Measurement reports.
-The parameter is present only if dot11RadioMeasurementActivated is true.
-VendorSpecificInfo
-A set of elementsAs defined in 8.4.2.28
-Zero or more elements.NameTypeValid rangeDescriptionModeInteger0, 1
-Channel switch mode, as defined for the Channel Switch Announcement element.
-Channel NumberIntegerAs defined in 18.3.8.4.3
-Specifies the new channel number.NameTypeValid rangeDescriptio
+モード　チャネルスイッチアナウンスメントエレメントのために定義されている。
+チャネル番号　新しいチャネル番号を指定します.
 
 page 260
+ーーーここまで
 セカンダリチャネルオフセットパラメータは、HT STAに存在してもよい。
 6.3.17.1.3生成時
 このプリミティブは、チャネルスイッチをスケジューリングし、この切り替えをBSS内のピアエンティティに通知するために、SMEによって生成されます。
