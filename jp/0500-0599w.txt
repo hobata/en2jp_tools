@@ -1,132 +1,213 @@
 page 500
-6）Ack PolicyサブフィールドがNo AckまたはBlock Ack、サブタイプAction No Ackの管理フレーム、およびグループアドレス指定フレームの個別にアドレス指定されたQoSデータフレームの場合、Duration / IDフィールドは次のいずれかに設定されます。
+6）個別にアドレス指定されたQoSデータフレームがNo AckまたはBlock Ackの値を持つAck Policyサブフィールドを持ち、サブタイプアクションのマネジメントフレームがNo Ackの場合、グループアドレス指定フレームでは、Duration/IDフィールドは次のいずれかに設定されます。
 i）フレームがTXOPの最終フラグメントである場合、0
-ii）それ以外の場合は、必要に応じて（適切なIFS値を含む）次のフレームおよびその応答フレームの送信に必要な推定時間b）複数の保護設定。
-Duration / IDフィールドは、次のように値Dに設定されます。
-1）TTXOP = 0かつTEND_NAV = 0の場合、D = TSINGLE-MSDU TPPDU 2）TTXOP = 0かつTEND_NAV> 0ならばD = TEND-NAV TPPDU3）TEND-NAV = 0ならば4）そうでなければここで、TINGLE-MSDUは、適用可能なIFS持続時間を含む、8.4.2.31（TXOP制限値0）で定義された許可フレーム交換シーケンスの送信に必要とされる推定時間である.TPENDINGは、同じACの保留MPDU
-関連するすべての即時応答フレーム
-任意のNDP送信と明示的なフィードバック応答フレーム適用可能なIFS期間
-任意のRDGTTXOPは、dot11EDCATableTXOPLimitの値です（dot11EDCAQAP - APのTXOP制限）。そのTXTTOPでの既に使用されている時間を差し引いた残りのTTXOPです。TXOPTEND-NAVは、TXOPホルダーによって設定されたNAVの残り時間です。 NAVが確立されていない場合、TPPDUは現在のPPDUの送信に必要な時間
+ii）それ以外の場合は、必要に応じて（適切なIFS値を含む）次のフレームおよびその応答フレームの伝搬に必要な推定時間
+b）複数の保護設定。Duration / IDフィールドは、次のように値Dに設定されます。
+1）~ 4)略
+TINGLE-MSDUは、適用可能なIFS持続時間を含む、8.4.2.31（TXOP制限値0）で定義された、許可フレーム交換シーケンスの伝搬に必要とされる推定時間である。
+TPENDINGは、以下の伝搬に必要な推定時間である。
+-同じACの保留MPDU
+-関連するすべての即時応答フレーム
+-任意のNDP送信と明示的なフィードバック応答フレーム適用可能なIFS期間
+-任意のRDG
+TTXOPは、ACにおけるdot11EDCATableTXOPLimitの値です（dot11EDCAQAP - APのTXOP制限）。
+TXOP-REMAININGは、そのTXTTOPでの既に使用されている時間を差し引いた残り時間です。
+TXOPTEND-NAVは、TXOPホルダーによって設定されたNAVの残り時間です。 NAVが確立されていない場合、0になります。
+TPPDUは現在のPPDUの送信に必要な時間
+
 8.2.5.3 QoS CF-Pollフレームの設定
-QoS CF-Pollを含むデータフレーム内で、Duration / IDフィールドの値は、次のいずれかに設定されます。a）TXOP制限がゼロでない場合、1つのSIFS期間+ TXOP制限、またはb） TXOP限界が0である場合、名目上のMSDUサイズの1つのMPDUと、関連するACKフレームと、2つのSIFS間隔との合計。
+QoS CF-Pollを含むデータフレーム内で、Duration / IDフィールドの値は、次のいずれかに設定されます。
+a）TXOP制限がゼロでない場合、1つのSIFS期間+ TXOP制限、または
+b） TXOP限界が0である場合、名目上のMSDUサイズの1つのMPDUと、関連するACKフレームと、2つのSIFS間隔との合計。
+
 8.2.5.4 HCCAのもとでTXOP保有者が送信したフレームの設定
-Duration / IDフィールドは、ハイブリッドコーディネーション機能（HCF）制御チャネルアクセス（HCCA）下でTXOPホルダによって送信され、制御されたアクセスフェーズ（CAP）全体に対してNAV保護を提供するフレーム内で、以下の値の1つに設定される。 ）RTSフレームの場合1）保留中のフレームが最終フレームの場合、保留中のフレームの送信に必要な時間、必要に応じて1つのACKフレーム+ 3つのSIFS間隔2）保留中のフレームが最終フレームでない場合TXOPの残りの期間minTPENDINGTTXOPTPPDU、（）DTTXOPTPPU TENDNAV TPPDU DTTXOPREMAINING TPPDU
+Duration / IDフィールドは、ハイブリッドコーディネーション機能（HCF）制御チャネルアクセス（HCCA）下でTXOPホルダによって送信され、制御されたアクセスフェーズ（CAP）全体に対してNAV保護を提供するフレーム内で、以下の値の1つに設定される。 
+a）RTSフレームの場合
+1）保留中のフレームが最終フレームの場合、保留中のフレームの送信に必要な時間、必要に応じて1つのACKフレーム+ 3つのSIFS間隔
+2）保留中のフレームが最終フレームでない場合TXOPの残りの期間
 
 page 501
-b）CTSフレームの場合1）保留中のフレームがTXOP内の唯一のフレームである場合、次のいずれか：i）応答フレームがある場合、保留中のフレームを送信するために必要な時間と1つのSIFS間隔に応答（ACKまたはBlockAck）と追加のSIFS間隔ii）応答フレームがない場合、保留中のフレームを送信するのに必要な時間と1つのSIFS間隔2）保留中のフレームがTXOPの最終フレームでない場合、 TXOPの残りの持続時間c）それ以外の場合1）フレームが複数のフレーム交換を伴うTXOPの非最終フレームである場合、TXOPの残りの持続時間2）フレームがTXOPの単独フレームまたは最終フレームである場合、このフレーム交換シーケンスに必要な
+b）CTSフレームの場合
+1）保留中のフレームがTXOP内の唯一のフレームである場合、次のいずれか：
+i）応答フレームがある場合、保留中のフレームを送信するために必要な時間と1つのSIFS間隔に応答（ACKまたはBlockAck）と追加のSIFS間隔
+ii）応答フレームがない場合、保留中のフレームを送信するのに必要な時間と1つのSIFS間隔
+2）保留中のフレームがTXOPの最終フレームでない場合、 TXOPの残りの持続時間
+c）それ以外の場合
+1）フレームが複数のフレーム交換を伴うTXOPの非最終フレームである場合、TXOPの残りの持続時間
+2）フレームがTXOPの単独フレームまたは最終フレームである場合、このフレーム交換シーケンスに必要な時間
+
 8.2.5.5 PSMPシーケンス内の設定
-PSMPフレーム内のDuration / IDフィールドは、フレームに記述されているすべてのPSMP-DTTおよびPSMP-UTT期間を完了するために必要な時間以上の値に設定されます。 PSMPシーケンスのPSMP-DTTおよびPSMP-UTT内で、継続時間/ IDフィールドは、先行するPSMPフレームの継続時間/ ID値から、PSMPフレームの終わりとフレームを運ぶPPDUの終わりとの間の時間を差し引いたものに設定される.NOTE言い換えれば、PSMPシーケンス内で送信されるすべてのフレームは、同じNAVエンドポイントを特定します。
+PSMPフレーム内のDuration / IDフィールドは、フレームに記述されているすべてのPSMP-DTTおよびPSMP-UTT期間を完了するために必要な時間以上の値に設定されます。 
+PSMPシーケンスのPSMP-DTTおよびPSMP-UTT内で、継続時間/ IDフィールドは、先行するPSMPフレームの継続時間/ ID値から、PSMPフレームの終わりとフレームを運ぶPPDUの終わりとの間の時間を差し引いたものに設定される.
+注：言い換えれば、PSMPシーケンス内で送信されるすべてのフレームは、同じNAVエンドポイントを特定します。
+
 デュアルCTSシーケンス内の8.2.5.6設定
-即時応答を含むPPDU内のTXOP保有者ではないQoS STAによって送信されたフレーム（フレーム1）（9.3.2.7で定義される第2のCTS（CTS2）送信を除く）内、またはRD応答者継続時間/ IDフィールドは、応答を誘発したフレーム、またはRDGを含むフレーム（フレーム2）から、フレーム1を搬送したPPDUの終わりとフレーム1の終わりとの間の時間間隔を引いた時間/ ID値に設定される。 Frames2を運ぶPPDU。 TXOP保有者であるQoS STAによって送信されたフレーム（フレーム1）（9.3.2.7で定義されているCTS2送信を除く）内のDuration / IDフィールドは、次の節の規則に従って設定されます。
+即時応答を含むPPDU内のTXOP保有者ではないQoS STAによって送信されたフレーム（フレーム1）（9.3.2.7で定義される第2のCTS（CTS2）送信を除く）内、またはRD応答者継続時間/ IDフィールドは、応答を誘発したフレーム、またはRDGを含むフレーム（フレーム2）から、フレーム1を搬送したPPDUの終わりとフレーム1の終わりとの間の時間間隔を引いた時間/ ID値に設定される。 Frames2を運ぶPPDU。 
+TXOP保有者であるQoS STAによって送信されたフレーム（フレーム1）（9.3.2.7で定義されているCTS2送信を除く）内のDuration / IDフィールドは、次の節の規則に従って設定されます。
 8.2.5.2ルールb）Frame1がQoS + CF-Pollフレームでなく、TXOP保有者がHCCAまたはPSMPで動作していない場合の多重保護
 8.2.5.3 Frame1がQoS + CF-Pollフレームで、TXOP保有者がHCCAまたはPSMPで動作していない場合
 8.2.5.4 TXOP保有者がHCCAの下で動作している場合
 8.2.5.5。 TXOPホルダーが9.3.2.7で定義されているデュアルCTS交換機のCTS2内でPSMP下で動作している場合、Duration / IDフィールドは交換を開始したRTSのDuration / IDフィールドの値から送信に要する時間を引いた値に設定される（CTS1）、CTS2、および適用可能なIFS間隔に基づいて決定されます。
+
 8.2.5.7制御応答フレームの設定
-この節では、QoS STAによって送信されるCTS、ACK、およびBlockAck制御応答フレームのDuration / IDフィールドの設定方法について説明します.RTSフレームに応答して送信されるデュアルCTSシーケンスの一部ではないCTSフレームの場合、Duration / ID RTSフレームを運ぶPPDUの終わりとCTSフレームを運ぶPPDUの終わりとの間の時間（マイクロ秒）を差し引いた応答を引き出したRTSフレームの持続時間/ IDフィールドから得られた値に設定される。
+この節では、QoS STAによって送信されるCTS、ACK、およびBlockAck制御応答フレームのDuration / IDフィールドの設定方法について説明します.
+RTSフレームに応答して送信されるデュアルCTSシーケンスの一部ではないCTSフレームの場合、Duration / ID RTSフレームを運ぶPPDUの終わりとCTSフレームを運ぶPPDUの終わりとの間の時間（マイクロ秒）を差し引いた応答を引き出したRTSフレームの持続時間/ IDフィールドから得られた値に、CTSフレームのDuration / IDフィールドが設定される。
 
 page 502
-ACKフレームの場合、Duration / IDフィールドは、レスポンスから派生したフレームのDuration / IDフィールドから得られた値から、レスポンスを引き出されたフレームを搬送するPPDUの終わりと、 PPDUはACKフレームを運ぶ。
-BlockAckReqフレームに応答して送信される、または暗黙的なBlock Ack要求を含むフレームに応答して送信されるBlockAckフレームの場合、Duration / IDフィールドは、応答を引き出したフレームのDuration / IDフィールドから取得された値から時間を差し引いた値に設定される応答を引き出すフレームを運ぶPPDUの終わりとBlockAckフレームを運ぶPPDUの終わりとの間のマイクロ秒単位で表します。
+ACKフレームのDuration / IDフィールドは、レスポンスから派生したフレームのDuration / IDフィールドから、以下の時間を引いた値である。
+レスポンスに起因するこのフレームを運ぶPPDUの最後と、ACKフレームを運ぶPPDUの最後の時間差をマイクロ秒で示した値
+BlockAckReqフレームに応答して送信される、または暗黙的なBlock Ack要求を含むフレームに応答して送信されるBlockAckフレームの場合、Duration / IDフィールドは、応答を引き出したフレームのDuration / IDフィールドから取得された値から以下の時間を差し引いた値に設定される。
+応答を引き出すフレームを運ぶPPDUの終わりとBlockAckフレームを運ぶPPDUの終わりとの間をマイクロ秒単位で表します。
+
 8.2.5.8他の応答フレームの設定
-TXOP保有者ではなく、8.2.5.1から8.2.5.7で指定されていないSTAによって送信されたフレームの場合、Duration / IDフィールドは、応答を誘発したフレームのDuration / IDフィールドから取得された値に設定される応答を引き出すフレームを搬送するPPDUの端部とフレームを搬送するPPDUの端部との間の時間をマイクロ秒単位で引いたものである。
+TXOP保有者ではなく、8.2.5.1から8.2.5.7で指定されていないSTAによって送信されたフレームの場合、Duration / IDフィールドは、応答を誘発したフレームのDuration / IDフィールドから取得された値から、応答を引き出すフレームを搬送するPPDUの端部とフレームを搬送するPPDUの端部との間の時間をマイクロ秒単位で引いたものである。
+
 8.3個々のフレームタイプのフォーマット
 8.3.1コントロールフレーム
 8.3.1.1制御フレームのフォーマット
 以下の説明では、直前のフレームとは、現在のフレームの先頭に先行するSIFSインターバル内で受信が完了したフレームを意味します。制御フレームのフレーム制御フィールド内のサブフィールドは、図8-12に示すように設定されます。
 8.3.1.2 RTSフレームフォーマット
 RTSフレームのフレームフォーマットは、図8-13のとおりです。
-B0B1B2B3B4B7B8B9B10B11B12B13B13B15
-プロトコルバージョンタイプ（制御）サブタイプDS（0）DSから（0）より多くのフラグ（0）リトライ（0）パワーマネージメントメモモアデータ（0）保護フレーム（0）オーダー（0）ビット：22411111111
-図8-12制御フレーム内のフィールド制御フィールドのサブフィールド値図8-13 RTSフレーム
+図8-12制御フレーム内のフィールド制御フィールドのサブフィールド値
+図8-13 RTSフレーム
 
 page 503
-RTSフレームのRAフィールドは、保留中の個別にアドレス指定されたデータ、管理、または制御フレームの意図された即時受信者である、WM上のSTAのアドレスである.TAフィールドは、RTSフレームを送信するSTAのアドレスである。非QoS STAによって送信されたすべてのRTSフレームでは、保留データまたは管理フレーム、1つのCTSフレーム、1つのACKフレーム、および3つのSIFS間隔を送信するのに必要な時間（マイクロ秒）です。
-計算された持続時間に分数マイクロ秒が含まれる場合、その値は次に高い整数に切り上げられます。
+RTSフレームのRAフィールドは、保留中の個別にアドレス指定されたデータ、管理、または制御フレームの意図された即時受信者である、WM上のSTAのアドレスである.
+TAフィールドは、RTSフレームを送信するSTAのアドレスである。
+この持続時間は、非QoS STAによって送信されたすべてのRTSフレームでは、保留データまたは管理フレーム、1つのCTSフレーム、1つのACKフレーム、および3つのSIFS間隔を送信するのに必要な時間（マイクロ秒）を意味します。計算された持続時間に分数マイクロ秒が含まれる場合、その値は次に高い整数に切り上げられます。
 QoS STAによって送信されるRTSフレームについては、8.2.5を参照してください。
+
 8.3.1.3 CTSフレームフォーマット
-CTSフレームのフレームフォーマットは図8-14のとおりです.CTSフレームがRTSフレームに続く場合、CTSフレームのRAフィールドは、CTSが応答である直前のRTSフレームのTAフィールドからコピーされます。
-CTSがフレーム交換の最初のフレームである場合、RAフィールドは送信機のMACアドレスに設定される.RTSフレームに応答して非QoS STAによって送信されるすべてのCTSフレームについて、持続時間値は直前のRTSフレームのDurationフィールドから、CTSフレームおよびそのSIFSインターバルを送信するのに必要な時間（マイクロ秒）を引いたものである。
-計算された持続時間がマイクロ秒を含む場合、その値は次のより高い整数に切り上げられる。非QoS STAでは、CTSが交換内の最初のフレームであり、保留中のデータまたは管理フレームが肯定応答を要求する場合、保留中のデータまたは管理フレーム、さらに2つのSIFSインターバルと1つのACKフレームを送信するのに必要な時間（マイクロ秒単位）。
+CTSフレームのフレームフォーマットは図8-14のとおりです.
+CTSフレームがRTSフレームに続く場合、CTSフレームのRAフィールドは、CTSが応答である直前のRTSフレームのTAフィールドからコピーされます。CTSがフレーム交換の最初のフレームである場合、RAフィールドは送信機のMACアドレスに設定される.
+
+RTSフレームに応答して非QoS STAによって送信されるすべてのCTSフレームについて、持続時間値は直前のRTSフレームのDurationフィールドから、CTSフレームおよびそのSIFSインターバルを送信するのに必要な時間（マイクロ秒）を引いたものである。
+計算された持続時間が分数のマイクロ秒を含む場合、その値は整数に切り上げられる。
+
+非QoS STAでは、CTSが交換内の最初のフレームであり、保留中のデータまたは管理フレームが肯定応答を要求する場合、保留中のデータまたは管理フレーム、さらに2つのSIFSインターバルと1つのACKフレームを送信するのに必要な時間（マイクロ秒単位）。
 非QoS STAでは、CTSが交換機内の最初のフレームであり、保留中のデータまたは管理フレームが確認応答を必要としない場合、継続時間値は、保留中のデータまたは管理フレームを送信するのに必要な時間（マイクロ秒単位） SIFS間隔。
-計算された持続時間に分数マイクロ秒が含まれる場合、その値は次に高い整数に切り上げられます。 QoS STAによる他のCTS送信の場合、持続時間値は8.2.5で定義されているように設定される。
+計算された持続時間に分数のマイクロ秒が含まれる場合、その値は次に高い整数に切り上げられます。 QoS STAによる他のCTS送信の場合、持続時間値は8.2.5で定義されているように設定される。
 8.3.1.4 ACKフレームフォーマット
-ACKフレームのフレームフォーマットは図8-15のとおりです。図8-14 CTSフレーム図8-15 ACKフレーム
+ACKフレームのフレームフォーマットは図8-15のとおりです。
+図8-14 CTSフレーム
+図8-15 ACKフレーム
 
 page 504
-ACKフレームのRAフィールドは、直前に個別にアドレス指定されたデータ、管理、BlockAckReq、BlockAck、またはPS-Pollフレームのアドレス2フィールドからコピーされます。非QoS STAによって送信されたACKフレームの場合、直前に個別にアドレス指定されたデータまたは管理フレームのフレーム制御フィールドでMore Fragmentsビットが0に等しい場合、期間値は0に設定されます。 QoS STAの場合、継続時間値は、直前のデータのDuration / IDフィールド、管理、PS-Poll、BlockAckReq、またはBlockAckフレームからACKフレームおよびSIFSインターバルを送信するのに必要なマイクロ秒単位の時間を引いた値です。
-計算された持続時間が分数マイクロ秒を含む場合、その値は次に高い整数に切り上げられます。
+ACKフレームのRAフィールドは、直前に個別にアドレス指定されたデータ、管理、BlockAckReq、BlockAck、またはPS-Pollフレームのアドレス2フィールドからコピーされます。
+
+非QoS STAによって送信されたACKフレームの場合、直前に個別にアドレス指定されたデータまたは管理フレームのフレーム制御フィールドでMore Fragmentsビットが0に等しい場合、期間値は0に設定されます。 QoS STAの場合、継続時間値は、直前のデータのDuration / IDフィールド、管理、PS-Poll、BlockAckReq、またはBlockAckフレームからACKフレームおよびSIFSインターバルを送信するのに必要なマイクロ秒単位の時間を引いた値です。計算された持続時間が分数マイクロ秒を含む場合、その値は整数に切り上げられます。
+
 その他のすべてのACKフレームでは、継続時間の値は8.2.5で指定されます。
+
 8.3.1.5 PS-Pollフレームフォーマット
-PS-Pollフレームのフレームフォーマットは、図8-16のようになります。 BSSIDは、APに含まれるSTAのアドレスです。
-TAフィールドは、フレームを送信するSTAのアドレスである。
-AIDは、そのSTAの現在の関連付けを確立したアソシエーション応答フレーム内のAPによってフレームを送信するSTAに割り当てられた値である。 AID値は、常に1に設定された2つのMSBを持ちます。
+PS-Pollフレームのフレームフォーマットは、図8-16のようになります。
+図8-16 PS-Pollフレーム
+BSSIDは、APに含まれるSTAのアドレスです。TAフィールドは、フレームを送信するSTAのアドレスである。AIDは、そのSTAの現在の関連付けを確立したアソシエーション応答フレーム内のAPによってフレームを送信するSTAに割り当てられた値である。 
+AID値は、常に1に設定された2つのMSBを持ちます。
 8.3.1.6 CF-Endフレームフォーマット
-CF-Endフレームのフレームフォーマットは、図8-17に示すとおりです.BSSIDフィールドは、APに含まれるSTAのアドレスです。
-RAフィールドはブロードキャストグループアドレスです。 Durationフィールドは0に設定されています。図8-16 PS-Pollフレーム図8-17 CF-Endフレーム
+CF-Endフレームのフレームフォーマットは、図8-17に示すとおりです.
+BSSIDフィールドは、APに含まれるSTAのアドレスです。RAフィールドはブロードキャストグループアドレスです。 
+Durationフィールドは0に設定されています。
+図8-17 CF-Endフレーム
 
 page 505
+CF-End+CF-Ackフレームのフレームフォーマットは、図8-18に示すとおりです。
+図8-18 CF-End+CF-Ackフレーム
+BSSIDフィールドは、APに含まれるSTAのアドレスです。RAフィールドはブロードキャストグループアドレスです。 
+Durationフィールドは0に設定されています。
+8.3.1.8 BlockAckReqフレームフォーマット
+BlockAckReqフレームのフレームフォーマットは、図8-19に示すとおりです。
+図8-19 BlockAckReqフレーム
+Dulation/IDフィールド値は、8.2.5節に定義されています。
+BlockAckReqフレームのRAフィールドは受信STAのアドレスアドレスです。 
+TAフィールドは、BlockAckReqフレームを送信するSTAのアドレスです。
+BAR制御フィールドは、図8-20に示されています。
+図8-20 BAR制御フィールド
+
+遅延＆HT-遅延合意の元での、BlockAckReqフレームでは、BAR制御フィールドのBAR Ackポリシーサブフィールドの値の意味が、表8-15のようになります。
+他のタイプの合意においてのBlockAckReqフレームの送信では、BAR Ackポリシーサブフィールドは、予約領域とみなされます。
 
 page 506
+表8-15 BAR応答ポリシーサブフィールド
+0 通常の了承　送信者が即時の了承を必要とする場合、BAR Ackポリシーサブフィールドが、この値に設定される。この宛名は、ACKを返す。9.26.1.7節を参照。
+1 了承なし　この宛名は、このフレームを受信時、非即時のレスポンスを返す。送信者が即時のレスポンスを必要としない場合、BAR Ackポリシーサブフィールドは、この価に設定される。
+PSMPシーケンス外のBasic BlockAckReqフレームにおいては、値1は使用されない。
+Multi-TID BlockAckReqフレームにおいては、値1は使用されない。
+
 Multi-TIDおよびCompressed Bitmapサブフィールドの値は、表8-16に示すように、3つのpossibleBlockAckReqフレームバリアントのどれが表現されるかを決定します。
-BAR ControlフィールドのTID_INFOサブフィールドの意味は、BlockAckReqフレームバリアントタイプに依存する。
-このサブフィールドの意味は、各BlockAckReqframeバリアントの節で説明されています。 BlockAckReqフレームのBAR情報フィールドの意味は、BlockAckReqフレームバリアントタイプに依存する。
-このフィールドの意味は、各BlockAckReqフレームバリアントの節の中で説明される。備考他の箇条からの他の資格を持たないBlockAckReqフレームへの言及は、特定の除外が呼び出されない限り、どのバリアントにも適用される。
+
+表8-16 BlockAckReqバリアント符号化
+
+BAR ControlフィールドのTID_INFOサブフィールドの意味は、BlockAckReqフレームバリアントタイプに依存する。このサブフィールドの意味は、各BlockAckReqframeバリアントの節で説明されています。 
+BlockAckReqフレームのBAR情報フィールドの意味は、BlockAckReqフレームバリアントタイプに依存する。
+このフィールドの意味は、各BlockAckReqフレームバリアントの節の中で説明される。
+備考：他の箇条からの他の資格を持たないBlockAckReqフレームへの言及は、特定の除外が呼び出されない限り、どのバリアントにも適用される。
+
 8.3.1.8.2 BlockAckReqの基本バリアント
-Basic BlockAckReqフレームのBAR ControlフィールドのTID_INFOサブフィールドは、Basic BlockAckフレームが要求されるTIDを含む。基本BlockAckReqフレームのBAR情報フィールドには、図8-21に示すように、Block Ack Starting SequenceControlサブフィールドが含まれています。
-Block AckStarting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBasicBlockAckReqフレームが送信される最初のMSDUのシーケンス番号が格納されます。
-Fragment Numberサブフィールドは0に設定されています。
-表8-15 BAR肯定応答ポリシーsubfieldValueMeaning0Normal肯定応答。
-BAR Ack Policyサブフィールドは、送信者が即時確認を必要とするときにこの値に設定されます。受信者はACKを返します。 9.26.1.7.1 No Acknowledgementを参照してください。
-受信者は、フレームの受信時に即時応答を送信しません。
-BAR Ack Policyサブフィールドは、送信側が即時確認応答を必要としない場合にこの値に設定されます。値1は、PSMPシーケンス外のBasic BlockAckReqフレームでは使用されません。値1は、Multi-TID BlockAckReqフレームでは使用されません。表8-16
- BlockAckReqフレーム・バリアント・エンコーディングMulti-TIDサブフィールド値圧縮ビットマップ・サブフィールド値BlockAckReqフレーム・バリアント100Basic BlockAckReq01Compressed BlockAckReq10Reserved11Multi-TID BlockAckRe
+Basic BlockAckReqフレームのBAR ControlフィールドのTID_INFOサブフィールドは、Basic BlockAckフレームが要求されるTIDを含む。
+
+基本BlockAckReqフレームのBAR情報フィールドには、図8-21に示すように、Block Ack Starting SequenceControlサブフィールドが含まれています。
+Block AckStarting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBasicBlockAckReqフレームが送信される最初のMSDUのシーケンス番号が格納されます。Fragment Numberサブフィールドは0に設定されています。
 
 page 507
-8.3.1.8.3圧縮されたBlockAckReq variant圧縮されたBlockAckReqフレームのBAR ControlフィールドのTID_INFOサブフィールドは、BlockAckフレームが要求されるTIDを含む。圧縮BlockAckReqフレームのBAR情報フィールドには、図8-21に示すBlock Ack StartingSequence Controlサブフィールドが含まれています。
+
+図8-21 Block Ack開始シーケンス制御フィールド
+8.3.1.8.3圧縮されたBlockAckReqバリアント
+圧縮されたBlockAckReqフレームのBAR ControlフィールドのTID_INFOサブフィールドは、BlockAckフレームが要求されるTIDを含む。
+
+圧縮BlockAckReqフレームのBAR情報フィールドには、図8-21に示すBlock Ack StartingSequence Controlサブフィールドが含まれています。
 BlockAck Starting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBlockAckReqフレームが送信される最初のMSDUまたはA-MSDUのシーケンス番号が格納されます。
 Block Ack Starting SequenceControlサブフィールドのFragment Numberサブフィールドは0に設定されます。
-8.3.1.8.4 Multi-TID BlockAckReqの変形
-Multi-TID BlockAckReqフレームのBAR ControlフィールドのTID_INFOサブフィールドは、TID_INFO + 1によって与えられるMulti-TID BlockAckReqフレームに存在するTIDの数を決定する。例えば、TID_INFOサブフィールドの値2は、3つのTID値が存在することを意味するMulti-TID BlockAckReq frames BAR Informationフィールドに入力します。 Multi-TID BlockAckReqフレームのBAR Informationフィールドには、図8-22に示すように、TID InfosubfieldsおよびBlock Ack Starting Sequence Controlサブフィールドの複数のセットが含まれています。
-Per TIDInfosubfieldを図8-23に示します。
-Block Ack Starting Sequence Controlサブフィールドを図8-21に示します。
-Block Ack Starting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBlockAckReqフレームが送信される最初のMSDUまたはA-MSDUのシーケンス番号が格納されます。 Block Ack Starting Sequence ControlサブフィールドのFragment Numberサブフィールドは0に設定されます。
-B0B3B4B15フラグメント番号（0）開始シーケンス番号：412
-図8-21 Block Ack Starting Sequence Controlフィールド
-オクテット：22Per TID InfoBlock Ack開始シーケンスControlRepeat、各TID
+
+8.3.1.8.4 Multi-TID BlockAckReqバリアント
+Multi-TID BlockAckReqフレームのBAR ControlフィールドのTID_INFOサブフィールドは、TID_INFO + 1によって与えられるMulti-TID BlockAckReqフレームに存在するTIDの数を決定する。例えば、TID_INFOサブフィールドの値2は、3つのTID値が存在することを意味するMulti-TID BlockAckReq frames BAR Informationフィールドに入力します。 
+
+Multi-TID BlockAckReqフレームのBAR Informationフィールドには、図8-22に示すように、TID InfosubfieldsおよびBlock Ack Starting Sequence Controlサブフィールドの複数のセットが含まれています。Per TIDInfosubfieldを図8-23に示します。Block Ack Starting Sequence Controlサブフィールドを図8-21に示します。Block Ack Starting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBlockAckReqフレームが送信される最初のMSDUまたはA-MSDUのシーケンス番号が格納されます。 Block Ack Starting Sequence ControlサブフィールドのFragment Numberサブフィールドは0に設定されます。
 図8-22 BAR情報フィールド（Multi-TID BlockAckReq）
-B0B11B12B15 ReservedTID ValueBits：124
 図8-23 TID情報ごとのサブフィールド
 
 page 508
-22662可変4フレーム制御時間/ IDRATABA ControlBA情報FCSMACヘッダ
+
 図8-24 BlockAckフレーム
-B0B1B2B3B11B12B15BA
-Ack PolicyMulti-TIDCompressed BitmapReservedTID_INFOBits：11194
+Dulation/IDフィルド値は、8.2.5節に定義されています。
+BlockAckフレームのRAフィールドはBlock Ackを要求した受信STAのアドレスアドレスです。 
+TAフィールドは、BlockAckフレームを送信するSTAのアドレスです。
+BAR制御フィールドは、図8-25に示されています。
 図8-25 BA制御フィールド
-表8-17 BA AckポリシーsubfieldValueMeaning0Normal Acknowledgement。
-BA Ack Policyサブフィールドは、送信者が即時確認応答を必要とするときにこの値に設定されます。
-受取人はACKを返します。
-値0は、PSMPシーケンス中にHT遅延BlockAckの下で送信されるデータには使用されません.1
-受信者はフレームの受信時に即時応答を送信しません。
+
+遅延＆HT-遅延合意の元で、送信されるBlockAckフレームのために、BA制御フィールドのBA Ack Policyサブフィールドは、、表8-17に示す意味を持ちます。他のタイプの合意におけるBlockAckフレームの送信では、BA Ackポリシーサブフィールド予約領域となります。
+表8-17 BA Ackポリシーサブフィールド
+0 通常の了承　送信者が即時確認応答を必要とするときにこの値に設定されます。受取人はACKを返します。
+値0は、PSMPシーケンス中にHT遅延BlockAckの下で送信されるデータには使用されません.
+1 了承なし　この宛名は、このフレームを受信時、非即時のレスポンスを返す。受信者はフレームの受信時に即時応答を送信しません。
 BA Ack Policyは、送信者が即時確認を必要としない場合にこの値に設定されます。
 値1は、PSMPシーケンス外の基本BlockAckフレームでは使用されません。
 値1はMulti-TID BlockAckフレームでは使用されません
 
 page 509
-BA ControlフィールドのMulti-TIDおよびCompressed Bitmapサブフィールドの値は、表8-18に示すように、3つのBlockAckフレームバリアントのうちのどれが表示されるかを決定します。注記他の副詞からの他の資格を持たないBlockAckフレームへの言及は、特定の除外が呼び出されない限り、任意のバリアントに適用される.BB ControlフィールドのTID_INFOサブフィールドの意味は、BlockAckフレームのバリアントタイプによって異なる。
-このサブフィールドの意味は、BlockAckフレームの各バリアントの節で説明されています。 BA情報フィールドの意味は、BlockAckフレームのバリアントタイプによって異なります。
+
+BA ControlフィールドのMulti-TIDおよびCompressed Bitmapサブフィールドの値は、表8-18に示すように、3つのBlockAckフレームバリアントのうちのどれが表示されるかを決定します。
+表8-18 BlockAckフレームバリアントのエンコーディング
+注記：他の副詞からの他の資格を持たないBlockAckフレームへの言及は、特定の除外が呼び出されない限り、任意のバリアントに適用される.
+
+BB ControlフィールドのTID_INFOサブフィールドの意味は、BlockAckフレームのバリアントタイプによって異なる。このサブフィールドの意味は、BlockAckフレームの各バリアントの節で説明されています。 BA情報フィールドの意味は、BlockAckフレームのバリアントタイプによって異なります。
 このフィールドの意味は、BlockAckフレームバリエーションのそれぞれの節で説明されています。
+
 8.3.1.9.2基本ブロックアクトバリアント
-Basic BlockAckフレームのBA ControlフィールドのTID_INFOサブフィールドは、このBlockAckフレームが送信されるTIDを含む。Basic BlockAckフレームのBA情報フィールドは、ブロックACK開始シーケンス制御サブフィールドおよびブロックACKビットマップサブフィールドを含む。図8-26。
-Block Ack Starting Sequence Controlサブフィールドのフォーマットを図8-21に示します。
-BlockAck Starting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBasic BlockAckフレームが送信される最初のMSDUのシーケンス番号が含まれ、直前に受信したBasicBlockAckReqフレームと同じ値に設定されます。ブロックACKビットマップサブフィールドは128です最大64MSDUの受信ステータスを示すために使用されます。
+Basic BlockAckフレームのBA ControlフィールドのTID_INFOサブフィールドは、このBlockAckフレームが送信されるTIDを含む。
+
+Basic BlockAckフレームのBA情報フィールドは、ブロックACK開始シーケンス制御サブフィールドおよび図8-26に示すブロックACKビットマップサブフィールドを含む。Block Ack Starting Sequence Controlサブフィールドのフォーマットを図8-21に示します。
+BlockAck Starting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBasic BlockAckフレームが送信される最初のMSDUのシーケンス番号が含まれ、直前に受信したBasicBlockAckReqフレームと同じ値に設定されます。
+図8-26 BA情報フィールド（BlockAck)
+
+ブロックACKビットマップサブフィールドの長さは128オクテットで、最大64MSDUの受信ステータスを示すために使用されます。
 ブロックACKビットマップのビット位置nは、1に等しい場合、（Block Ack Starting Sequence Control + n）に等しいMPDUシーケンス制御値を有するMPDUの受信を確認応答する。
 ブロックACKビットマップのビット位置nは、0に等しい場合、（Block Ack Starting Sequence Control + n）に等しいMPDUシーケンス制御値を有するMPDUが受信されなかったことを示す。
 MPDUシーケンス制御フィールドおよびブロックACK開始シーケンス制御サブフィールド値の各々は、16ビットの符号なし整数として扱われる。
-MSDUの未使用フラグメント番号の場合、ビットマップの対応するビットは0に設定されます。表8-18 BlockAckフレームバリアントのエンコーディングマルチTIDサブフィールド値圧縮ビットマップサブフィールドvalueBlockAckフレームvariant00Basic BlockAck01Compressed BlockAck10Reserved11Multi-TID BlockAckBlock Ack Starting Sequence ControlBlock Ack BitmapOctets： 2128図8-26 BA情報フィールド（BlockAck
+MSDUの未使用フラグメント番号の場合、ビットマップの対応するビットは0に設定されます。
 
 page 510
+ーーーここまで
 8.3.1.9.3圧縮されたブロックアクトバリアント
 圧縮BlockAckフレームのBA制御フィールドのTID_INFOサブフィールドは、このBlockAckフレームが送信されるTIDを含む。圧縮BlockAckフレームのBA情報フィールドは、図8-27に示すように、Block Ack Starting Sequence ControlサブフィールドとBlock Ack Bitmapサブフィールドで構成されます。
 Block Ack Starting Sequence ControlサブフィールドのStarting Sequence Numberサブフィールドには、このBlockAckフレームが送信される最初のMSDUまたはA-MSDUのシーケンス番号が格納されます。
