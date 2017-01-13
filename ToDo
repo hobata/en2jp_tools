@@ -1,0 +1,14 @@
+CONVERTION METHOD AFTER EXPORT
+
+Find title lines <- need marking
+
+When head of line is not space, it is normal line. <- need marking
+When a line has ". ", replace the " " to "\n".
+When connect lines, insert a space between the lines.
+When the line has ":" in the end, do not connect with following line.
+
+When head of line is space, it is in a table. <- need marking
+When a line has "." in a table, insert a null line(line feed) after the line.
+A table must be devided some rectangular area.
+Connect line in a rectangular area.
+
