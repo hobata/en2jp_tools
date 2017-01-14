@@ -12,7 +12,7 @@ def print_help():
   print "output to stdout\n"
 
 # table cell match pattern
-ptn_h = r"  [\S]" # any char. except space
+ptn_h = r"  [a-z0-9A-Z(]" # any char. except space
 re_h = re.compile(ptn_h)
 
 tbl_col = []
@@ -29,6 +29,7 @@ def chkConRow(mlist):
 strDic = {}
 def makeTableRaw(r):
   global strDic
+  strRaw = ""
   mlist = []
   iter = re.finditer(re_h, r, flags=0)
   for m in iter:
@@ -46,7 +47,7 @@ def makeTableRaw(r):
   else:
     # print row
     for k, v in sorted(strDic.items()): # sort by key
-      print v.strip()
+      strRaw = strRaw + "\n" + v.strip()
     # new row
     strDic = {}
     for i, m in enumerate(mlist):
@@ -56,7 +57,7 @@ def makeTableRaw(r):
       else:
         strDic[m] = r[m+2:mlist[i+1]].strip() # a head of next
 
-  return len(mlist), retCont
+  return len(mlist), retCont, strRaw
 
 # MAIN
 argvs = sys.argv  # list of command line
@@ -77,10 +78,19 @@ infile.close()
 
 # store status area
 lineStatus = [] # each line status
-
+tableRaw = [""] * len(read_lines)
 for i, r in enumerate(read_lines):
-  if r[:2] == "  ":
-    col, newRow = makeTableRaw(r)
+  if "..." in r:
+    lineStatus.append("a") # table of contents
+    continue
+  if r[:2] == "  ": # may be table
+    col, newRow, strRaw  = makeTableRaw(r)
+    if strRaw <> "":
+      tableRaw[i] = strRaw
+    prev = read_lines[i-1][0]
+    if (prev == "a" or prev == "n") and col == 1:
+      lineStatus.append("a") # 1st line of table is not "t1"
+      continue
     lineStatus.append("t%d " % (col) + str(newRow) ) # in table
     continue
   else:
@@ -90,7 +100,8 @@ for i, r in enumerate(read_lines):
     continue
 
 for i, s in enumerate(lineStatus):
-  if "t" in s:
+  if not "t" in s:
     print s + ":" + read_lines[i].replace("\n", "")
-
+  if not tableRaw[i] == "":
+    print "t:" + tableRaw[i]
 
