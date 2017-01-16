@@ -125,11 +125,10 @@ for i, r in enumerate(read_lines):
       continue
 
   if r[0] == "t": # table
+    tmp = "  " + tmp # for recognize as table
     col, newRow, strRaw  = makeTableRaw(tmp)
     if not strRaw == "":
-      out_txt.append("<TABLE>")
       out_txt.append(strRaw)
-      out_txt.append("</TABLE>")
 
 for s in out_txt:
   print s.replace("\n", "")
