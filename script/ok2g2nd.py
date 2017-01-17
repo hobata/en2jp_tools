@@ -48,7 +48,9 @@ def makeTableRaw(r):
   iter = re_h.finditer(r)
   for m in iter:
     mlist.append(m.start())
+  #print mlist
   retCont = chkConRow(mlist)
+  #print retCont
   if retCont:
     for i, m in enumerate(mlist): # append string
       if m in strDic:
@@ -97,6 +99,13 @@ for i, r in enumerate(read_lines):
   tmp = r[4:] # out(work)_string
 
   if i >= 1:
+    if read_lines[i-1][0]  == "t" and r[0] <> "t": # end table
+      # print row
+      for k, v in sorted(strDic.items()): # sort by key
+        out_txt.append(v.strip() + '\n')
+      # clear row
+      strDic = {}
+
     if read_lines[i-1][0]  == "c": # connect
       out_txt[-1] = out_txt[-1][:-1] + " " + tmp # end of line is "\n"
       out_txt[-1] = out_txt[-1].replace("  ", " ")
