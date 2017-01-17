@@ -140,4 +140,5 @@ for i, r in enumerate(read_lines):
       out_txt.append(strRaw)
 
 for s in out_txt:
-  print s.replace("\n", "")
+  print s
+  #print s.replace('\n', '')
