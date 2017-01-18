@@ -7,7 +7,7 @@ def print_help():
   print "This program needs one parameter."
   print "Usage:"
   print " get temporary txt : python ok2g1.py f_name1 > temparary_file"
-  #print " get target file   : python ok2g2.py temporary_file  > target_file"
+  print " get target file   : python ok2g2.py temporary_file  target_file"
   print "Parameter:"
   print " f_name1: okular exported txt file name"
   print "temporary file: line head indicators:"
@@ -79,7 +79,7 @@ def makeTableRaw(r):
 argvs = sys.argv  # list of command line
 argc = len(argvs) # prameter number
 
-if not argc == 2:
+if not argc == 3:
   print_help()
   sys.exit()
 
@@ -92,12 +92,12 @@ if not os.path.exists(fn):
 infile = open(fn, "r")
 read_lines = infile.readlines()
 infile.close()
+read_lines.append("n__:  \n") # terinate table
 
 # store status area
 out_txt = [] # outpur raw strings
 for i, r in enumerate(read_lines):
   tmp = r[4:] # out(work)_string
-
   if i >= 1:
     if read_lines[i-1][0]  == "t" and r[0] <> "t": # end table
       # print row
@@ -139,5 +139,9 @@ for i, r in enumerate(read_lines):
     if not strRaw == "":
       out_txt.append(strRaw)
 
+fn = argvs[2]
+f = open(fn, 'w')
 for s in out_txt:
-  print s.replace("\n", "")
+  f.write(s)
+f.close()
+
