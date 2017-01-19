@@ -6,7 +6,7 @@ import os, sys, re, time
 def print_help():
   print "This program needs one parameter."
   print "Usage:"
-  print " get temporary txt : python ok2g1.py f_name1 > temparary_file"
+  print " get temporary txt : python ok2g1.py f_name1 temparary_file"
   print " get target file   : python ok2g2.py temporary_file  target_file"
   print "Parameter:"
   print " f_name1: okular exported txt file name"

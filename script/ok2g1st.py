@@ -4,10 +4,10 @@
 import os, sys, re, time
 
 def print_help():
-  print "This program needs one parameter."
+  print "This program needs two parameter."
   print "Usage:"
-  print " get temporary txt : python ok2g1st.py f_name1 > temparary_file"
-  print " get target file   : python ok2g2nd.py temporary_file  > target_file"
+  print " get temporary txt : python ok2g1.py f_name1 temparary_file"
+  print " get target file   : python ok2g2.py temporary_file  target_file"
   print "Parameter:"
   print " f_name1: okular exported txt file name"
   print "temporary file: line head indicators:"
@@ -77,7 +77,7 @@ def makeTableRaw(r):
 argvs = sys.argv  # list of command line
 argc = len(argvs) # prameter number
 
-if not argc == 2:
+if not argc == 3:
   print_help()
   sys.exit()
 
@@ -143,8 +143,12 @@ for i, r in enumerate(read_lines):
     lineStatus[i] = "n" # no action
     continue
 
+fn = argvs[2]
+f = open(fn, 'w')
 for i, s in enumerate(lineStatus):
   if not s[0] == "t":
-    print s[0] + "__:" + read_lines[i].replace("\n", "")
+    tmp = s[0] + "__:" + read_lines[i]
   else:
-    print s[:3] + ":" + read_lines[i].replace("\n", "")
+    tmp =  s[:3] + ":" + read_lines[i]
+  f.write(tmp)
+f.close()
