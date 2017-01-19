@@ -144,4 +144,3 @@ f = open(fn, 'w')
 for s in out_txt:
   f.write(s)
 f.close()
-
